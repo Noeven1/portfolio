@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAHAD // Senior Video Editor & Motion Designer</title>
-    <meta name="description" content="High-Retention Video Editing & Motion Graphics for Creators, SaaS & Brands. Portfolio of Fahad, Senior Video Editor & Motion Designer.">
+    <title>ZAYAN FAHAD — Post-Production, Pacing & Motion Direction</title>
+    <meta name="description" content="Zayan Fahad — Post-Production, Pacing & Motion Direction. Clean cuts, intentional rhythm, and custom motion graphics for creators, brands, and studios.">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Plus Jakarta Sans, Inter & JetBrains Mono -->
+    <!-- Google Fonts: Syne, Space Grotesk, Plus Jakarta Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- YouTube IFrame API for Forcing 4K / 1080p60 Playback Quality -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
         tailwind.config = {
@@ -23,15 +26,20 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Syne', 'Space Grotesk', 'sans-serif'],
+                        grotesk: ['Space Grotesk', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
-                        obsidian: '#09090b',
-                        surface: '#121215',
-                        surfaceHover: '#18181c',
-                        borderSubtle: '#27272a',
+                        pitch: '#050505',
+                        cell: '#0B0B0B',
+                        elevated: '#111111',
+                        gridline: '#1c1c1c',
+                        crisp: '#FAFAFA',
+                        muted: '#8E8E93',
+                        signal: '#00FF66',
+                        electric: '#FF2A85',
                     }
                 }
             }
@@ -39,360 +47,341 @@
     </script>
 
     <style>
-        /* Custom Minimal Styling & Scrollbar */
         body {
-            background-color: #09090b;
-            color: #f4f4f5;
-            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: #FAFAFA;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
 
-        /* Subtle Ambient Grid Background */
-        .bg-grid-pattern {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-        }
+        /* Architectural Exposed Hairline Grid */
+        .hairline-b { border-bottom: 1px solid #1c1c1c; }
+        .hairline-t { border-top: 1px solid #1c1c1c; }
+        .hairline-r { border-right: 1px solid #1c1c1c; }
+        .hairline-l { border-left: 1px solid #1c1c1c; }
+        .hairline-box { border: 1px solid #1c1c1c; }
 
-        /* Custom Scrollbar */
+        /* Custom Minimal Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #09090b;
+            background: #050505;
         }
         ::-webkit-scrollbar-thumb {
-            background: #27272a;
-            border-radius: 3px;
+            background: #222222;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #3f3f46;
+            background: #00FF66;
         }
 
-        /* Video Card Hover Glow */
-        .video-card {
-            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease, box-shadow 0.28s ease;
+        /* Card & Interactive States */
+        .work-cell {
+            transition: background-color 0.2s ease, border-color 0.2s ease;
         }
-        .video-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.22);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
-        }
-
-        /* Timeline Scrub Bar Animation */
-        @keyframes playheadMove {
-            0% { left: 12%; }
-            50% { left: 84%; }
-            100% { left: 12%; }
-        }
-        .playhead-anim {
-            animation: playheadMove 18s ease-in-out infinite;
+        .work-cell:hover {
+            background-color: #111111;
+            border-color: #333333;
         }
 
-        /* Audio Waveform Bars Animation */
-        @keyframes eqBar {
-            0%, 100% { transform: scaleY(0.3); }
-            50% { transform: scaleY(1); }
+        /* NLE Timeline Playhead Sweep */
+        @keyframes nleSweep {
+            0% { left: 0%; }
+            100% { left: 100%; }
         }
-        .eq-bar-1 { animation: eqBar 0.9s ease-in-out infinite; }
-        .eq-bar-2 { animation: eqBar 0.6s ease-in-out infinite 0.2s; }
-        .eq-bar-3 { animation: eqBar 1.1s ease-in-out infinite 0.4s; }
-        .eq-bar-4 { animation: eqBar 0.75s ease-in-out infinite 0.1s; }
+        .nle-playhead {
+            animation: nleSweep 24s linear infinite;
+        }
+
+        /* Subtle Scanline Overlay on Showreel */
+        .scanline-overlay {
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 2px,
+                rgba(0, 0, 0, 0.22) 3px
+            );
+        }
     </style>
 </head>
-<body class="bg-obsidian text-zinc-100 antialiased selection:bg-emerald-500/20 selection:text-emerald-300">
+<body class="bg-pitch text-crisp antialiased selection:bg-signal selection:text-pitch">
 
     <!-- ============================================================================ -->
-    <!-- TOP STICKY GLASSMORPHISM NAVIGATION BAR                                      -->
+    <!-- ARCHITECTURAL STICKY HEADER WITH LIVE NLE TIMECODE                           -->
     <!-- ============================================================================ -->
-    <header class="fixed top-0 left-0 right-0 z-40 backdrop-blur-xl bg-[#09090b]/80 border-b border-zinc-800/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <!-- Brand / Logo -->
-            <a href="#" class="flex items-center gap-2.5 group focus:outline-none">
-                <div class="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-700/80 flex items-center justify-center group-hover:border-emerald-500/60 transition-colors">
-                    <span class="font-display font-bold text-sm tracking-tighter text-white">F<span class="text-emerald-400">.</span></span>
-                </div>
-                <div class="flex items-center gap-1.5">
-                    <span class="font-display font-bold tracking-tight text-white text-base">FAHAD</span>
-                    <span class="font-mono text-[11px] text-zinc-500 hidden sm:inline-block">// STUDIO</span>
-                </div>
-            </a>
-
-            <!-- Desktop Navigation Links -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-                <a href="#work" class="hover:text-white transition-colors">Work</a>
-                <a href="#services" class="hover:text-white transition-colors">Services</a>
-                <a href="#workflow" class="hover:text-white transition-colors">Workflow</a>
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
-            </nav>
-
-            <!-- Right Status & Quick Tools -->
-            <div class="flex items-center gap-2.5 sm:gap-3">
-                <!-- Available Status Indicator -->
-                <a href="#contact" class="hidden lg:inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 hover:border-zinc-700 text-xs font-medium text-zinc-300 transition-all">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                    <span>Available for Freelance</span>
+    <header class="fixed top-0 left-0 right-0 z-40 bg-pitch/95 backdrop-blur-md hairline-b">
+        <div class="max-w-[1440px] mx-auto grid grid-cols-12 items-center h-16">
+            
+            <!-- Brand Identity Cell -->
+            <div class="col-span-6 sm:col-span-4 lg:col-span-3 px-4 sm:px-6 h-full flex items-center justify-between hairline-r">
+                <a href="#" class="flex items-center gap-3 group focus:outline-none">
+                    <span class="w-3 h-3 bg-signal inline-block group-hover:bg-electric transition-colors"></span>
+                    <span class="font-grotesk font-bold tracking-tight text-white text-base sm:text-lg uppercase">ZAYAN FAHAD</span>
                 </a>
+                <span class="hidden xl:inline-block font-mono text-[10px] text-muted px-1.5 py-0.5 border border-[#262626]">NLE // 24FPS</span>
+            </div>
 
-                <!-- Add / Edit Videos Button (Interactive Helper for Owner) -->
-                <button onclick="toggleStudioModal()" title="Add or Replace Your Videos & Export HTML" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 text-xs font-mono transition-all">
-                    <i class="fa-solid fa-sliders text-emerald-400"></i>
+            <!-- Live Running Timecode & Navigation Cell -->
+            <div class="hidden lg:flex lg:col-span-5 px-6 h-full items-center justify-between hairline-r">
+                <nav class="flex items-center gap-7 font-mono text-xs uppercase tracking-wider text-muted">
+                    <a href="#work" class="hover:text-signal transition-colors">[01] Work</a>
+                    <a href="#scope" class="hover:text-signal transition-colors">[02] Custom Scope</a>
+                    <a href="#craft" class="hover:text-electric transition-colors">[03] Craft</a>
+                    <a href="#contact" class="hover:text-crisp transition-colors">[04] Contact</a>
+                </nav>
+                <div class="flex items-center gap-2 font-mono text-[11px] text-muted bg-cell px-2.5 py-1 hairline-box">
+                    <span class="w-1.5 h-1.5 rounded-full bg-signal animate-pulse"></span>
+                    <span id="liveTimecode" class="text-crisp font-medium">00:00:00:00</span>
+                </div>
+            </div>
+
+            <!-- Action Controls Cell -->
+            <div class="col-span-6 sm:col-span-8 lg:col-span-4 px-4 sm:px-6 h-full flex items-center justify-end gap-2.5 sm:gap-3">
+                <button onclick="toggleStudioModal()" title="Add or Reorder Videos & Download index.html (Shift+M)" class="px-3 py-2 bg-cell hover:bg-elevated text-crisp hairline-box hover:border-electric font-mono text-[11px] uppercase tracking-wider transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-electric"></i>
                     <span class="hidden sm:inline">Manage Videos</span>
                 </button>
 
-                <!-- Primary Hire CTA -->
-                <a href="#contact" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white text-zinc-950 hover:bg-zinc-200 font-medium text-xs sm:text-sm transition-all">
-                    <span>Book a Project</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                <a href="https://www.fiverr.com/s/7j1kDz1" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 bg-cell hover:bg-elevated text-crisp hairline-box hover:border-signal font-mono text-[11px] uppercase tracking-wider transition-all">
+                    <span>Fiverr</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-signal"></i>
+                </a>
+
+                <a href="#scope" class="inline-flex items-center gap-2 px-4 py-2 bg-signal hover:bg-[#1aff75] text-pitch font-mono font-bold text-[11px] uppercase tracking-wider transition-all">
+                    <span>Start a Project</span>
                 </a>
             </div>
+
         </div>
     </header>
 
     <!-- ============================================================================ -->
-    <!-- HERO SECTION + FEATURED SHOWREEL                                             -->
+    <!-- HERO SECTION: ARCHITECTURAL POST-PRODUCTION STATEMENT + SHOWREEL             -->
     <!-- ============================================================================ -->
-    <section class="relative pt-28 pb-16 sm:pt-36 sm:pb-24 bg-grid-pattern border-b border-zinc-900">
-        <!-- Subtle Radial Spotlight -->
-        <div class="pointer-events-none absolute inset-0 flex justify-center">
-            <div class="w-[650px] h-[320px] bg-emerald-500/5 blur-[130px] rounded-full"></div>
-        </div>
-
-        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Top Metadata Pill -->
-            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-                <div class="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-400">
-                    <span class="text-emerald-400 font-semibold">SENIOR VIDEO EDITOR & MOTION DESIGNER</span>
-                    <span class="text-zinc-600">•</span>
-                    <span>3+ YEARS EXP</span>
+    <section class="pt-16 hairline-b">
+        <div class="max-w-[1440px] mx-auto">
+            
+            <!-- Top Technical Strip -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 hairline-b font-mono text-[11px] text-muted">
+                <div class="px-4 sm:px-6 py-2.5 hairline-r flex items-center justify-between">
+                    <span>DIRECTOR / EDITOR</span>
+                    <span class="text-crisp">ZAYAN FAHAD</span>
                 </div>
-                <div class="hidden sm:flex items-center gap-4 text-xs font-mono text-zinc-500">
-                    <span>[PR / AE / RESOLVE]</span>
-                    <span>[4K 60FPS PIPELINE]</span>
+                <div class="px-4 sm:px-6 py-2.5 sm:hairline-r flex items-center justify-between">
+                    <span>PIPELINE</span>
+                    <span class="text-signal">4K60 // REC.709</span>
+                </div>
+                <div class="px-4 sm:px-6 py-2.5 hairline-t sm:border-t-0 hairline-r flex items-center justify-between">
+                    <span>ENGAGEMENT</span>
+                    <span class="text-electric">1 VIDEO OR 1 MONTH</span>
+                </div>
+                <div class="px-4 sm:px-6 py-2.5 hairline-t sm:border-t-0 flex items-center justify-between">
+                    <span>DIRECT</span>
+                    <button onclick="copyEmailAddress()" class="text-crisp hover:text-signal underline underline-offset-4 transition-colors">mdf042731@gmail.com</button>
                 </div>
             </div>
 
-            <!-- Main Headline -->
-            <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] max-w-4xl">
-                High-Retention Video Editing &amp; Motion Graphics for <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-500">Creators &amp; Brands.</span>
-            </h1>
-
-            <!-- Subheadline -->
-            <p class="mt-6 text-base sm:text-lg text-zinc-400 max-w-2xl leading-relaxed font-normal">
-                I help fast-growing YouTube channels, SaaS startups, and personal brands turn raw footage into razor-sharp stories—combining frame-accurate pacing, custom After Effects motion design, and immersive sound engineering.
-            </p>
-
-            <!-- Hero CTAs -->
-            <div class="mt-8 flex flex-wrap items-center gap-3.5">
-                <a href="#work" class="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 font-semibold text-sm transition-all shadow-lg shadow-white/5">
-                    <span>View Selected Work</span>
-                    <i class="fa-solid fa-arrow-down text-xs"></i>
-                </a>
-                <a href="#contact" class="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white border border-zinc-800 hover:border-zinc-700 font-medium text-sm transition-all">
-                    <span>Book a Project</span>
-                </a>
-                <button onclick="openShowreelModal()" class="inline-flex items-center gap-2.5 px-4 py-3 rounded-xl text-zinc-400 hover:text-white text-sm font-mono transition-colors">
-                    <span class="w-7 h-7 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                        <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
-                    </span>
-                    <span>Play 2026 Showreel (01:15)</span>
-                </button>
-            </div>
-
-            <!-- ==================================================================== -->
-            <!-- FEATURED SHOWREEL PLAYER PREVIEW CARD                                -->
-            <!-- ==================================================================== -->
-            <div class="mt-12 sm:mt-14">
-                <div onclick="openShowreelModal()" class="group relative rounded-2xl bg-surface border border-zinc-800/90 hover:border-zinc-700 overflow-hidden cursor-pointer shadow-2xl transition-all">
-                    
-                    <!-- Top NLE Timeline Header Bar -->
-                    <div class="px-4 py-2.5 bg-zinc-950/90 border-b border-zinc-800/80 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                            <span class="text-zinc-200 font-medium">FAHAD_SHOWREEL_MASTER_v4.mp4</span>
-                            <span class="hidden sm:inline text-zinc-600">|</span>
-                            <span class="hidden sm:inline text-emerald-400">REC.709 // 4K 60FPS</span>
+            <!-- Main Editorial Hero Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+                
+                <!-- Left Column: Confident Copy & Direct Actions -->
+                <div class="lg:col-span-7 p-6 sm:p-10 lg:p-14 hairline-b lg:border-b-0 lg:hairline-r flex flex-col justify-between bg-pitch">
+                    <div>
+                        <div class="inline-flex items-center gap-2.5 px-3 py-1 bg-cell hairline-box font-mono text-[11px] uppercase tracking-widest mb-6">
+                            <span class="w-2 h-2 bg-signal"></span>
+                            <span class="text-crisp">POST-PRODUCTION, PACING &amp; MOTION DIRECTION</span>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <span class="hidden md:inline text-zinc-500">AUDIO: -6.0 dB STEREO MASTER</span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-300">TC 00:00:42:18</span>
-                        </div>
+
+                        <h1 class="font-display font-extrabold text-4xl sm:text-6xl xl:text-7xl tracking-tight text-crisp uppercase leading-[0.96]">
+                            ZAYAN FAHAD<span class="text-signal">.</span>
+                        </h1>
+
+                        <p class="mt-6 text-base sm:text-xl text-crisp/90 max-w-2xl font-normal leading-relaxed">
+                            Clean cuts, intentional rhythm, and custom motion graphics for creators, brands, and studios. <span class="text-signal font-medium">Every frame has a job to do.</span>
+                        </p>
+
+                        <p class="mt-4 text-sm text-muted max-w-xl leading-relaxed">
+                            No filler transitions or template bloat. I cut long-form essays, commercial promos, SaaS product films, and vertical short-form with frame-accurate pacing and sound design that respects the viewer's intelligence.
+                        </p>
                     </div>
 
-                    <!-- Main Showreel Visual Canvas / Preview -->
-                    <div class="relative aspect-video w-full bg-zinc-950 overflow-hidden">
-                        <!-- Dynamic Showreel Canvas Background -->
-                        <canvas id="heroShowreelCanvas" class="w-full h-full object-cover opacity-85 group-hover:scale-[1.02] transition-transform duration-700"></canvas>
+                    <!-- Primary Action Bar -->
+                    <div class="mt-10 pt-8 hairline-t">
+                        <div class="font-mono text-[11px] uppercase tracking-wider text-muted mb-4">
+                            // WHETHER IT'S A SINGLE VIDEO OR A MONTHLY PARTNERSHIP — PICK HOW YOU WANT TO WORK:
+                        </div>
 
-                        <!-- Dark Gradient Vignette -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/35 to-transparent"></div>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <a href="#work" class="px-6 py-3.5 bg-signal hover:bg-[#1aff75] text-pitch font-mono font-bold text-xs uppercase tracking-wider transition-all inline-flex items-center gap-2.5">
+                                <span>Inspect Selected Work</span>
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </a>
 
-                        <!-- Center Play Button & Label -->
-                        <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/10 backdrop-blur-md border border-white/25 flex items-center justify-center group-hover:scale-110 group-hover:bg-white group-hover:text-zinc-950 text-white transition-all duration-300 shadow-2xl">
-                                <i class="fa-solid fa-play text-lg sm:text-xl ml-1"></i>
+                            <a href="#scope" class="px-5 py-3.5 bg-cell hover:bg-elevated text-crisp border border-electric/70 hover:border-electric font-mono font-medium text-xs uppercase tracking-wider transition-all inline-flex items-center gap-2.5">
+                                <span class="w-2 h-2 bg-electric"></span>
+                                <span>1 Video / 1 Month Scope Builder</span>
+                            </a>
+
+                            <a href="https://www.fiverr.com/s/7j1kDz1" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 bg-cell hover:bg-elevated text-crisp hairline-box hover:border-crisp font-mono text-xs uppercase tracking-wider transition-all inline-flex items-center gap-2">
+                                <span>Fiverr Direct</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-signal"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Showreel Deck & Technical Monitor -->
+                <div class="lg:col-span-5 bg-cell flex flex-col justify-between">
+                    
+                    <!-- Monitor Top Bar -->
+                    <div class="px-5 py-3 bg-pitch hairline-b flex items-center justify-between font-mono text-[11px]">
+                        <div class="flex items-center gap-2">
+                            <span class="px-1.5 py-0.5 bg-electric text-pitch font-bold text-[10px]">REEL</span>
+                            <span class="text-crisp">ZAYAN_FAHAD_REEL_MASTER.MP4</span>
+                        </div>
+                        <span class="text-signal">[4K SOURCE READY]</span>
+                    </div>
+
+                    <!-- Interactive Showreel Monitor -->
+                    <div onclick="openShowreelModal()" class="relative aspect-video w-full bg-pitch overflow-hidden cursor-pointer group">
+                        <canvas id="heroMonitorCanvas" class="w-full h-full block"></canvas>
+                        <div class="scanline-overlay pointer-events-none absolute inset-0"></div>
+
+                        <!-- Center Trigger -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-pitch/30 group-hover:bg-pitch/10 transition-all">
+                            <div class="w-16 h-16 bg-pitch/90 border-2 border-signal group-hover:border-electric group-hover:scale-105 flex items-center justify-center transition-all">
+                                <i class="fa-solid fa-play text-signal group-hover:text-electric text-lg ml-1"></i>
                             </div>
-                            <span class="mt-4 px-3 py-1 rounded-full bg-zinc-950/80 border border-zinc-800 text-xs font-mono uppercase tracking-wider text-zinc-300">
-                                Click to Watch Official Showreel
+                            <span class="mt-3 px-3 py-1 bg-pitch/90 hairline-box font-mono text-[11px] uppercase tracking-widest text-crisp">
+                                Launch Master Showreel (Max Quality)
                             </span>
                         </div>
 
-                        <!-- Bottom Overlay Info Inside Frame -->
-                        <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-wrap items-end justify-between gap-4">
-                            <div>
-                                <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 mb-1">
-                                    <span>FEATURED REEL</span>
-                                    <span>•</span>
-                                    <span>COMMERCIAL, YOUTUBE &amp; SAAS MOTION</span>
-                                </div>
-                                <h2 class="font-display text-lg sm:text-2xl font-bold text-white">
-                                    2026 Selected Editing &amp; Motion Design Reel
-                                </h2>
-                            </div>
+                        <!-- Frame Corners -->
+                        <div class="pointer-events-none absolute top-3 left-3 w-3 h-3 border-t border-l border-signal/70"></div>
+                        <div class="pointer-events-none absolute top-3 right-3 w-3 h-3 border-t border-r border-signal/70"></div>
+                        <div class="pointer-events-none absolute bottom-3 left-3 w-3 h-3 border-b border-l border-signal/70"></div>
+                        <div class="pointer-events-none absolute bottom-3 right-3 w-3 h-3 border-b border-r border-signal/70"></div>
+                    </div>
 
-                            <!-- Live Audio Equalizer Pill -->
-                            <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-950/85 border border-zinc-800/90 backdrop-blur-md">
-                                <div class="flex items-end gap-0.5 h-3.5">
-                                    <span class="w-0.5 h-full bg-emerald-400 eq-bar-1 origin-bottom"></span>
-                                    <span class="w-0.5 h-full bg-emerald-400 eq-bar-2 origin-bottom"></span>
-                                    <span class="w-0.5 h-full bg-emerald-400 eq-bar-3 origin-bottom"></span>
-                                    <span class="w-0.5 h-full bg-emerald-400 eq-bar-4 origin-bottom"></span>
-                                </div>
-                                <span class="font-mono text-[11px] text-zinc-300">SFX + MOTION SYNC</span>
+                    <!-- NLE Timeline Track Strip -->
+                    <div class="p-5 bg-pitch hairline-t space-y-3">
+                        <div class="flex items-center justify-between font-mono text-[10px] text-muted">
+                            <span>TIMELINE // V1 + A1 + A2</span>
+                            <span class="text-signal">MAX BITRATE PLAYBACK ENFORCED</span>
+                        </div>
+                        <div class="relative h-7 bg-cell hairline-box overflow-hidden flex flex-col justify-between p-1">
+                            <div class="nle-playhead pointer-events-none absolute top-0 bottom-0 w-[1.5px] bg-electric z-10"></div>
+                            <div class="grid grid-cols-12 gap-1 h-2">
+                                <div class="col-span-3 bg-signal/40"></div>
+                                <div class="col-span-2 bg-electric/50"></div>
+                                <div class="col-span-4 bg-crisp/30"></div>
+                                <div class="col-span-3 bg-signal/40"></div>
+                            </div>
+                            <div class="grid grid-cols-12 gap-1 h-2">
+                                <div class="col-span-5 bg-muted/30"></div>
+                                <div class="col-span-4 bg-signal/25"></div>
+                                <div class="col-span-3 bg-electric/30"></div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 pt-1 font-mono text-[11px]">
+                            <div class="p-2.5 bg-cell hairline-box">
+                                <div class="text-muted text-[10px]">SOFTWARE</div>
+                                <div class="text-crisp font-bold mt-0.5">PR / AE / RESOLVE</div>
+                            </div>
+                            <div class="p-2.5 bg-cell hairline-box">
+                                <div class="text-muted text-[10px]">DELIVERY</div>
+                                <div class="text-signal font-bold mt-0.5">4K / 1080P60</div>
+                            </div>
+                            <div class="p-2.5 bg-cell hairline-box">
+                                <div class="text-muted text-[10px]">SCOPE</div>
+                                <div class="text-electric font-bold mt-0.5">FLEXIBLE</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Bottom NLE Timeline Scrub Bar Aesthetic -->
-                    <div class="relative px-4 py-3 bg-zinc-950 border-t border-zinc-800/80 flex items-center gap-3 overflow-hidden">
-                        <!-- Playhead Line -->
-                        <div class="playhead-anim pointer-events-none absolute top-0 bottom-0 w-[1.5px] bg-emerald-400 z-10">
-                            <div class="w-2.5 h-2.5 -ml-[4px] bg-emerald-400 rotate-45"></div>
-                        </div>
-
-                        <span class="font-mono text-[10px] text-zinc-500 shrink-0">V1 // CUTS</span>
-                        <div class="flex-1 grid grid-cols-12 gap-1 h-4">
-                            <div class="col-span-2 rounded-sm bg-emerald-500/20 border border-emerald-500/40"></div>
-                            <div class="col-span-3 rounded-sm bg-zinc-800 border border-zinc-700"></div>
-                            <div class="col-span-2 rounded-sm bg-indigo-500/20 border border-indigo-500/40"></div>
-                            <div class="col-span-3 rounded-sm bg-emerald-500/20 border border-emerald-500/40"></div>
-                            <div class="col-span-2 rounded-sm bg-zinc-800 border border-zinc-700"></div>
-                        </div>
-                        <span class="font-mono text-[10px] text-zinc-500 shrink-0 hidden sm:inline">01:15:00</span>
-                    </div>
                 </div>
 
-                <!-- Key Career Metrics Bar -->
-                <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-                    <div class="p-4 rounded-xl bg-surface border border-zinc-800/80">
-                        <div class="font-display text-2xl sm:text-3xl font-bold text-white">3+ Years</div>
-                        <div class="text-xs font-mono text-zinc-400 mt-1">POST-PRODUCTION EXP.</div>
-                    </div>
-                    <div class="p-4 rounded-xl bg-surface border border-zinc-800/80">
-                        <div class="font-display text-2xl sm:text-3xl font-bold text-white">45M+</div>
-                        <div class="text-xs font-mono text-zinc-400 mt-1">ORGANIC CLIENT VIEWS</div>
-                    </div>
-                    <div class="p-4 rounded-xl bg-surface border border-zinc-800/80">
-                        <div class="font-display text-2xl sm:text-3xl font-bold text-emerald-400">+68%</div>
-                        <div class="text-xs font-mono text-zinc-400 mt-1">AVG. RETENTION LIFT</div>
-                    </div>
-                    <div class="p-4 rounded-xl bg-surface border border-zinc-800/80">
-                        <div class="font-display text-2xl sm:text-3xl font-bold text-white">250+</div>
-                        <div class="text-xs font-mono text-zinc-400 mt-1">PROJECTS DELIVERED</div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================================ -->
-    <!-- CORE FEATURE: FILTERABLE VIDEO SHOWCASE SECTION                              -->
+    <!-- SECTION 01: SELECTED WORK (4K / 1080P60 AUTO-FORCED SHOWCASE)                -->
     <!-- ============================================================================ -->
-    <section id="work" class="py-20 sm:py-28 border-b border-zinc-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="work" class="py-16 sm:py-24 hairline-b">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
             
-            <!-- Section Header -->
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <!-- Section Header + Quality Guarantee Badge -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 hairline-b">
                 <div>
-                    <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2">
-                        <span>// SELECTED PORTFOLIO</span>
+                    <div class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest mb-3">
+                        <span class="px-2 py-0.5 bg-signal text-pitch font-bold">01 // ARCHIVE</span>
+                        <span class="text-muted">SELECTED CUTS &amp; MOTION WORK</span>
                     </div>
-                    <h2 class="font-display text-2xl sm:text-4xl font-bold text-white tracking-tight">
-                        Engineered for Attention.
+                    <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-crisp uppercase tracking-tight">
+                        Selected Work.
                     </h2>
-                    <p class="mt-2 text-sm sm:text-base text-zinc-400 max-w-xl">
-                        Filter by format below. Both widescreen <span class="text-zinc-200 font-mono text-xs">16:9</span> long-form edits and native <span class="text-zinc-200 font-mono text-xs">9:16</span> vertical short-form engines are supported.
-                    </p>
                 </div>
 
-                <!-- Helper Button to Add Own Videos right from the showcase -->
-                <div class="flex items-center gap-3">
-                    <button onclick="toggleStudioModal()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-mono text-zinc-300 hover:text-white transition-all">
-                        <i class="fa-solid fa-plus text-emerald-400"></i>
-                        <span>Add / Test Your Video URL</span>
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="px-3.5 py-2 bg-cell hairline-box font-mono text-[11px] flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-signal"></span>
+                        <span class="text-crisp">4K / 1080P60 AUTO-FORCED PLAYER</span>
+                    </div>
+                    <button onclick="toggleStudioModal()" class="px-4 py-2 bg-cell hover:bg-elevated text-crisp border border-electric/60 hover:border-electric font-mono text-xs uppercase tracking-wider transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-plus text-electric"></i>
+                        <span>Add / Edit Videos</span>
                     </button>
-                </div>
-            </div>
-
-            <!-- Category Filter Tabs -->
-            <div class="flex items-center justify-between flex-wrap gap-4 pb-6 mb-8 border-b border-zinc-800/80">
-                <div id="filterTabs" class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 w-full sm:w-auto no-scrollbar">
-                    <button onclick="setFilter('all')" data-filter="all" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-white text-zinc-950 font-semibold shrink-0">
-                        All Work
-                    </button>
-                    <button onclick="setFilter('short-form')" data-filter="short-form" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 shrink-0">
-                        Short-Form (9:16)
-                    </button>
-                    <button onclick="setFilter('long-form')" data-filter="long-form" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 shrink-0">
-                        YouTube Long-Form
-                    </button>
-                    <button onclick="setFilter('saas-motion')" data-filter="saas-motion" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 shrink-0">
-                        SaaS &amp; Motion
-                    </button>
-                    <button onclick="setFilter('color-audio')" data-filter="color-audio" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 shrink-0">
-                        Color &amp; Audio
-                    </button>
-                </div>
-
-                <!-- Count Indicator -->
-                <div id="projectCountBadge" class="font-mono text-xs text-zinc-500">
-                    SHOWING 8 PROJECTS
                 </div>
             </div>
 
-            <!-- ==================================================================== -->
-            <!-- DYNAMIC VIDEO SHOWCASE CONTAINERS                                    -->
-            <!-- ==================================================================== -->
-            
-            <!-- 16:9 Widescreen Projects Grid -->
-            <div id="horizontalSectionWrapper" class="mb-14">
-                <div class="flex items-center justify-between mb-5">
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 font-mono text-[11px] text-zinc-300">16:9 WIDESCREEN</span>
-                        <h3 class="text-sm font-mono uppercase tracking-wider text-zinc-400">YouTube Long-Form, SaaS Promos &amp; Commercials</h3>
+            <!-- Filter Bar -->
+            <div class="py-5 flex flex-wrap items-center justify-between gap-4 hairline-b mb-10">
+                <div id="filterTabs" class="flex flex-wrap items-center gap-2">
+                    <button onclick="setFilter('all')" data-filter="all" class="filter-btn px-4 py-2 font-mono text-xs uppercase tracking-wider bg-signal text-pitch font-bold transition-all">
+                        ALL WORK
+                    </button>
+                    <button onclick="setFilter('16:9')" data-filter="16:9" class="filter-btn px-4 py-2 font-mono text-xs uppercase tracking-wider bg-cell text-muted hover:text-crisp hairline-box transition-all">
+                        [16:9] HORIZONTAL
+                    </button>
+                    <button onclick="setFilter('9:16')" data-filter="9:16" class="filter-btn px-4 py-2 font-mono text-xs uppercase tracking-wider bg-cell text-muted hover:text-crisp hairline-box transition-all">
+                        [9:16] VERTICAL
+                    </button>
+                    <button onclick="setFilter('motion')" data-filter="motion" class="filter-btn px-4 py-2 font-mono text-xs uppercase tracking-wider bg-cell text-muted hover:text-crisp hairline-box transition-all">
+                        MOTION &amp; SAAS
+                    </button>
+                </div>
+
+                <div id="projectCountBadge" class="font-mono text-xs text-muted uppercase">
+                    INDEX: 08 ITEMS
+                </div>
+            </div>
+
+            <!-- 16:9 HORIZONTAL WORK GRID -->
+            <div id="horizontalSectionWrapper" class="mb-16">
+                <div class="flex items-center justify-between mb-5 font-mono text-xs">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2 py-0.5 bg-cell border border-signal/50 text-signal">[16:9 WIDESCREEN]</span>
+                        <span class="text-muted uppercase">Long-Form YouTube, Documentary, Commercial &amp; SaaS Motion</span>
                     </div>
                 </div>
-                <div id="horizontalGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Populated via JavaScript from PORTFOLIO_DATA -->
+                <div id="horizontalGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Populated via JS -->
                 </div>
             </div>
 
-            <!-- 9:16 Vertical Projects Grid (Reels / TikTok / Shorts) -->
+            <!-- 9:16 VERTICAL WORK GRID -->
             <div id="verticalSectionWrapper">
-                <div class="flex items-center justify-between mb-5">
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 font-mono text-[11px] text-emerald-400">9:16 VERTICAL</span>
-                        <h3 class="text-sm font-mono uppercase tracking-wider text-zinc-400">High-Retention Reels, TikToks &amp; YouTube Shorts</h3>
+                <div class="flex items-center justify-between mb-5 font-mono text-xs">
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2 py-0.5 bg-cell border border-electric/60 text-electric">[9:16 VERTICAL]</span>
+                        <span class="text-muted uppercase">Short-Form Pacing, Kinetic Typography &amp; Retention Cuts</span>
                     </div>
                 </div>
                 <div id="verticalGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    <!-- Populated via JavaScript from PORTFOLIO_DATA -->
+                    <!-- Populated via JS -->
                 </div>
             </div>
 
@@ -400,485 +389,487 @@
     </section>
 
     <!-- ============================================================================ -->
-    <!-- SERVICES & CAPABILITIES SECTION                                              -->
+    <!-- SECTION 02: FLEXIBLE CUSTOM ORDER & COLLABORATION BUILDER                    -->
+    <!-- (Designed so 1-Video OR 1-Month clients feel right at home)                  -->
     <!-- ============================================================================ -->
-    <section id="services" class="py-20 sm:py-28 border-b border-zinc-900 bg-[#0b0b0e]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-2xl mb-14">
-                <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2">
-                    <span>// CORE CAPABILITIES</span>
+    <section id="scope" class="py-16 sm:py-24 hairline-b bg-cell">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+            
+            <!-- Header -->
+            <div class="max-w-3xl mb-12">
+                <div class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest mb-3">
+                    <span class="px-2 py-0.5 bg-electric text-pitch font-bold">02 // FLEXIBLE SCOPE</span>
+                    <span class="text-muted">NO RIGID PACKAGES. NO FORCED RETAINERS.</span>
                 </div>
-                <h2 class="font-display text-2xl sm:text-4xl font-bold text-white tracking-tight">
-                    Post-Production Built for Growth.
+                <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-crisp uppercase tracking-tight">
+                    Work How You Want.
                 </h2>
-                <p class="mt-3 text-zinc-400 text-sm sm:text-base">
-                    Every cut, keyframe, and sound riser is intentional—designed to maximize viewer watch time and brand authority.
+                <p class="mt-4 text-base sm:text-lg text-muted leading-relaxed">
+                    Whether you need <span class="text-crisp font-medium">just one video edited right</span>, a custom mini-batch for a campaign, or a <span class="text-signal font-medium">dedicated 1-month collaboration</span>—select your setup below and send it over via Fiverr or Email.
                 </p>
             </div>
 
-            <!-- 3-Column Minimal Service Cards -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Interactive Scope Builder Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 hairline-box bg-pitch">
                 
-                <!-- Card 1: Short-Form Engines -->
-                <div class="p-7 rounded-2xl bg-surface border border-zinc-800/90 hover:border-zinc-700 transition-all flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="font-mono text-xs text-emerald-400 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20">01 // 9:16 VERTICAL</span>
-                            <i class="fa-solid fa-bolt text-zinc-500 text-lg"></i>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-white mb-3">
-                            Short-Form Engines
-                        </h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed mb-6">
-                            Scroll-stopping Reels, TikToks, and YouTube Shorts engineered with frame-one visual hooks, kinetic typography, and micro-pacing that holds retention above 75%.
-                        </p>
-                    </div>
-                    <ul class="space-y-2.5 pt-5 border-t border-zinc-800/80 text-xs font-mono text-zinc-300">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Custom Animated Captions &amp; Callouts</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Multi-Layered SFX &amp; Audio Risers</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 24–48 Hour Fast Turnaround</li>
-                    </ul>
-                </div>
-
-                <!-- Card 2: Long-Form YouTube & VSLs -->
-                <div class="p-7 rounded-2xl bg-surface border border-zinc-800/90 hover:border-zinc-700 transition-all flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="font-mono text-xs text-emerald-400 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20">02 // 16:9 LONG-FORM</span>
-                            <i class="fa-solid fa-film text-zinc-500 text-lg"></i>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-white mb-3">
-                            Long-Form YouTube &amp; VSLs
-                        </h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed mb-6">
-                            Documentary-style storytelling, talking-head synthesis, and high-converting Video Sales Letters structured around first-30-second retention architecture.
-                        </p>
-                    </div>
-                    <ul class="space-y-2.5 pt-5 border-t border-zinc-800/80 text-xs font-mono text-zinc-300">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Narrative Arc &amp; First-30s Hook Polish</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Custom 3D/2D Map &amp; Chart Visualizers</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Curated B-Roll &amp; Music Licensing</li>
-                    </ul>
-                </div>
-
-                <!-- Card 3: Motion Graphics & Polish -->
-                <div class="p-7 rounded-2xl bg-surface border border-zinc-800/90 hover:border-zinc-700 transition-all flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-6">
-                            <span class="font-mono text-xs text-emerald-400 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20">03 // MOTION &amp; FINISH</span>
-                            <i class="fa-solid fa-wand-magic-sparkles text-zinc-500 text-lg"></i>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-white mb-3">
-                            Motion Graphics &amp; Polish
-                        </h3>
-                        <p class="text-sm text-zinc-400 leading-relaxed mb-6">
-                            Bespoke After Effects UI animations for SaaS launches, smooth speed-ramping, DaVinci Resolve color grading, and broadcast-level dialogue mastering.
-                        </p>
-                    </div>
-                    <ul class="space-y-2.5 pt-5 border-t border-zinc-800/80 text-xs font-mono text-zinc-300">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> SaaS Product UI Walkthroughs (AE)</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Film Emulation &amp; Rec.709 Color Grade</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> -14 LUFS Dialogue Cleanup &amp; Mastering</li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <!-- Software & Technical Stack Strip -->
-            <div class="mt-12 p-6 rounded-2xl bg-zinc-950 border border-zinc-800/80 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-                <div>
-                    <div class="text-xs font-mono uppercase text-zinc-500">PRODUCTION TOOLKIT &amp; PIPELINE</div>
-                    <div class="text-sm font-medium text-zinc-300 mt-1">Industry-standard post-production software for seamless project handoff.</div>
-                </div>
-                <div class="flex flex-wrap items-center gap-2.5">
-                    <span class="px-3.5 py-2 rounded-xl bg-surface border border-zinc-800 text-xs font-mono text-zinc-200 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-indigo-400"></span> Adobe Premiere Pro
-                    </span>
-                    <span class="px-3.5 py-2 rounded-xl bg-surface border border-zinc-800 text-xs font-mono text-zinc-200 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-purple-400"></span> After Effects
-                    </span>
-                    <span class="px-3.5 py-2 rounded-xl bg-surface border border-zinc-800 text-xs font-mono text-zinc-200 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-400"></span> DaVinci Resolve Studio
-                    </span>
-                    <span class="px-3.5 py-2 rounded-xl bg-surface border border-zinc-800 text-xs font-mono text-zinc-200 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-orange-400"></span> Blender 3D
-                    </span>
-                    <span class="px-3.5 py-2 rounded-xl bg-surface border border-zinc-800 text-xs font-mono text-zinc-200 flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Custom Workflow Automation
-                    </span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================================ -->
-    <!-- STREAMLINED 4-STEP WORKFLOW & ABOUT SECTION                                  -->
-    <!-- ============================================================================ -->
-    <section id="workflow" class="py-20 sm:py-28 border-b border-zinc-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                
-                <!-- Left Column: About Fahad -->
-                <div id="about" class="lg:col-span-5 p-7 sm:p-8 rounded-2xl bg-surface border border-zinc-800/90">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-14 h-14 rounded-2xl bg-zinc-900 border border-zinc-700 flex items-center justify-center font-display font-bold text-xl text-white">
-                            F<span class="text-emerald-400">.</span>
-                        </div>
-                        <div>
-                            <h3 class="font-display text-xl font-bold text-white">Fahad</h3>
-                            <p class="text-xs font-mono text-emerald-400">SENIOR VIDEO EDITOR &amp; MOTION DESIGNER</p>
-                        </div>
-                    </div>
-
-                    <p class="text-sm text-zinc-300 leading-relaxed mb-4">
-                        With over 3+ years of dedicated post-production experience, I bridge the gap between raw recording and high-performing digital media.
-                    </p>
-                    <p class="text-sm text-zinc-400 leading-relaxed mb-6">
-                        Rather than just cutting dead air, I approach every timeline from a viewer-psychology perspective—combining visual pattern interrupts, custom After Effects motion graphics, and tactile sound design so viewers stay locked in until the final frame.
-                    </p>
-
-                    <div class="grid grid-cols-2 gap-3 pt-5 border-t border-zinc-800/80 text-xs font-mono">
-                        <div>
-                            <span class="text-zinc-500 block">TURNAROUND</span>
-                            <span class="text-zinc-200 font-medium">24–72 Hours Avg.</span>
-                        </div>
-                        <div>
-                            <span class="text-zinc-500 block">DELIVERY</span>
-                            <span class="text-zinc-200 font-medium">Frame.io / Google Drive</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column: 4-Step Frictionless Workflow -->
-                <div class="lg:col-span-7">
-                    <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2">
-                        <span>// FRICTIONLESS PIPELINE</span>
-                    </div>
-                    <h2 class="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight mb-8">
-                        How We Work Together
-                    </h2>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-5 rounded-xl bg-surface/60 border border-zinc-800/80">
-                            <span class="font-mono text-xs text-emerald-400">STEP 01</span>
-                            <h4 class="font-display font-semibold text-white text-base mt-1 mb-2">Asset Drop &amp; Creative Brief</h4>
-                            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                                Share your raw footage via Google Drive or Frame.io along with target references or script notes.
-                            </p>
-                        </div>
-
-                        <div class="p-5 rounded-xl bg-surface/60 border border-zinc-800/80">
-                            <span class="font-mono text-xs text-emerald-400">STEP 02</span>
-                            <h4 class="font-display font-semibold text-white text-base mt-1 mb-2">Narrative &amp; Pacing Assembly</h4>
-                            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                                Tight A-roll cutting, hook optimization, and rhythmic pacing to eliminate viewer drop-off points.
-                            </p>
-                        </div>
-
-                        <div class="p-5 rounded-xl bg-surface/60 border border-zinc-800/80">
-                            <span class="font-mono text-xs text-emerald-400">STEP 03</span>
-                            <h4 class="font-display font-semibold text-white text-base mt-1 mb-2">Motion Design &amp; Sound Mix</h4>
-                            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                                Custom After Effects callouts, kinetic captions, B-roll layering, color grading, and SFX mastering.
-                            </p>
-                        </div>
-
-                        <div class="p-5 rounded-xl bg-surface/60 border border-zinc-800/80">
-                            <span class="font-mono text-xs text-emerald-400">STEP 04</span>
-                            <h4 class="font-display font-semibold text-white text-base mt-1 mb-2">Review &amp; Final 4K Render</h4>
-                            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                                Timestamped revisions handled rapidly, followed by final master delivery optimized for your platform.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================================ -->
-    <!-- CONTACT / BOOK A PROJECT SECTION                                             -->
-    <!-- ============================================================================ -->
-    <section id="contact" class="py-20 sm:py-28">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="rounded-3xl bg-surface border border-zinc-800 p-6 sm:p-12 shadow-2xl">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <!-- Left 7 Cols: Interactive Configuration Steps -->
+                <div class="lg:col-span-7 p-6 sm:p-10 hairline-b lg:border-b-0 lg:hairline-r space-y-10">
                     
-                    <!-- Left Column: Direct Channels -->
-                    <div class="lg:col-span-5 flex flex-col justify-between">
-                        <div>
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-400 mb-4">
-                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                <span>ACCEPTING NEW CLIENTS FOR Q2/Q3</span>
-                            </div>
-                            <h2 class="font-display text-2xl sm:text-4xl font-bold text-white tracking-tight">
-                                Ready to level up your content?
-                            </h2>
-                            <p class="mt-3 text-sm sm:text-base text-zinc-400 leading-relaxed">
-                                Whether you need a high-converting SaaS launch video, a reliable partner for weekly YouTube uploads, or viral short-form engines—let's talk.
-                            </p>
-
-                            <!-- Direct Contact Links (Customizable in CONFIG) -->
-                            <div class="mt-8 space-y-3">
-                                <a id="directEmailLink" href="mailto:fahad.studio@example.com" class="flex items-center justify-between p-4 rounded-xl bg-zinc-900/90 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-all group">
-                                    <div class="flex items-center gap-3.5">
-                                        <div class="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center text-emerald-400">
-                                            <i class="fa-regular fa-envelope"></i>
-                                        </div>
-                                        <div>
-                                            <div class="text-xs font-mono text-zinc-500">DIRECT EMAIL</div>
-                                            <div id="displayEmailText" class="text-sm font-medium text-white">fahad.studio@example.com</div>
-                                        </div>
-                                    </div>
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-zinc-500 group-hover:text-white transition-colors"></i>
-                                </a>
-
-                                <a id="directFreelanceLink" href="https://www.fiverr.com/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-zinc-900/90 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-all group">
-                                    <div class="flex items-center gap-3.5">
-                                        <div class="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center text-emerald-400">
-                                            <i class="fa-solid fa-briefcase"></i>
-                                        </div>
-                                        <div>
-                                            <div class="text-xs font-mono text-zinc-500">FREELANCE PROFILE</div>
-                                            <div class="text-sm font-medium text-white">Fiverr / Upwork Direct Order</div>
-                                        </div>
-                                    </div>
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-zinc-500 group-hover:text-white transition-colors"></i>
-                                </a>
-
-                                <a id="directSocialLink" href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-zinc-900/90 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-all group">
-                                    <div class="flex items-center gap-3.5">
-                                        <div class="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center text-emerald-400">
-                                            <i class="fa-brands fa-whatsapp text-lg"></i>
-                                        </div>
-                                        <div>
-                                            <div class="text-xs font-mono text-zinc-500">FAST CHAT</div>
-                                            <div class="text-sm font-medium text-white">WhatsApp / Discord (@fahad.edits)</div>
-                                        </div>
-                                    </div>
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-zinc-500 group-hover:text-white transition-colors"></i>
-                                </a>
-                            </div>
+                    <!-- STEP 1: ENGAGEMENT MODEL -->
+                    <div>
+                        <div class="flex items-center justify-between font-mono text-xs uppercase text-muted mb-4">
+                            <span>STEP 01 // SELECT COLLABORATION MODEL</span>
+                            <span class="text-signal">REQUIRED</span>
                         </div>
 
-                        <div class="mt-8 pt-6 border-t border-zinc-800/80 text-xs font-mono text-zinc-500">
-                            AVG RESPONSE TIME: &lt; 4 HOURS WORLDWIDE
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5" id="scopeModelCards">
+                            <!-- Option 1: Single Video -->
+                            <button type="button" onclick="selectScopeModel('01 / SINGLE VIDEO', 'Standalone single edit or paid test run — zero ongoing commitment.')" data-model="01 / SINGLE VIDEO" class="scope-model-btn text-left p-5 bg-cell border-2 border-signal transition-all flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between font-mono text-[11px] mb-3">
+                                        <span class="text-signal font-bold">01 / SINGLE VIDEO</span>
+                                        <span class="w-2.5 h-2.5 bg-signal"></span>
+                                    </div>
+                                    <h3 class="font-grotesk font-bold text-lg text-crisp uppercase">One-Off Edit</h3>
+                                    <p class="mt-2 text-xs text-muted leading-relaxed">
+                                        Need one video edited right? Ideal for a standalone YouTube cut, VSL, promo, or a paid test run with zero ongoing commitment.
+                                    </p>
+                                </div>
+                                <div class="mt-4 pt-3 hairline-t font-mono text-[10px] text-crisp uppercase">
+                                    → 1 Deliverable // Fast Turnaround
+                                </div>
+                            </button>
+
+                            <!-- Option 2: Custom Batch -->
+                            <button type="button" onclick="selectScopeModel('02 / CUSTOM BATCH', '3 to 10 videos tailored to a launch, series, or mixed campaign.')" data-model="02 / CUSTOM BATCH" class="scope-model-btn text-left p-5 bg-cell border border-[#222222] hover:border-crisp/40 transition-all flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between font-mono text-[11px] mb-3">
+                                        <span class="text-electric font-bold">02 / CUSTOM BATCH</span>
+                                        <span class="w-2.5 h-2.5 border border-muted"></span>
+                                    </div>
+                                    <h3 class="font-grotesk font-bold text-lg text-crisp uppercase">Custom Sprint</h3>
+                                    <p class="mt-2 text-xs text-muted leading-relaxed">
+                                        3 to 10 videos for a launch, series, or mixed long-form + short-form campaign tailored to your exact deliverables.
+                                    </p>
+                                </div>
+                                <div class="mt-4 pt-3 hairline-t font-mono text-[10px] text-muted uppercase">
+                                    → Flexible Volume // Custom Quote
+                                </div>
+                            </button>
+
+                            <!-- Option 3: 1-Month Collab -->
+                            <button type="button" onclick="selectScopeModel('03 / 1-MONTH COLLAB', 'Dedicated editing partner for a full month with priority queue & shared workflow.')" data-model="03 / 1-MONTH COLLAB" class="scope-model-btn text-left p-5 bg-cell border border-[#222222] hover:border-crisp/40 transition-all flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between font-mono text-[11px] mb-3">
+                                        <span class="text-signal font-bold">03 / 1-MONTH COLLAB</span>
+                                        <span class="w-2.5 h-2.5 border border-muted"></span>
+                                    </div>
+                                    <h3 class="font-grotesk font-bold text-lg text-crisp uppercase">Monthly Partner</h3>
+                                    <p class="mt-2 text-xs text-muted leading-relaxed">
+                                        Dedicated editing partner for a full month. Consistent turnaround, shared asset workflow, and priority queue.
+                                    </p>
+                                </div>
+                                <div class="mt-4 pt-3 hairline-t font-mono text-[10px] text-muted uppercase">
+                                    → 30-Day Collab // Priority Queue
+                                </div>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Right Column: Interactive Project Inquiry Form -->
-                    <div class="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-zinc-950 border border-zinc-800/90">
-                        <h3 class="font-display text-lg font-bold text-white mb-1">Send a Project Brief</h3>
-                        <p class="text-xs text-zinc-400 mb-6">Fill out the details below to generate an instant email or copy the formatted brief.</p>
+                    <!-- STEP 2: FORMAT / FOCUS (MULTI-SELECT PILLS) -->
+                    <div>
+                        <div class="flex items-center justify-between font-mono text-xs uppercase text-muted mb-4">
+                            <span>STEP 02 // WHAT ARE WE CUTTING? (SELECT ONE OR MORE)</span>
+                            <span class="text-electric">MULTI-SELECT</span>
+                        </div>
 
-                        <form id="inquiryForm" onsubmit="handleInquirySubmit(event)" class="space-y-4">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-mono text-zinc-400 mb-1.5">YOUR NAME / BRAND *</label>
-                                    <input id="clientName" type="text" required placeholder="Alex Rivera" class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-emerald-500/60 focus:outline-none text-sm text-white placeholder-zinc-600">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-mono text-zinc-400 mb-1.5">YOUR EMAIL / HANDLE *</label>
-                                    <input id="clientEmail" type="text" required placeholder="alex@company.com" class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-emerald-500/60 focus:outline-none text-sm text-white placeholder-zinc-600">
-                                </div>
-                            </div>
+                        <div class="flex flex-wrap gap-2.5" id="scopeFormatPills">
+                            <button type="button" onclick="toggleFormatPill(this, 'Long-Form (16:9)')" class="format-pill px-4 py-2.5 font-mono text-xs bg-signal text-pitch font-bold border border-signal transition-all">
+                                Long-Form (16:9)
+                            </button>
+                            <button type="button" onclick="toggleFormatPill(this, 'Short-Form (9:16)')" class="format-pill px-4 py-2.5 font-mono text-xs bg-cell text-crisp border border-[#262626] hover:border-electric transition-all">
+                                Short-Form (9:16)
+                            </button>
+                            <button type="button" onclick="toggleFormatPill(this, 'Motion Graphics / SaaS')" class="format-pill px-4 py-2.5 font-mono text-xs bg-cell text-crisp border border-[#262626] hover:border-electric transition-all">
+                                Motion Graphics / SaaS
+                            </button>
+                            <button type="button" onclick="toggleFormatPill(this, 'Color & Sound Polish')" class="format-pill px-4 py-2.5 font-mono text-xs bg-cell text-crisp border border-[#262626] hover:border-electric transition-all">
+                                Color &amp; Sound Polish
+                            </button>
+                            <button type="button" onclick="toggleFormatPill(this, 'Custom / Open Scope')" class="format-pill px-4 py-2.5 font-mono text-xs bg-cell text-crisp border border-[#262626] hover:border-electric transition-all">
+                                Custom / Not Sure Yet
+                            </button>
+                        </div>
+                    </div>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-mono text-zinc-400 mb-1.5">PROJECT FORMAT</label>
-                                    <select id="projectType" class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-emerald-500/60 focus:outline-none text-sm text-white">
-                                        <option value="Short-Form Reels/Shorts (9:16)">Short-Form Reels / Shorts (9:16)</option>
-                                        <option value="YouTube Long-Form (16:9)">YouTube Long-Form Edit (16:9)</option>
-                                        <option value="SaaS Promo & Motion Graphics">SaaS Promo &amp; Motion Graphics</option>
-                                        <option value="VSL / Commercial Edit">High-Converting VSL / Ad</option>
-                                        <option value="Monthly Retainer Package">Monthly Retainer Package</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-mono text-zinc-400 mb-1.5">ESTIMATED BUDGET / SCOPE</label>
-                                    <select id="projectBudget" class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-emerald-500/60 focus:outline-none text-sm text-white">
-                                        <option value="Single Trial Video">Single Trial Video</option>
-                                        <option value="$250 – $500 Package">$250 – $500 Package</option>
-                                        <option value="$500 – $1,500 Monthly">$500 – $1,500 Monthly</option>
-                                        <option value="$1,500+ Custom Production">$1,500+ Custom Production</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-xs font-mono text-zinc-400 mb-1.5">PROJECT DETAILS &amp; REFERENCE LINKS *</label>
-                                <textarea id="projectDetails" rows="4" required placeholder="Tell me about your channel/brand, raw footage length, and desired style..." class="w-full px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 focus:border-emerald-500/60 focus:outline-none text-sm text-white placeholder-zinc-600"></textarea>
-                            </div>
-
-                            <div class="pt-2 flex flex-wrap items-center gap-3">
-                                <button type="submit" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 font-semibold text-sm transition-all">
-                                    <i class="fa-regular fa-paper-plane"></i>
-                                    <span>Send Inquiry via Email</span>
-                                </button>
-                                <button type="button" onclick="copyBriefToClipboard()" class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-800 text-xs sm:text-sm font-mono transition-all">
-                                    <i class="fa-regular fa-copy text-emerald-400"></i>
-                                    <span>Copy Brief Text</span>
-                                </button>
-                            </div>
-                        </form>
+                    <!-- STEP 3: OPTIONAL NOTE / REFERENCE LINK -->
+                    <div>
+                        <div class="flex items-center justify-between font-mono text-xs uppercase text-muted mb-3">
+                            <label for="scopeNotesInput">STEP 03 // QUICK PROJECT NOTE OR REFERENCE LINK (OPTIONAL)</label>
+                            <span>PLAIN TEXT</span>
+                        </div>
+                        <textarea id="scopeNotesInput" oninput="updateScopePreview()" rows="3" placeholder="e.g., Looking to edit 1 YouTube documentary (15 mins) with custom After Effects callouts, or testing a 1-month reel collab..." class="w-full p-4 bg-cell hairline-box focus:border-signal focus:outline-none text-sm text-crisp placeholder-muted/60 font-sans"></textarea>
                     </div>
 
                 </div>
+
+                <!-- Right 5 Cols: Live Scope Ticket & Direct Dispatch -->
+                <div class="lg:col-span-5 p-6 sm:p-10 bg-[#080808] flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between pb-4 hairline-b font-mono text-xs">
+                            <span class="text-signal font-bold">// GENERATED SCOPE BRIEF</span>
+                            <span class="text-muted">TO: ZAYAN FAHAD</span>
+                        </div>
+
+                        <!-- Live Summary Box -->
+                        <div class="mt-5 p-5 bg-cell hairline-box font-mono text-xs space-y-3">
+                            <div>
+                                <span class="text-muted block text-[10px]">ENGAGEMENT:</span>
+                                <span id="summaryModelText" class="text-signal font-bold text-sm">01 / SINGLE VIDEO</span>
+                                <p id="summaryModelDesc" class="text-muted text-[11px] mt-0.5">Standalone single edit or paid test run — zero ongoing commitment.</p>
+                            </div>
+                            <div class="pt-3 hairline-t">
+                                <span class="text-muted block text-[10px]">SELECTED FORMATS:</span>
+                                <span id="summaryFormatsText" class="text-crisp font-medium">Long-Form (16:9)</span>
+                            </div>
+                            <div class="pt-3 hairline-t">
+                                <span class="text-muted block text-[10px]">NOTES / LINKS:</span>
+                                <p id="summaryNotesText" class="text-crisp/90 whitespace-pre-wrap break-words">Open to discussing details directly.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dispatch Buttons -->
+                    <div class="mt-8 space-y-3">
+                        <div class="font-mono text-[10px] text-muted uppercase tracking-wider">
+                            CHOOSE HOW YOU PREFER TO START:
+                        </div>
+
+                        <!-- Button 1: Fiverr Custom Order (Copies brief + opens Fiverr) -->
+                        <button type="button" onclick="launchFiverrWithScope()" class="w-full py-4 px-5 bg-signal hover:bg-[#1aff75] text-pitch font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-between">
+                            <span>Book or Request Custom Offer on Fiverr</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </button>
+
+                        <!-- Button 2: Direct Email Dispatch -->
+                        <button type="button" onclick="sendScopeViaEmail()" class="w-full py-3.5 px-5 bg-cell hover:bg-elevated text-crisp border border-electric hover:bg-electric/10 font-mono font-semibold text-xs uppercase tracking-wider transition-all flex items-center justify-between">
+                            <span>Send Scope via Email (mdf042731@gmail.com)</span>
+                            <i class="fa-regular fa-paper-plane text-electric"></i>
+                        </button>
+
+                        <!-- Button 3: Copy Brief + Email to Clipboard -->
+                        <button type="button" onclick="copyScopeAndEmail()" class="w-full py-3 px-5 bg-pitch hover:bg-cell text-muted hover:text-crisp hairline-box font-mono text-[11px] uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+                            <i class="fa-regular fa-copy text-signal"></i>
+                            <span>Copy Brief Text &amp; Email Address</span>
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <!-- ============================================================================ -->
-    <!-- MINIMAL FOOTER                                                               -->
+    <!-- SECTION 03: CRAFT, STANDARDS & TECHNICAL SPECIFICATIONS                      -->
     <!-- ============================================================================ -->
-    <footer class="py-10 border-t border-zinc-900 text-xs font-mono text-zinc-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2">
-                <span class="text-white font-display font-bold">FAHAD // STUDIO</span>
-                <span>— © 2026 ALL RIGHTS RESERVED.</span>
+    <section id="craft" class="py-16 sm:py-24 hairline-b">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+            
+            <div class="mb-12">
+                <div class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest mb-3">
+                    <span class="px-2 py-0.5 bg-signal text-pitch font-bold">03 // CRAFT &amp; SPECS</span>
+                    <span class="text-muted">WHAT GOES INTO THE TIMELINE</span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-crisp uppercase tracking-tight">
+                    Cut for Clarity.
+                </h2>
             </div>
-            <div class="flex items-center gap-6">
-                <button onclick="toggleStudioModal()" class="hover:text-emerald-400 transition-colors">
-                    [+ Manage / Export Portfolio]
-                </button>
-                <a href="#" class="hover:text-white transition-colors">BACK TO TOP ↑</a>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 hairline-box bg-cell">
+                
+                <!-- Spec 01 -->
+                <div class="p-7 sm:p-9 hairline-b md:border-b-0 md:hairline-r flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between font-mono text-xs text-signal mb-6">
+                            <span>[01 // PACING &amp; STORY]</span>
+                            <span>16:9 &amp; 9:16</span>
+                        </div>
+                        <h3 class="font-grotesk font-bold text-2xl text-crisp uppercase mb-3">
+                            Intentional Rhythm
+                        </h3>
+                        <p class="text-sm text-muted leading-relaxed">
+                            Good editing isn't about throwing transitions at every sentence. It's knowing when to let a moment breathe and when to cut on the exact syllable to carry momentum forward.
+                        </p>
+                    </div>
+                    <ul class="mt-8 pt-5 hairline-t space-y-2 font-mono text-xs text-crisp">
+                        <li>+ Narrative structuring &amp; hook refinement</li>
+                        <li>+ Frame-accurate J-cuts &amp; L-cuts</li>
+                        <li>+ Zero wasted seconds</li>
+                    </ul>
+                </div>
+
+                <!-- Spec 02 -->
+                <div class="p-7 sm:p-9 hairline-b md:border-b-0 md:hairline-r flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between font-mono text-xs text-electric mb-6">
+                            <span>[02 // AFTER EFFECTS]</span>
+                            <span>60FPS MOTION</span>
+                        </div>
+                        <h3 class="font-grotesk font-bold text-2xl text-crisp uppercase mb-3">
+                            Custom Motion Design
+                        </h3>
+                        <p class="text-sm text-muted leading-relaxed">
+                            Built from scratch in After Effects—clean UI walkthroughs for SaaS products, kinetic typography, data callouts, and spatial 3D camera movement that visually explains complex ideas.
+                        </p>
+                    </div>
+                    <ul class="mt-8 pt-5 hairline-t space-y-2 font-mono text-xs text-crisp">
+                        <li>+ Custom vector UI &amp; HUD animations</li>
+                        <li>+ Smooth speed-ramping &amp; graph curves</li>
+                        <li>+ Brand-matched typography systems</li>
+                    </ul>
+                </div>
+
+                <!-- Spec 03 -->
+                <div class="p-7 sm:p-9 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between font-mono text-xs text-signal mb-6">
+                            <span>[03 // FINISHING]</span>
+                            <span>COLOR &amp; SOUND</span>
+                        </div>
+                        <h3 class="font-grotesk font-bold text-2xl text-crisp uppercase mb-3">
+                            Sound &amp; Color Grade
+                        </h3>
+                        <p class="text-sm text-muted leading-relaxed">
+                            Half of what makes a cut feel expensive is the audio mix. Every timeline gets dialogue cleanup, subtle room tone, tactile foley layers, and a balanced color pass in DaVinci Resolve.
+                        </p>
+                    </div>
+                    <ul class="mt-8 pt-5 hairline-t space-y-2 font-mono text-xs text-crisp">
+                        <li>+ -14 LUFS broadcast dialogue mastering</li>
+                        <li>+ Layered risers, hits &amp; atmospheric SFX</li>
+                        <li>+ Clean Rec.709 color &amp; skin-tone balance</li>
+                    </ul>
+                </div>
+
             </div>
+        </div>
+    </section>
+
+    <!-- ============================================================================ -->
+    <!-- SECTION 04: DIRECT CONTACT & FOOTER                                          -->
+    <!-- ============================================================================ -->
+    <footer id="contact" class="py-16 sm:py-24 bg-pitch">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+            
+            <div class="p-8 sm:p-12 bg-cell hairline-box">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    
+                    <div class="lg:col-span-7">
+                        <div class="inline-flex items-center gap-2 px-2.5 py-1 bg-pitch hairline-box font-mono text-[11px] text-signal mb-4">
+                            <span class="w-2 h-2 bg-signal animate-pulse"></span>
+                            <span>AVAILABLE FOR SINGLE EDITS &amp; MONTHLY COLLABS</span>
+                        </div>
+                        <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-crisp uppercase tracking-tight">
+                            Let's Cut Your Next Project.
+                        </h2>
+                        <p class="mt-3 text-sm sm:text-base text-muted max-w-xl">
+                            Reach out directly via email or place an order / custom inquiry on Fiverr. Straightforward communication and fast turnaround.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-5 flex flex-col gap-3">
+                        <!-- Direct Fiverr Link -->
+                        <a href="https://www.fiverr.com/s/7j1kDz1" target="_blank" rel="noopener noreferrer" class="p-4 bg-signal hover:bg-[#1aff75] text-pitch font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-between">
+                            <span>Order or Message on Fiverr</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+
+                        <!-- Direct Email + Copy Button -->
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                            <a href="mailto:mdf042731@gmail.com" class="sm:col-span-8 p-4 bg-pitch hover:bg-elevated text-crisp hairline-box font-mono text-xs transition-all flex items-center justify-between">
+                                <span class="truncate">mdf042731@gmail.com</span>
+                                <i class="fa-regular fa-envelope text-electric ml-2"></i>
+                            </a>
+                            <button type="button" onclick="copyEmailAddress()" class="sm:col-span-4 p-4 bg-pitch hover:bg-elevated text-crisp border border-electric/60 hover:border-electric font-mono text-xs uppercase transition-all flex items-center justify-center gap-2">
+                                <i class="fa-regular fa-copy text-electric"></i>
+                                <span>Copy</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Owner Controls -->
+            <div class="mt-10 pt-8 hairline-t flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-muted">
+                <div class="flex items-center gap-3">
+                    <span class="w-2.5 h-2.5 bg-signal"></span>
+                    <span class="text-crisp font-bold">ZAYAN FAHAD</span>
+                    <span>// POST-PRODUCTION &amp; MOTION</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-6">
+                    <button onclick="toggleStudioModal()" class="hover:text-signal transition-colors">
+                        [MANAGE VIDEOS / EXPORT INDEX.HTML]
+                    </button>
+                    <a href="https://www.fiverr.com/s/7j1kDz1" target="_blank" rel="noopener noreferrer" class="hover:text-electric transition-colors">
+                        [FIVERR]
+                    </a>
+                    <a href="#" class="hover:text-crisp transition-colors">TOP ↑</a>
+                </div>
+            </div>
+
         </div>
     </footer>
 
     <!-- ============================================================================ -->
-    <!-- LIGHTBOX VIDEO PLAYER MODAL (Supports YouTube, Shorts, Vimeo, Drive & MP4)   -->
+    <!-- HIGH-BITRATE VIDEO THEATER MODAL (4K / 1080P60 AUTO-FORCED)                  -->
     <!-- ============================================================================ -->
-    <div id="videoLightbox" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-xl">
-        <div class="relative w-full max-w-5xl flex flex-col items-center">
-            <!-- Top Bar above Player -->
-            <div class="w-full flex items-center justify-between mb-3 px-1">
-                <div>
-                    <span id="lightboxCategory" class="font-mono text-xs text-emerald-400 uppercase">CATEGORY</span>
-                    <h3 id="lightboxTitle" class="font-display text-lg sm:text-xl font-bold text-white">Project Title</h3>
+    <div id="videoLightbox" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-pitch/95 backdrop-blur-xl">
+        <div class="relative w-full max-w-6xl flex flex-col items-center">
+            
+            <!-- Theater Technical Header -->
+            <div class="w-full p-3 sm:px-5 bg-cell hairline-box border-b-0 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <span id="lightboxAspectBadge" class="px-2 py-0.5 bg-signal text-pitch font-mono font-bold text-[10px]">[16:9]</span>
+                    <h3 id="lightboxTitle" class="font-grotesk font-bold text-sm sm:text-base text-crisp uppercase truncate max-w-md">Project Title</h3>
                 </div>
-                <button onclick="closeVideoLightbox()" class="w-10 h-10 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 hover:text-white flex items-center justify-center transition-all">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
+
+                <div class="flex items-center gap-3">
+                    <!-- Max Quality Enforced Indicator -->
+                    <span class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 bg-pitch hairline-box font-mono text-[10px] text-signal">
+                        <i class="fa-solid fa-Lock text-[9px]"></i>
+                        <span id="qualityStatusBadge">MAX QUALITY LOCKED (4K / 1080P60 AUTO-FORCED)</span>
+                    </span>
+
+                    <!-- Open Uncompressed Source Link -->
+                    <a id="lightboxSourceLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden items-center gap-1.5 px-2.5 py-1 bg-pitch hover:bg-elevated hairline-box font-mono text-[10px] text-crisp hover:text-electric transition-colors">
+                        <span>Open Original Stream</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                    </a>
+
+                    <button onclick="closeVideoLightbox()" class="w-8 h-8 bg-pitch hover:bg-electric hover:text-pitch text-crisp hairline-box font-mono text-sm flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
             </div>
 
-            <!-- Dynamic Aspect-Ratio Player Wrapper -->
-            <div id="lightboxPlayerContainer" class="w-full aspect-video rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800 shadow-2xl relative flex items-center justify-center">
-                <!-- Populated dynamically with iframe, <video>, or interactive motion demo -->
+            <!-- Dynamic Player Container -->
+            <div id="lightboxPlayerContainer" class="w-full aspect-video bg-black hairline-box relative flex items-center justify-center overflow-hidden">
+                <!-- Populated dynamically via YouTube JS API, Vimeo 4K, or HTML5 Video -->
             </div>
 
-            <!-- Bottom Metadata Bar -->
-            <div class="w-full mt-3 px-1 flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-zinc-400">
-                <div id="lightboxDeliverables">Deliverables: After Effects + Premiere Pro</div>
-                <div id="lightboxMetric" class="text-emerald-400 font-semibold">+68% Retention</div>
+            <!-- Theater Footer -->
+            <div class="w-full p-3 sm:px-5 bg-cell hairline-box border-t-0 flex flex-wrap items-center justify-between gap-2 font-mono text-xs">
+                <div id="lightboxDeliverables" class="text-muted">SPECS: 4K60 // Premiere Pro + After Effects</div>
+                <div class="flex items-center gap-4">
+                    <span id="lightboxRole" class="text-electric">EDITOR &amp; MOTION DESIGNER: ZAYAN FAHAD</span>
+                </div>
             </div>
+
         </div>
     </div>
 
     <!-- ============================================================================ -->
-    <!-- STUDIO VIDEO MANAGER & 1-CLICK HTML EXPORTER MODAL                           -->
+    <!-- STUDIO VIDEO MANAGER & ONE-CLICK LOWERCASE `index.html` EXPORTER             -->
     <!-- ============================================================================ -->
-    <div id="studioModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-lg">
-        <div class="w-full max-w-3xl rounded-2xl bg-surface border border-zinc-800 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div id="studioModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-pitch/90 backdrop-blur-md">
+        <div class="w-full max-w-3xl bg-cell border border-[#2a2a2a] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
             
             <!-- Modal Header -->
-            <div class="px-6 py-4 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between">
+            <div class="px-6 py-4 bg-pitch hairline-b flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
-                    <i class="fa-solid fa-sliders text-emerald-400"></i>
-                    <h3 class="font-display font-bold text-white text-base sm:text-lg">Portfolio Video Manager &amp; Permanent Exporter</h3>
+                    <span class="w-2.5 h-2.5 bg-electric"></span>
+                    <h3 class="font-grotesk font-bold text-crisp text-base uppercase tracking-wide">Studio Video Manager &amp; Permanent Exporter</h3>
                 </div>
-                <button onclick="toggleStudioModal()" class="w-8 h-8 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white flex items-center justify-center">
+                <button onclick="toggleStudioModal()" class="w-8 h-8 bg-cell hover:bg-elevated text-muted hover:text-crisp hairline-box flex items-center justify-center">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <!-- Modal Body (Scrollable) -->
+            <!-- Modal Body -->
             <div class="p-6 overflow-y-auto space-y-6 text-sm">
                 
-                <!-- Instructions Banner -->
-                <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-zinc-200 text-xs leading-relaxed">
-                    <strong class="text-emerald-400 font-mono block mb-1">HOW TO ADD YOUR VIDEOS PERMANENTLY FOR FREE:</strong>
-                    1. Add your YouTube, YouTube Shorts, Vimeo, Google Drive share link, or direct MP4 link below.<br>
-                    2. Test it immediately in your live portfolio grid.<br>
-                    3. Click <strong>"Download Ready-to-Host index.html"</strong> at the bottom of this window, then drag that file into <strong>Netlify Drop</strong>, <strong>Cloudflare Pages</strong>, or <strong>GitHub Pages</strong> for free lifetime hosting!
+                <!-- Instructions -->
+                <div class="p-4 bg-pitch border-l-2 border-signal font-mono text-xs text-muted leading-relaxed">
+                    <strong class="text-signal block mb-1">// HOW TO UPDATE YOUR LIVE GITHUB WEBSITE PERMANENTLY:</strong>
+                    1. Add your YouTube, YouTube Shorts, Vimeo, Google Drive, or MP4 links below. You can also reorder or delete items.<br>
+                    2. Click <strong class="text-crisp">"Download Ready-to-Host index.html"</strong> at the bottom.<br>
+                    3. Upload that downloaded <code class="text-electric">index.html</code> file into your GitHub repository — it is already named in exact lowercase so GitHub Pages works immediately.
                 </div>
 
-                <!-- Add New Video Form -->
-                <form id="addVideoForm" onsubmit="handleAddCustomVideo(event)" class="space-y-4 bg-zinc-950 p-5 rounded-xl border border-zinc-800/90">
-                    <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-300 font-semibold">Add a New Project to Showcase</h4>
+                <!-- Add Video Form -->
+                <form id="addVideoForm" onsubmit="handleAddCustomVideo(event)" class="space-y-4 bg-pitch p-5 hairline-box">
+                    <div class="font-mono text-xs uppercase text-signal font-bold">+ ADD NEW VIDEO TO ARCHIVE</div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-[11px] font-mono text-zinc-400 mb-1">PROJECT TITLE *</label>
-                            <input id="newVidTitle" type="text" required placeholder="e.g., AI SaaS Product Launch Promo" class="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white text-xs focus:outline-none focus:border-emerald-500">
+                            <label class="block text-[11px] font-mono text-muted mb-1">PROJECT TITLE *</label>
+                            <input id="newVidTitle" type="text" required placeholder="e.g., Documentary Cut // AI Hardware" class="w-full px-3 py-2 bg-cell hairline-box text-crisp text-xs focus:outline-none focus:border-signal">
                         </div>
                         <div>
-                            <label class="block text-[11px] font-mono text-zinc-400 mb-1">VIDEO URL (YouTube, Shorts, Drive, Vimeo, MP4) *</label>
-                            <input id="newVidUrl" type="url" required placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white text-xs focus:outline-none focus:border-emerald-500">
+                            <label class="block text-[11px] font-mono text-muted mb-1">VIDEO URL (YouTube, Shorts, Vimeo, Drive, MP4) *</label>
+                            <input id="newVidUrl" type="url" required placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3 py-2 bg-cell hairline-box text-crisp text-xs focus:outline-none focus:border-signal">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-[11px] font-mono text-zinc-400 mb-1">CATEGORY TAB</label>
-                            <select id="newVidCategory" class="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white text-xs">
-                                <option value="short-form">Short-Form (9:16)</option>
-                                <option value="long-form">YouTube Long-Form</option>
-                                <option value="saas-motion">SaaS &amp; Motion</option>
-                                <option value="color-audio">Color &amp; Audio</option>
+                            <label class="block text-[11px] font-mono text-muted mb-1">ASPECT RATIO</label>
+                            <select id="newVidAspect" class="w-full px-3 py-2 bg-cell hairline-box text-crisp text-xs font-mono">
+                                <option value="16:9">[16:9] Horizontal Widescreen</option>
+                                <option value="9:16">[9:16] Vertical Short / Reel</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-[11px] font-mono text-zinc-400 mb-1">ASPECT RATIO</label>
-                            <select id="newVidAspect" class="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white text-xs">
-                                <option value="16:9">16:9 Widescreen</option>
-                                <option value="9:16">9:16 Vertical (Reels/Shorts)</option>
+                            <label class="block text-[11px] font-mono text-muted mb-1">CATEGORY TAG</label>
+                            <select id="newVidCategory" class="w-full px-3 py-2 bg-cell hairline-box text-crisp text-xs font-mono">
+                                <option value="long-form">Long-Form / Documentary</option>
+                                <option value="short-form">Short-Form / Reels</option>
+                                <option value="motion">Motion &amp; SaaS</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-[11px] font-mono text-zinc-400 mb-1">KEY METRIC BADGE</label>
-                            <input id="newVidMetric" type="text" placeholder="e.g., +72% Retention" class="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white text-xs">
+                            <label class="block text-[11px] font-mono text-muted mb-1">DURATION / TAG</label>
+                            <input id="newVidDuration" type="text" placeholder="e.g., 14:20 // 4K60" class="w-full px-3 py-2 bg-cell hairline-box text-crisp text-xs font-mono">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-[11px] font-mono text-zinc-400 mb-1">TOOLS / DELIVERABLES TAG</label>
-                            <input id="newVidTools" type="text" placeholder="After Effects + Premiere Pro" class="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white text-xs">
+                            <label class="block text-[11px] font-mono text-muted mb-1">ROLE &amp; SOFTWARE SPEC NOTE</label>
+                            <input id="newVidTools" type="text" placeholder="e.g., Pacing, Custom AE Motion & Sound Mix" class="w-full px-3 py-2 bg-cell hairline-box text-crisp text-xs">
                         </div>
                         <div>
-                            <label class="block text-[11px] font-mono text-zinc-400 mb-1">CUSTOM THUMBNAIL URL (Optional - Auto-fetched for YT)</label>
-                            <input id="newVidThumb" type="url" placeholder="Leave blank for automatic thumbnail" class="w-full px-3 py-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white text-xs">
+                            <label class="block text-[11px] font-mono text-muted mb-1">CUSTOM THUMBNAIL URL (Optional — Auto-HD for YT)</label>
+                            <input id="newVidThumb" type="url" placeholder="Leave blank for automatic maxresdefault.jpg" class="w-full px-3 py-2 bg-cell hairline-box text-crisp text-xs">
                         </div>
                     </div>
 
-                    <div class="pt-1 flex items-center justify-end gap-3">
-                        <button type="submit" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold text-xs transition-all">
+                    <div class="pt-1 flex justify-end">
+                        <button type="submit" class="px-5 py-2.5 bg-signal hover:bg-[#1aff75] text-pitch font-mono font-bold text-xs uppercase tracking-wider transition-all">
                             + Add Video to Portfolio
                         </button>
                     </div>
                 </form>
 
-                <!-- Current Video List in Portfolio -->
+                <!-- Existing Videos List with Reorder & Delete -->
                 <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <h4 class="font-mono text-xs uppercase tracking-wider text-zinc-400">Current Videos in Showcase (<span id="managerCount">0</span>)</h4>
-                        <button onclick="resetDefaultPortfolio()" class="text-[11px] font-mono text-zinc-500 hover:text-zinc-300">Reset to Default Demo List</button>
+                    <div class="flex items-center justify-between mb-2 font-mono text-xs">
+                        <span class="text-muted uppercase">CURRENT ARCHIVE (<span id="managerCount">0</span>)</span>
+                        <button onclick="resetDefaultPortfolio()" class="text-[11px] text-muted hover:text-electric">Reset to Default Demo List</button>
                     </div>
-                    <div id="managerVideoList" class="space-y-2 max-h-48 overflow-y-auto pr-1">
+                    <div id="managerVideoList" class="space-y-2 max-h-52 overflow-y-auto pr-1">
                         <!-- Populated via JS -->
                     </div>
                 </div>
             </div>
 
-            <!-- Modal Footer: Export Options -->
-            <div class="px-6 py-4 bg-zinc-950 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-3">
-                <button onclick="copyPortfolioConfig()" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-mono text-zinc-200 transition-all">
-                    <i class="fa-regular fa-copy text-emerald-400"></i>
-                    <span>Copy PORTFOLIO_DATA Array</span>
+            <!-- Modal Footer -->
+            <div class="px-6 py-4 bg-pitch hairline-t flex flex-wrap items-center justify-between gap-3">
+                <button onclick="copyPortfolioConfig()" class="px-4 py-2.5 bg-cell hover:bg-elevated hairline-box font-mono text-xs text-crisp transition-all flex items-center gap-2">
+                    <i class="fa-regular fa-copy text-electric"></i>
+                    <span>Copy JSON Config</span>
                 </button>
-                <button onclick="downloadUpdatedHtmlFile()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-xs transition-all">
+                <button onclick="downloadUpdatedHtmlFile()" class="px-6 py-2.5 bg-signal hover:bg-[#1aff75] text-pitch font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2">
                     <i class="fa-solid fa-download"></i>
                     <span>Download Ready-to-Host index.html</span>
                 </button>
@@ -886,150 +877,159 @@
         </div>
     </div>
 
-    <!-- Custom Toast Notification (No alert() used!) -->
-    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 hidden items-center gap-3 px-4 py-3 rounded-xl bg-zinc-900 border border-emerald-500/40 text-white text-xs font-mono shadow-2xl">
-        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-        <span id="toastMessage">Action completed!</span>
+    <!-- Custom Toast Feedback -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 hidden items-center gap-3 px-4 py-3 bg-pitch border-2 border-signal text-crisp text-xs font-mono shadow-2xl">
+        <span class="w-2 h-2 bg-signal"></span>
+        <span id="toastMessage">Action completed.</span>
     </div>
 
     <!-- ============================================================================ -->
-    <!-- PORTFOLIO CONFIGURATION & APPLICATION SCRIPT                                 -->
+    <!-- CORE APPLICATION LOGIC & 4K QUALITY ENFORCER                                 -->
     <!-- ============================================================================ -->
     <script>
-        /* ==========================================================================
-           1. EASY CONFIGURATION: EDIT YOUR VIDEOS & CONTACT INFO HERE!
-           ==========================================================================
-           To customize your portfolio permanently in 10 seconds:
-           - Paste any YouTube link (e.g. "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-           - Or YouTube Shorts link ("https://www.youtube.com/shorts/...")
-           - Or Google Drive video share link ("https://drive.google.com/file/d/YOUR_ID/view")
-           - Or direct MP4 link ("https://example.com/video.mp4")
-        ========================================================================== */
         const SITE_CONFIG = {
-            ownerName: "FAHAD",
-            email: "fahad.studio@example.com",
-            showreelUrl: "", // Paste your YouTube / Vimeo / Drive Showreel URL here
-            showreelTitle: "2026 Official Editing & Motion Graphics Showreel"
+            ownerName: "ZAYAN FAHAD",
+            email: "mdf042731@gmail.com",
+            fiverrUrl: "https://www.fiverr.com/s/7j1kDz1",
+            showreelUrl: "", // Paste your master showreel YouTube/Vimeo/Drive link here or via Manage Videos
+            showreelTitle: "ZAYAN FAHAD // MASTER POST-PRODUCTION & MOTION REEL"
         };
 
         ///* PORTFOLIO_DATA_START */
         const DEFAULT_PORTFOLIO_DATA = [
             {
-                id: "vid-1",
-                title: "Fintech AI SaaS Product Launch Promo",
-                category: "saas-motion",
-                categoryLabel: "SaaS & Motion",
+                id: "zf-01",
+                title: "Next-Gen AI Infrastructure — Product & Motion Film",
+                category: "motion",
+                categoryLabel: "MOTION & SAAS",
                 aspectRatio: "16:9",
-                metric: "+310% Signups",
-                deliverables: "After Effects UI + Custom 3D Camera + SFX",
-                duration: "01:12",
-                videoUrl: "", // Leave empty for built-in interactive motion demo, or paste your YouTube/Vimeo/Drive URL!
-                thumbnail: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80",
-                accentColor: "#10b981"
+                duration: "01:24 // 4K60",
+                deliverables: "After Effects 3D Camera + Vector UI + Sound Design",
+                videoUrl: "",
+                thumbnail: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=85",
+                accent: "#00FF66"
             },
             {
-                id: "vid-2",
-                title: "How Semiconductors Actually Work — Documentary Cut",
+                id: "zf-02",
+                title: "Inside Modern Chip Fabrication — Documentary Essay",
                 category: "long-form",
-                categoryLabel: "YouTube Long-Form",
+                categoryLabel: "DOCUMENTARY CUT",
                 aspectRatio: "16:9",
-                metric: "71% Avg Retention (18m)",
-                deliverables: "Premiere Pro + 3D Map Callouts + Sound Design",
-                duration: "18:42",
+                duration: "19:10 // 4K24",
+                deliverables: "Narrative Pacing + Custom Map Callouts + Mix",
                 videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
-                accentColor: "#6366f1"
+                thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85",
+                accent: "#FF2A85"
             },
             {
-                id: "vid-3",
-                title: "High-Converting B2B Agency VSL & Case Study",
+                id: "zf-03",
+                title: "High-Contrast Automotive Spec Commercial & Foley",
                 category: "long-form",
-                categoryLabel: "YouTube & VSL",
+                categoryLabel: "COMMERCIAL SPEC",
                 aspectRatio: "16:9",
-                metric: "4.2x ROAS Lift",
-                deliverables: "Hook Architecture + Dynamic Charts + Color",
-                duration: "06:15",
+                duration: "01:05 // 4K60",
+                deliverables: "Optical Flow Speed Ramps + DaVinci Resolve Grade",
                 videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
-                accentColor: "#f59e0b"
+                thumbnail: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85",
+                accent: "#00FF66"
             },
             {
-                id: "vid-4",
-                title: "Cyberpunk Commercial Spec Grade & Sound Master",
-                category: "color-audio",
-                categoryLabel: "Color & Audio",
+                id: "zf-04",
+                title: "Fintech OS — Interactive UI Walkthrough & Launch",
+                category: "motion",
+                categoryLabel: "SAAS LAUNCH",
                 aspectRatio: "16:9",
-                metric: "Rec.709 Film Print",
-                deliverables: "DaVinci Resolve Nodes + Multi-track Foley",
-                duration: "00:58",
+                duration: "02:15 // 4K60",
+                deliverables: "60fps Kinetic UI + Custom Graph Curves + Foley",
                 videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=900&q=80",
-                accentColor: "#ec4899"
+                thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85",
+                accent: "#FF2A85"
             },
             {
-                id: "vid-5",
-                title: "Founder Story: $0 to $10M ARR in 14 Months",
+                id: "zf-05",
+                title: "Why Minimal Design Wins — Kinetic Short-Form Essay",
                 category: "short-form",
-                categoryLabel: "Short-Form (9:16)",
+                categoryLabel: "SHORT-FORM [9:16]",
                 aspectRatio: "9:16",
-                metric: "1.8M Organic Views",
-                deliverables: "Kinetic Typography + Custom SFX Risers",
-                duration: "00:48",
+                duration: "00:52 // 60FPS",
+                deliverables: "Frame-Accurate Pacing + Custom AE Typography",
                 videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-                accentColor: "#10b981"
+                thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=700&q=85",
+                accent: "#00FF66"
             },
             {
-                id: "vid-6",
-                title: "3 Psychology Tricks Apple Uses in Pricing",
+                id: "zf-06",
+                title: "Founder Breakdown: Building Without Venture Capital",
                 category: "short-form",
-                categoryLabel: "Short-Form (9:16)",
+                categoryLabel: "SHORT-FORM [9:16]",
                 aspectRatio: "9:16",
-                metric: "84% Watched Full",
-                deliverables: "After Effects Motion Cutouts + Speed Ramps",
-                duration: "00:39",
+                duration: "00:44 // 60FPS",
+                deliverables: "Tight A-Roll Cut + Visual Callouts + SFX Risers",
                 videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80",
-                accentColor: "#3b82f6"
+                thumbnail: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85",
+                accent: "#FF2A85"
             },
             {
-                id: "vid-7",
-                title: "Next-Gen Web3 Wallet UI Micro-Interactions",
-                category: "saas-motion",
-                categoryLabel: "SaaS & Motion (9:16)",
+                id: "zf-07",
+                title: "SaaS Mobile App — Micro-Interaction Reel",
+                category: "motion",
+                categoryLabel: "MOTION [9:16]",
                 aspectRatio: "9:16",
-                metric: "+68% Retention",
-                deliverables: "60fps Vector UI Animation + Sub-Bass SFX",
-                duration: "00:32",
+                duration: "00:36 // 60FPS",
+                deliverables: "After Effects Vector Motion + Sub-Bass Design",
                 videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
-                accentColor: "#a855f7"
+                thumbnail: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=700&q=85",
+                accent: "#00FF66"
             },
             {
-                id: "vid-8",
-                title: "Automotive Speed Ramp & Rhythm Sync Reel",
-                category: "color-audio",
-                categoryLabel: "Color & Audio (9:16)",
+                id: "zf-08",
+                title: "Night Runner — Rhythm, Speed Ramp & Color Study",
+                category: "short-form",
+                categoryLabel: "COLOR & CUT [9:16]",
                 aspectRatio: "9:16",
-                metric: "920K Reels Plays",
-                deliverables: "Optical Flow Ramping + Engine SFX Design",
-                duration: "00:27",
+                duration: "00:31 // 60FPS",
+                deliverables: "DaVinci Resolve Film Emulation + Beat Sync",
                 videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80",
-                accentColor: "#10b981"
+                thumbnail: "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=700&q=85",
+                accent: "#FF2A85"
             }
         ];
         ///* PORTFOLIO_DATA_END */
 
-        // State Management
         let portfolioItems = [];
         let activeFilter = 'all';
-        let lightboxAnimationId = null;
+        let activeYtPlayer = null;
+        let lightboxCanvasAnim = null;
 
-        // Load Portfolio Data (Checks localStorage first so user edits persist)
+        // Scope Builder State
+        let selectedScopeModel = '01 / SINGLE VIDEO';
+        let selectedScopeDesc = 'Standalone single edit or paid test run — zero ongoing commitment.';
+        let selectedFormats = new Set(['Long-Form (16:9)']);
+
+        /* ==========================================================================
+           1. LIVE 24FPS NLE TIMECODE GENERATOR
+           ========================================================================== */
+        function startLiveTimecode() {
+            const el = document.getElementById('liveTimecode');
+            if (!el) return;
+            const startTime = Date.now();
+            setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                const totalSeconds = Math.floor(elapsed / 1000);
+                const hrs = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+                const mins = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+                const secs = String(totalSeconds % 60).padStart(2, '0');
+                const frames = String(Math.floor((elapsed % 1000) / (1000 / 24))).padStart(2, '0');
+                el.textContent = `${hrs}:${mins}:${secs}:${frames}`;
+            }, 41);
+        }
+
+        /* ==========================================================================
+           2. STORAGE & PORTFOLIO DATA LOADING
+           ========================================================================== */
         function loadPortfolioData() {
             try {
-                const saved = localStorage.getItem('fahad_portfolio_v1');
+                const saved = localStorage.getItem('zayan_fahad_portfolio_v2');
                 if (saved) {
                     portfolioItems = JSON.parse(saved);
                 } else {
@@ -1042,60 +1042,65 @@
 
         function savePortfolioData() {
             try {
-                localStorage.setItem('fahad_portfolio_v1', JSON.stringify(portfolioItems));
-            } catch (e) {
-                console.warn('Could not save to localStorage');
-            }
+                localStorage.setItem('zayan_fahad_portfolio_v2', JSON.stringify(portfolioItems));
+            } catch (e) {}
         }
 
         /* ==========================================================================
-           2. SMART URL PARSER (YouTube, YT Shorts, Vimeo, Google Drive, Direct MP4)
+           3. HIGH-BITRATE URL PARSER (Forces 4K / 1080p60 on YouTube, Vimeo, Drive)
            ========================================================================== */
         function parseVideoUrl(url) {
-            if (!url || !url.trim()) return { type: 'demo', embedUrl: '' };
+            if (!url || !url.trim()) return { type: 'demo', embedUrl: '', originalUrl: '' };
             const cleanUrl = url.trim();
 
-            // 1. Check YouTube (watch?v=, youtu.be/, youtube.com/shorts/, youtube.com/embed/)
+            // YouTube & YouTube Shorts
             const ytRegex = /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
             const ytMatch = cleanUrl.match(ytRegex);
             if (ytMatch && ytMatch[1]) {
+                const videoId = ytMatch[1];
                 return {
-                    type: 'iframe',
-                    videoId: ytMatch[1],
-                    embedUrl: `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&rel=0&modestbranding=1`,
-                    autoThumb: `https://img.youtube.com/vi/${ytMatch[1]}/maxresdefault.jpg`
+                    type: 'youtube',
+                    videoId: videoId,
+                    embedUrl: `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&vq=hd2160&hd=1&rel=0&modestbranding=1&playsinline=1`,
+                    originalUrl: `https://www.youtube.com/watch?v=${videoId}`,
+                    maxThumb: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+                    fallbackThumb: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
                 };
             }
 
-            // 2. Check Vimeo
+            // Vimeo (4K Quality parameter)
             const vimeoRegex = /vimeo\.com\/(?:video\/)?(\d+)/;
             const vimeoMatch = cleanUrl.match(vimeoRegex);
             if (vimeoMatch && vimeoMatch[1]) {
                 return {
-                    type: 'iframe',
-                    embedUrl: `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1`
+                    type: 'vimeo',
+                    embedUrl: `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1&quality=4K&dnt=1`,
+                    originalUrl: cleanUrl
                 };
             }
 
-            // 3. Check Google Drive shared video link (/file/d/ID/view -> /file/d/ID/preview)
+            // Google Drive
             const driveRegex = /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/;
             const driveMatch = cleanUrl.match(driveRegex);
             if (driveMatch && driveMatch[1]) {
                 return {
-                    type: 'iframe',
-                    embedUrl: `https://drive.google.com/file/d/${driveMatch[1]}/preview`
+                    type: 'drive',
+                    driveId: driveMatch[1],
+                    embedUrl: `https://drive.google.com/file/d/${driveMatch[1]}/preview`,
+                    originalUrl: cleanUrl
                 };
             }
 
-            // 4. Direct MP4 / WebM / Ogg file
+            // Direct MP4 / WebM
             return {
                 type: 'mp4',
-                embedUrl: cleanUrl
+                embedUrl: cleanUrl,
+                originalUrl: cleanUrl
             };
         }
 
         /* ==========================================================================
-           3. RENDER VIDEO SHOWCASE GRIDS (16:9 AND 9:16 NATIVE CARDS)
+           4. RENDER ARCHITECTURAL WORK GRIDS
            ========================================================================== */
         function renderShowcase() {
             const horizontalGrid = document.getElementById('horizontalGrid');
@@ -1106,126 +1111,130 @@
 
             const filtered = portfolioItems.filter(item => {
                 if (activeFilter === 'all') return true;
+                if (activeFilter === '16:9') return item.aspectRatio !== '9:16';
+                if (activeFilter === '9:16') return item.aspectRatio === '9:16';
                 return item.category === activeFilter;
             });
 
             const horizontalItems = filtered.filter(i => i.aspectRatio !== '9:16');
             const verticalItems = filtered.filter(i => i.aspectRatio === '9:16');
 
-            countBadge.textContent = `SHOWING ${filtered.length} PROJECT${filtered.length === 1 ? '' : 'S'}`;
+            countBadge.textContent = `INDEX: ${String(filtered.length).padStart(2, '0')} ITEM${filtered.length === 1 ? '' : 'S'}`;
 
-            // Toggle visibility of 16:9 vs 9:16 sections depending on filter results
             horizontalWrapper.style.display = horizontalItems.length > 0 ? 'block' : 'none';
             verticalWrapper.style.display = verticalItems.length > 0 ? 'block' : 'none';
 
-            // Render 16:9 Horizontal Cards
-            horizontalGrid.innerHTML = horizontalItems.map(item => `
-                <article onclick="openVideoCard('${item.id}')" class="video-card group rounded-2xl bg-surface border border-zinc-800/90 overflow-hidden cursor-pointer flex flex-col justify-between">
-                    <div>
-                        <!-- 16:9 Thumbnail Container -->
-                        <div class="relative aspect-video w-full bg-zinc-950 overflow-hidden">
-                            <img src="${item.thumbnail}" alt="${item.title}" onerror="this.src='https://placehold.co/800x450/121215/10b981?text=16:9+Video+Preview'" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent"></div>
-                            
-                            <!-- Top Badges -->
-                            <div class="absolute top-3 left-3 right-3 flex items-center justify-between">
-                                <span class="px-2.5 py-1 rounded-md bg-zinc-950/85 backdrop-blur-md border border-zinc-800 font-mono text-[10px] text-zinc-300 uppercase">
-                                    ${item.categoryLabel}
-                                </span>
-                                <span class="px-2 py-0.5 rounded bg-zinc-950/85 backdrop-blur-md border border-zinc-800 font-mono text-[10px] text-zinc-400">
-                                    ${item.duration || '01:00'}
-                                </span>
-                            </div>
+            // Render 16:9 Horizontal Work Cells
+            horizontalGrid.innerHTML = horizontalItems.map((item, idx) => {
+                const parsed = parseVideoUrl(item.videoUrl);
+                const thumbSrc = item.thumbnail || parsed.maxThumb || 'https://placehold.co/960x540/0B0B0B/00FF66?text=16:9+4K+SOURCE';
+                const fallbackOnError = parsed.fallbackThumb
+                    ? `this.onerror=null;this.src='${parsed.fallbackThumb}';`
+                    : `this.onerror=null;this.src='https://placehold.co/960x540/0B0B0B/00FF66?text=16:9+MASTER';`;
 
-                            <!-- Center Play Button -->
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="w-12 h-12 rounded-full bg-zinc-950/80 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-white group-hover:text-zinc-950 transition-all duration-300 shadow-lg">
-                                    <i class="fa-solid fa-play text-xs ml-0.5"></i>
-                                </div>
-                            </div>
+                return `
+                <article onclick="openVideoCard('${item.id}')" class="work-cell group bg-cell hairline-box cursor-pointer flex flex-col justify-between">
+                    <!-- Top Technical Index Bar -->
+                    <div class="px-4 py-2.5 bg-pitch hairline-b flex items-center justify-between font-mono text-[11px]">
+                        <div class="flex items-center gap-2">
+                            <span class="text-signal font-bold">${String(idx + 1).padStart(2, '0')} //</span>
+                            <span class="text-crisp uppercase">${item.categoryLabel}</span>
+                        </div>
+                        <span class="text-muted">[${item.aspectRatio}] • ${item.duration || '4K60'}</span>
+                    </div>
 
-                            <!-- Bottom Metric Pill -->
-                            <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                                <span class="px-2.5 py-1 rounded-md bg-emerald-500/15 backdrop-blur-md border border-emerald-500/30 font-mono text-[11px] text-emerald-300 font-medium">
-                                    <i class="fa-solid fa-chart-line mr-1 text-[10px]"></i>${item.metric}
-                                </span>
-                                <span class="font-mono text-[10px] text-zinc-400 bg-zinc-950/80 px-2 py-0.5 rounded border border-zinc-800">
-                                    16:9 HD
-                                </span>
+                    <!-- 16:9 Frame -->
+                    <div class="relative aspect-video w-full bg-pitch overflow-hidden">
+                        <img src="${thumbSrc}" alt="${item.title}" onerror="${fallbackOnError}" class="w-full h-full object-cover opacity-85 group-hover:scale-[1.03] group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-pitch/90 via-transparent to-transparent"></div>
+
+                        <!-- Play Trigger -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-14 h-14 bg-pitch/90 border border-crisp/40 group-hover:border-signal group-hover:bg-signal group-hover:text-pitch text-crisp flex items-center justify-center transition-all">
+                                <i class="fa-solid fa-play text-sm ml-0.5"></i>
                             </div>
                         </div>
 
-                        <!-- Card Text Content -->
-                        <div class="p-5">
-                            <h4 class="font-display font-bold text-white text-base group-hover:text-emerald-400 transition-colors line-clamp-1">
+                        <!-- Quality Tag -->
+                        <div class="absolute bottom-3 right-3 px-2 py-0.5 bg-pitch/90 hairline-box font-mono text-[10px] text-signal">
+                            4K / 1080P60
+                        </div>
+                    </div>
+
+                    <!-- Bottom Metadata -->
+                    <div class="p-5 hairline-t flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="font-grotesk font-bold text-lg text-crisp group-hover:text-signal transition-colors uppercase leading-snug">
                                 ${item.title}
-                            </h4>
-                            <p class="mt-2 text-xs font-mono text-zinc-400 line-clamp-1">
+                            </h3>
+                            <p class="mt-1.5 font-mono text-xs text-muted">
                                 ${item.deliverables}
                             </p>
                         </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs text-muted group-hover:text-electric mt-1 transition-colors"></i>
                     </div>
                 </article>
-            `).join('');
+                `;
+            }).join('');
 
-            // Render 9:16 Vertical Cards (Native Reels / Shorts Frame)
-            verticalGrid.innerHTML = verticalItems.map(item => `
-                <article onclick="openVideoCard('${item.id}')" class="video-card group rounded-2xl bg-surface border border-zinc-800/90 overflow-hidden cursor-pointer flex flex-col">
-                    <!-- 9:16 Vertical Container -->
-                    <div class="relative aspect-[9/16] w-full bg-zinc-950 overflow-hidden">
-                        <img src="${item.thumbnail}" alt="${item.title}" onerror="this.src='https://placehold.co/450x800/121215/10b981?text=9:16+Short'" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/25 to-transparent"></div>
+            // Render 9:16 Vertical Work Cells
+            verticalGrid.innerHTML = verticalItems.map((item, idx) => {
+                const parsed = parseVideoUrl(item.videoUrl);
+                const thumbSrc = item.thumbnail || parsed.maxThumb || 'https://placehold.co/540x960/0B0B0B/FF2A85?text=9:16+VERTICAL';
+                const fallbackOnError = parsed.fallbackThumb
+                    ? `this.onerror=null;this.src='${parsed.fallbackThumb}';`
+                    : `this.onerror=null;this.src='https://placehold.co/540x960/0B0B0B/FF2A85?text=9:16+SHORT';`;
 
-                        <!-- Top Pill -->
-                        <div class="absolute top-3 left-3 right-3 flex items-center justify-between">
-                            <span class="px-2.5 py-1 rounded-md bg-zinc-950/80 backdrop-blur-md border border-zinc-800 font-mono text-[10px] text-emerald-400">
-                                9:16 SHORT
-                            </span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-950/80 backdrop-blur-md border border-zinc-800 font-mono text-[10px] text-zinc-300">
-                                ${item.duration || '00:45'}
-                            </span>
-                        </div>
+                return `
+                <article onclick="openVideoCard('${item.id}')" class="work-cell group bg-cell hairline-box cursor-pointer flex flex-col">
+                    <!-- Top Bar -->
+                    <div class="px-3.5 py-2 bg-pitch hairline-b flex items-center justify-between font-mono text-[10px]">
+                        <span class="text-electric font-bold">V${String(idx + 1).padStart(2, '0')} // 9:16</span>
+                        <span class="text-muted">${item.duration || '60FPS'}</span>
+                    </div>
 
-                        <!-- Center Play Button -->
+                    <!-- 9:16 Frame -->
+                    <div class="relative aspect-[9/16] w-full bg-pitch overflow-hidden">
+                        <img src="${thumbSrc}" alt="${item.title}" onerror="${fallbackOnError}" class="w-full h-full object-cover opacity-85 group-hover:scale-[1.03] group-hover:opacity-100 transition-all duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-pitch via-pitch/25 to-transparent"></div>
+
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-12 h-12 rounded-full bg-zinc-950/80 backdrop-blur-md border border-white/20 flex items-center justify-center text-white group-hover:scale-110 group-hover:bg-white group-hover:text-zinc-950 transition-all duration-300 shadow-lg">
+                            <div class="w-12 h-12 bg-pitch/90 border border-crisp/40 group-hover:border-electric group-hover:bg-electric group-hover:text-pitch text-crisp flex items-center justify-center transition-all">
                                 <i class="fa-solid fa-play text-xs ml-0.5"></i>
                             </div>
                         </div>
 
-                        <!-- Bottom Info Inside Vertical Card -->
                         <div class="absolute bottom-0 inset-x-0 p-4">
-                            <span class="inline-block px-2.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 font-mono text-[10px] text-emerald-300 mb-2">
-                                ${item.metric}
+                            <span class="inline-block px-2 py-0.5 bg-pitch/90 border border-electric/50 font-mono text-[10px] text-electric mb-2">
+                                ${item.categoryLabel}
                             </span>
-                            <h4 class="font-display font-bold text-white text-sm sm:text-base leading-snug group-hover:text-emerald-400 transition-colors">
+                            <h3 class="font-grotesk font-bold text-base text-crisp group-hover:text-signal transition-colors uppercase leading-snug">
                                 ${item.title}
-                            </h4>
-                            <p class="mt-1.5 text-[11px] font-mono text-zinc-400 line-clamp-1">
+                            </h3>
+                            <p class="mt-1 font-mono text-[11px] text-muted line-clamp-1">
                                 ${item.deliverables}
                             </p>
                         </div>
                     </div>
                 </article>
-            `).join('');
+                `;
+            }).join('');
         }
 
-        // Filter Tab Switching
         function setFilter(category) {
             activeFilter = category;
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
                 if (btn.getAttribute('data-filter') === category) {
-                    btn.className = "filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-white text-zinc-950 shrink-0";
+                    btn.className = "filter-btn px-4 py-2 font-mono text-xs uppercase tracking-wider bg-signal text-pitch font-bold transition-all";
                 } else {
-                    btn.className = "filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 shrink-0";
+                    btn.className = "filter-btn px-4 py-2 font-mono text-xs uppercase tracking-wider bg-cell text-muted hover:text-crisp hairline-box transition-all";
                 }
             });
             renderShowcase();
         }
 
         /* ==========================================================================
-           4. LIGHTBOX MODAL PLAYER (Supports Real Embeds + Built-In Motion Demo)
+           5. MAX-QUALITY VIDEO THEATER MODAL (YouTube 4K/1080p API Enforcer)
            ========================================================================== */
         function openVideoCard(id) {
             const item = portfolioItems.find(i => i.id === id);
@@ -1236,79 +1245,159 @@
         function openShowreelModal() {
             openLightboxWithData({
                 title: SITE_CONFIG.showreelTitle,
-                categoryLabel: "OFFICIAL SHOWREEL // 4K 60FPS",
                 aspectRatio: "16:9",
-                metric: "250+ Projects Delivered",
-                deliverables: "Premiere Pro + After Effects + DaVinci Resolve",
+                deliverables: "SPECS: 4K60 MASTER // Premiere Pro + After Effects + DaVinci Resolve",
                 videoUrl: SITE_CONFIG.showreelUrl,
-                accentColor: "#10b981"
+                accent: "#00FF66"
             });
         }
 
         function openLightboxWithData(item) {
             const modal = document.getElementById('videoLightbox');
             const container = document.getElementById('lightboxPlayerContainer');
-            document.getElementById('lightboxCategory').textContent = item.categoryLabel;
+            const sourceLink = document.getElementById('lightboxSourceLink');
+            const aspectBadge = document.getElementById('lightboxAspectBadge');
+            const qualityBadge = document.getElementById('qualityStatusBadge');
+
             document.getElementById('lightboxTitle').textContent = item.title;
             document.getElementById('lightboxDeliverables').textContent = item.deliverables;
-            document.getElementById('lightboxMetric').textContent = item.metric;
+            aspectBadge.textContent = `[${item.aspectRatio || '16:9'}]`;
 
-            // Adjust container aspect ratio for 9:16 vertical vs 16:9 widescreen
             if (item.aspectRatio === '9:16') {
-                container.className = "w-full max-w-[360px] aspect-[9/16] rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800 shadow-2xl relative flex items-center justify-center mx-auto";
+                container.className = "w-full max-w-[380px] aspect-[9/16] bg-black hairline-box relative flex items-center justify-center overflow-hidden mx-auto";
             } else {
-                container.className = "w-full aspect-video rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800 shadow-2xl relative flex items-center justify-center";
+                container.className = "w-full aspect-video bg-black hairline-box relative flex items-center justify-center overflow-hidden";
             }
 
             const parsed = parseVideoUrl(item.videoUrl);
 
-            if (parsed.type === 'iframe') {
-                container.innerHTML = `
-                    <iframe src="${parsed.embedUrl}" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                `;
-            } else if (parsed.type === 'mp4') {
-                container.innerHTML = `
-                    <video src="${parsed.embedUrl}" controls autoplay playsinline class="w-full h-full object-contain bg-black"></video>
-                `;
+            if (parsed.originalUrl) {
+                sourceLink.href = parsed.originalUrl;
+                sourceLink.classList.remove('hidden');
+                sourceLink.classList.add('inline-flex');
             } else {
-                // Interactive Motion Graphics Simulation Player when no external URL is set yet
+                sourceLink.classList.add('hidden');
+                sourceLink.classList.remove('inline-flex');
+            }
+
+            // Cleanup previous player
+            if (activeYtPlayer && typeof activeYtPlayer.destroy === 'function') {
+                try { activeYtPlayer.destroy(); } catch (e) {}
+                activeYtPlayer = null;
+            }
+            if (lightboxCanvasAnim) {
+                cancelAnimationFrame(lightboxCanvasAnim);
+                lightboxCanvasAnim = null;
+            }
+
+            if (parsed.type === 'youtube') {
+                qualityBadge.textContent = "FORCING 4K / 1080P60 STREAM...";
+                container.innerHTML = `<div id="ytApiPlayerMount" class="w-full h-full"></div>`;
+
+                if (window.YT && window.YT.Player) {
+                    activeYtPlayer = new YT.Player('ytApiPlayerMount', {
+                        videoId: parsed.videoId,
+                        playerVars: {
+                            autoplay: 1,
+                            vq: 'hd2160',
+                            hd: 1,
+                            rel: 0,
+                            modestbranding: 1,
+                            playsinline: 1
+                        },
+                        events: {
+                            onReady: function(event) {
+                                enforceHighestYouTubeQuality(event.target);
+                                event.target.playVideo();
+                            },
+                            onStateChange: function(event) {
+                                if (event.data === YT.PlayerState.PLAYING || event.data === YT.PlayerState.BUFFERING) {
+                                    enforceHighestYouTubeQuality(event.target);
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    // Fallback iframe with vq=hd2160
+                    container.innerHTML = `<iframe src="${parsed.embedUrl}" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                }
+            } else if (parsed.type === 'vimeo') {
+                qualityBadge.textContent = "4K STREAM REQUESTED (VIMEO)";
+                container.innerHTML = `<iframe src="${parsed.embedUrl}" class="w-full h-full border-0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+            } else if (parsed.type === 'drive') {
+                qualityBadge.textContent = "SOURCE STREAM READY";
+                container.innerHTML = `<iframe src="${parsed.embedUrl}" class="w-full h-full border-0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+            } else if (parsed.type === 'mp4') {
+                qualityBadge.textContent = "UNCOMPRESSED DIRECT MP4 STREAM";
+                container.innerHTML = `<video src="${parsed.embedUrl}" controls autoplay playsinline preload="auto" class="w-full h-full object-contain bg-black"></video>`;
+            } else {
+                // Interactive NLE Preview Canvas when no external URL is pasted yet
+                qualityBadge.textContent = "DEMO TIMELINE MONITOR (60FPS)";
                 container.innerHTML = `
-                    <canvas id="lightboxMotionCanvas" class="w-full h-full block"></canvas>
-                    <div class="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-zinc-950/90 border border-zinc-800/90 backdrop-blur-md flex flex-wrap items-center justify-between gap-3">
-                        <div class="flex items-center gap-2.5 text-xs font-mono text-zinc-300">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span>INTERACTIVE PREVIEW MODE</span>
+                    <canvas id="lightboxMonitorCanvas" class="w-full h-full block"></canvas>
+                    <div class="absolute bottom-4 left-4 right-4 p-4 bg-pitch/95 hairline-box flex flex-wrap items-center justify-between gap-3">
+                        <div class="font-mono text-xs text-crisp">
+                            <span class="text-signal font-bold">// DEMO MONITOR:</span> Click "Add / Link Your Video" to paste your YouTube, Shorts, Vimeo, or Drive URL.
                         </div>
-                        <button onclick="closeVideoLightbox(); toggleStudioModal();" class="px-3 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 text-xs font-mono transition-colors">
-                            + Link Your YouTube / Drive URL
+                        <button onclick="closeVideoLightbox(); toggleStudioModal();" class="px-4 py-2 bg-signal text-pitch font-mono font-bold text-xs uppercase">
+                            + Link Your Video URL
                         </button>
                     </div>
                 `;
-                startLightboxMotionPreview(item);
+                startLightboxMonitorDemo(item);
             }
 
             modal.classList.remove('hidden');
             modal.classList.add('flex');
         }
 
+        // Explicitly force YouTube IFrame API to lock highest available resolution (hd2160 -> hd1440 -> hd1080 -> highres)
+        function enforceHighestYouTubeQuality(player) {
+            try {
+                const levels = ['hd2160', 'hd1440', 'hd1080', 'hd720', 'highres'];
+                if (typeof player.getAvailableQualityLevels === 'function') {
+                    const available = player.getAvailableQualityLevels();
+                    const best = levels.find(q => available.includes(q)) || 'hd2160';
+                    if (typeof player.setPlaybackQualityRange === 'function') {
+                        player.setPlaybackQualityRange(best, best);
+                    }
+                    if (typeof player.setPlaybackQuality === 'function') {
+                        player.setPlaybackQuality(best);
+                    }
+                    const badge = document.getElementById('qualityStatusBadge');
+                    if (badge) badge.textContent = `MAX QUALITY LOCKED (${best.toUpperCase()} AUTO-FORCED)`;
+                } else {
+                    if (typeof player.setPlaybackQualityRange === 'function') {
+                        player.setPlaybackQualityRange('hd2160', 'hd2160');
+                    }
+                    if (typeof player.setPlaybackQuality === 'function') {
+                        player.setPlaybackQuality('hd2160');
+                    }
+                }
+            } catch (e) {}
+        }
+
         function closeVideoLightbox() {
             const modal = document.getElementById('videoLightbox');
             const container = document.getElementById('lightboxPlayerContainer');
-            if (lightboxAnimationId) {
-                cancelAnimationFrame(lightboxAnimationId);
-                lightboxAnimationId = null;
+            if (activeYtPlayer && typeof activeYtPlayer.destroy === 'function') {
+                try { activeYtPlayer.destroy(); } catch (e) {}
+                activeYtPlayer = null;
+            }
+            if (lightboxCanvasAnim) {
+                cancelAnimationFrame(lightboxCanvasAnim);
+                lightboxCanvasAnim = null;
             }
             container.innerHTML = '';
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }
 
-        // Interactive Canvas Motion Visualizer for Demo Items
-        function startLightboxMotionPreview(item) {
-            const canvas = document.getElementById('lightboxMotionCanvas');
+        function startLightboxMonitorDemo(item) {
+            const canvas = document.getElementById('lightboxMonitorCanvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
-            let frame = 0;
+            let f = 0;
 
             function resize() {
                 if (!canvas.parentElement) return;
@@ -1317,61 +1406,119 @@
             }
             resize();
 
-            function draw() {
-                frame++;
+            function loop() {
+                f++;
                 const w = canvas.width;
                 const h = canvas.height;
-
-                // Deep obsidian background
-                ctx.fillStyle = '#09090b';
+                ctx.fillStyle = '#050505';
                 ctx.fillRect(0, 0, w, h);
 
-                // Subtle NLE safe-margin grid
-                ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+                // Safe action guides
+                ctx.strokeStyle = '#1c1c1c';
                 ctx.lineWidth = 1;
-                ctx.strokeRect(w * 0.08, h * 0.08, w * 0.84, h * 0.84);
+                ctx.strokeRect(w * 0.06, h * 0.06, w * 0.88, h * 0.88);
 
-                // Animated Kinetic Rings
-                const centerX = w / 2;
-                const centerY = h / 2 - 15;
-                const radius = Math.min(w, h) * 0.22;
+                // Animated Waveform / Motion bars
+                const bars = 28;
+                const barW = (w * 0.6) / bars;
+                const startX = w * 0.2;
+                for (let i = 0; i < bars; i++) {
+                    const amp = Math.abs(Math.sin((f * 0.05) + i * 0.35)) * (h * 0.26) + 6;
+                    ctx.fillStyle = i % 3 === 0 ? '#FF2A85' : '#00FF66';
+                    ctx.fillRect(startX + i * barW, (h / 2) - (amp / 2) - 15, barW - 4, amp);
+                }
 
-                ctx.save();
-                ctx.translate(centerX, centerY);
-                ctx.rotate(frame * 0.015);
-                ctx.strokeStyle = item.accentColor || '#10b981';
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.arc(0, 0, radius, 0, Math.PI * 1.35);
-                ctx.stroke();
-
-                ctx.rotate(-frame * 0.03);
-                ctx.strokeStyle = 'rgba(255,255,255,0.25)';
-                ctx.beginPath();
-                ctx.arc(0, 0, radius * 0.72, 0, Math.PI * 1.1);
-                ctx.stroke();
-                ctx.restore();
-
-                // Center Title Typography
-                ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 16px "Plus Jakarta Sans", sans-serif';
+                ctx.fillStyle = '#FAFAFA';
+                ctx.font = 'bold 15px "Space Grotesk", sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText(item.title.slice(0, 34), centerX, centerY + 5);
+                ctx.fillText(item.title.toUpperCase(), w / 2, h * 0.2);
 
-                // Timecode Counter
-                const secs = Math.floor(frame / 60).toString().padStart(2, '0');
-                const frames = (frame % 60).toString().padStart(2, '0');
-                ctx.fillStyle = '#10b981';
-                ctx.font = '12px "JetBrains Mono", monospace';
-                ctx.fillText(`PLAYING PREVIEW // TC 00:00:${secs}:${frames}`, centerX, centerY + 32);
-
-                lightboxAnimationId = requestAnimationFrame(draw);
+                lightboxCanvasAnim = requestAnimationFrame(loop);
             }
-            draw();
+            loop();
         }
 
         /* ==========================================================================
-           5. STUDIO VIDEO MANAGER & 1-CLICK HTML EXPORTER
+           6. FLEXIBLE CUSTOM SCOPE BUILDER (1 VIDEO, BATCH, OR 1-MONTH COLLAB)
+           ========================================================================== */
+        function selectScopeModel(modelCode, modelDesc) {
+            selectedScopeModel = modelCode;
+            selectedScopeDesc = modelDesc;
+
+            document.querySelectorAll('.scope-model-btn').forEach(btn => {
+                const isSelected = btn.getAttribute('data-model') === modelCode;
+                if (isSelected) {
+                    btn.className = "scope-model-btn text-left p-5 bg-cell border-2 border-signal transition-all flex flex-col justify-between";
+                } else {
+                    btn.className = "scope-model-btn text-left p-5 bg-cell border border-[#222222] hover:border-crisp/40 transition-all flex flex-col justify-between";
+                }
+            });
+
+            updateScopePreview();
+        }
+
+        function toggleFormatPill(btn, formatName) {
+            if (selectedFormats.has(formatName)) {
+                if (selectedFormats.size > 1) {
+                    selectedFormats.delete(formatName);
+                }
+            } else {
+                selectedFormats.add(formatName);
+            }
+
+            document.querySelectorAll('.format-pill').forEach(pill => {
+                const label = pill.textContent.trim();
+                if (selectedFormats.has(label)) {
+                    pill.className = "format-pill px-4 py-2.5 font-mono text-xs bg-signal text-pitch font-bold border border-signal transition-all";
+                } else {
+                    pill.className = "format-pill px-4 py-2.5 font-mono text-xs bg-cell text-crisp border border-[#262626] hover:border-electric transition-all";
+                }
+            });
+
+            updateScopePreview();
+        }
+
+        function updateScopePreview() {
+            document.getElementById('summaryModelText').textContent = selectedScopeModel;
+            document.getElementById('summaryModelDesc').textContent = selectedScopeDesc;
+            document.getElementById('summaryFormatsText').textContent = Array.from(selectedFormats).join(' + ');
+
+            const notes = document.getElementById('scopeNotesInput').value.trim();
+            document.getElementById('summaryNotesText').textContent = notes || 'Open to discussing details directly.';
+        }
+
+        function getCompiledScopeText() {
+            const formats = Array.from(selectedFormats).join(', ');
+            const notes = document.getElementById('scopeNotesInput').value.trim() || 'Let’s discuss details.';
+            return `Hi Zayan,\n\nI'd like to start a project with you:\n- Collaboration Scope: ${selectedScopeModel}\n- Formats / Focus: ${formats}\n- Project Notes: ${notes}`;
+        }
+
+        function launchFiverrWithScope() {
+            copyTextHelper(getCompiledScopeText());
+            showToast('Scope copied to clipboard! Opening Zayan’s Fiverr page...');
+            window.open(SITE_CONFIG.fiverrUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        function sendScopeViaEmail() {
+            const subject = encodeURIComponent(`Project Scope: ${selectedScopeModel} — for Zayan Fahad`);
+            const body = encodeURIComponent(getCompiledScopeText());
+            window.location.href = `mailto:${SITE_CONFIG.email}?subject=${subject}&body=${body}`;
+            showToast('Opening email client addressed to mdf042731@gmail.com...');
+        }
+
+        function copyScopeAndEmail() {
+            const text = `Email: ${SITE_CONFIG.email}\n\n${getCompiledScopeText()}`;
+            copyTextHelper(text);
+            showToast('Copied project scope & mdf042731@gmail.com to clipboard!');
+        }
+
+        function copyEmailAddress() {
+            copyTextHelper(SITE_CONFIG.email);
+            showToast('Copied mdf042731@gmail.com to clipboard!');
+        }
+
+        /* ==========================================================================
+           7. STUDIO VIDEO MANAGER & ONE-CLICK `index.html` DOWNLOADER
            ========================================================================== */
         function toggleStudioModal() {
             const modal = document.getElementById('studioModal');
@@ -1390,76 +1537,82 @@
             const countEl = document.getElementById('managerCount');
             countEl.textContent = portfolioItems.length;
 
-            listEl.innerHTML = portfolioItems.map(item => `
-                <div class="flex items-center justify-between p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs">
+            listEl.innerHTML = portfolioItems.map((item, index) => `
+                <div class="flex items-center justify-between p-3 bg-pitch hairline-box text-xs font-mono">
                     <div class="flex items-center gap-2.5 truncate pr-2">
-                        <span class="px-1.5 py-0.5 rounded bg-zinc-950 border border-zinc-800 font-mono text-[10px] text-emerald-400 shrink-0">${item.aspectRatio}</span>
-                        <span class="font-medium text-white truncate">${item.title}</span>
-                        <span class="text-zinc-500 font-mono text-[10px] hidden sm:inline">(${item.videoUrl ? 'Custom URL Linked' : 'Demo Preview'})</span>
+                        <span class="px-1.5 py-0.5 bg-cell border border-signal/40 text-signal text-[10px]">[${item.aspectRatio}]</span>
+                        <span class="text-crisp truncate">${item.title}</span>
+                        <span class="text-muted text-[10px] hidden sm:inline">${item.videoUrl ? '(URL Linked)' : '(Demo)'}</span>
                     </div>
-                    <button onclick="removePortfolioItem('${item.id}')" class="text-zinc-500 hover:text-red-400 px-2 py-1 transition-colors shrink-0" title="Remove Video">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button onclick="movePortfolioItem(${index}, -1)" class="px-2 py-1 bg-cell hover:bg-elevated text-muted hover:text-crisp hairline-box" title="Move Up">↑</button>
+                        <button onclick="movePortfolioItem(${index}, 1)" class="px-2 py-1 bg-cell hover:bg-elevated text-muted hover:text-crisp hairline-box" title="Move Down">↓</button>
+                        <button onclick="removePortfolioItem('${item.id}')" class="px-2 py-1 bg-cell hover:bg-electric hover:text-pitch text-muted hairline-box transition-colors" title="Delete">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
                 </div>
             `).join('');
+        }
+
+        function movePortfolioItem(index, direction) {
+            const target = index + direction;
+            if (target < 0 || target >= portfolioItems.length) return;
+            const temp = portfolioItems[index];
+            portfolioItems[index] = portfolioItems[target];
+            portfolioItems[target] = temp;
+            savePortfolioData();
+            renderShowcase();
+            renderManagerList();
         }
 
         function handleAddCustomVideo(e) {
             e.preventDefault();
             const title = document.getElementById('newVidTitle').value.trim();
             const videoUrl = document.getElementById('newVidUrl').value.trim();
-            const category = document.getElementById('newVidCategory').value;
             const aspectRatio = document.getElementById('newVidAspect').value;
-            const metric = document.getElementById('newVidMetric').value.trim() || '+65% Retention';
-            const deliverables = document.getElementById('newVidTools').value.trim() || 'After Effects + Premiere Pro';
+            const category = document.getElementById('newVidCategory').value;
+            const duration = document.getElementById('newVidDuration').value.trim() || '4K60';
+            const deliverables = document.getElementById('newVidTools').value.trim() || 'Edited by Zayan Fahad';
             let thumbnail = document.getElementById('newVidThumb').value.trim();
 
-            const categoryMap = {
-                'short-form': 'Short-Form (9:16)',
-                'long-form': 'YouTube Long-Form',
-                'saas-motion': 'SaaS & Motion',
-                'color-audio': 'Color & Audio'
+            const labelMap = {
+                'long-form': 'LONG-FORM CUT',
+                'short-form': 'SHORT-FORM [9:16]',
+                'motion': 'MOTION & SAAS'
             };
 
             const parsed = parseVideoUrl(videoUrl);
-            if (!thumbnail) {
-                if (parsed.autoThumb) {
-                    thumbnail = parsed.autoThumb;
-                } else {
-                    thumbnail = aspectRatio === '9:16'
-                        ? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80'
-                        : 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80';
-                }
+            if (!thumbnail && parsed.maxThumb) {
+                thumbnail = parsed.maxThumb;
             }
 
-            const newItem = {
-                id: 'vid-' + Date.now(),
+            portfolioItems.unshift({
+                id: 'zf-' + Date.now(),
                 title,
                 category,
-                categoryLabel: categoryMap[category] || 'Featured Edit',
+                categoryLabel: labelMap[category] || 'SELECTED WORK',
                 aspectRatio,
-                metric,
+                duration,
                 deliverables,
-                duration: aspectRatio === '9:16' ? '00:45' : '02:30',
                 videoUrl,
                 thumbnail,
-                accentColor: '#10b981'
-            };
+                accent: '#00FF66'
+            });
 
-            portfolioItems.unshift(newItem);
             savePortfolioData();
             renderShowcase();
             renderManagerList();
             document.getElementById('addVideoForm').reset();
-            showToast('Video added to your showcase! Click it to test playback.');
+            showToast('Video added to archive! Click "Download Ready-to-Host index.html" to save permanently.');
         }
 
         function removePortfolioItem(id) {
-            portfolioItems = portfolioItems.filter(item => item.id !== id);
+            portfolioItems = portfolioItems.filter(i => i.id !== id);
             savePortfolioData();
             renderShowcase();
             renderManagerList();
-            showToast('Video removed from showcase.');
+            showToast('Removed video from archive.');
         }
 
         function resetDefaultPortfolio() {
@@ -1467,17 +1620,14 @@
             savePortfolioData();
             renderShowcase();
             renderManagerList();
-            showToast('Restored default demo portfolio.');
+            showToast('Restored default portfolio list.');
         }
 
-        // Copy updated JS array to clipboard
         function copyPortfolioConfig() {
-            const codeString = `const DEFAULT_PORTFOLIO_DATA = ${JSON.stringify(portfolioItems, null, 4)};`;
-            copyTextHelper(codeString);
-            showToast('Copied updated PORTFOLIO_DATA array to clipboard!');
+            copyTextHelper(JSON.stringify(portfolioItems, null, 4));
+            showToast('Copied JSON configuration to clipboard.');
         }
 
-        // Download complete self-contained index.html with the user's updated videos baked in!
         function downloadUpdatedHtmlFile() {
             let fullHtml = document.documentElement.outerHTML;
             const replacementBlock = `///* PORTFOLIO_DATA_START */\n        const DEFAULT_PORTFOLIO_DATA = ${JSON.stringify(portfolioItems, null, 4)};\n        ///* PORTFOLIO_DATA_END */`;
@@ -1492,35 +1642,79 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            showToast('Downloaded ready-to-host index.html!');
+            showToast('Downloaded exact lowercase index.html ready for GitHub Pages!');
         }
 
         /* ==========================================================================
-           6. CONTACT FORM & CLIPBOARD HELPERS
+           8. HERO TECHNICAL NLE MONITOR CANVAS
            ========================================================================== */
-        function getFormattedBrief() {
-            const name = document.getElementById('clientName').value.trim() || 'Prospective Client';
-            const email = document.getElementById('clientEmail').value.trim() || 'Not specified';
-            const type = document.getElementById('projectType').value;
-            const budget = document.getElementById('projectBudget').value;
-            const details = document.getElementById('projectDetails').value.trim() || 'Looking to discuss a video editing project.';
+        function initHeroMonitorCanvas() {
+            const canvas = document.getElementById('heroMonitorCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let t = 0;
 
-            return `Hi Fahad,\n\nI'd love to book a project with you.\n\n- Name/Brand: ${name}\n- Contact: ${email}\n- Format: ${type}\n- Scope/Budget: ${budget}\n\nProject Details:\n${details}`;
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                canvas.width = rect.width || 640;
+                canvas.height = rect.height || 360;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            function draw() {
+                t += 0.018;
+                const w = canvas.width;
+                const h = canvas.height;
+
+                ctx.fillStyle = '#050505';
+                ctx.fillRect(0, 0, w, h);
+
+                // Architectural Grid
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+                ctx.lineWidth = 1;
+                for (let x = 0; x < w; x += 48) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, h);
+                    ctx.stroke();
+                }
+                for (let y = 0; y < h; y += 48) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(w, y);
+                    ctx.stroke();
+                }
+
+                // Signal Green & Electric Pink Keyframe Curves
+                ctx.beginPath();
+                ctx.strokeStyle = '#00FF66';
+                ctx.lineWidth = 2;
+                for (let x = 0; x <= w; x += 8) {
+                    const y = h * 0.5 + Math.sin(x * 0.012 + t) * (h * 0.18) * Math.cos(x * 0.004 - t * 0.6);
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.strokeStyle = '#FF2A85';
+                ctx.lineWidth = 1.5;
+                for (let x = 0; x <= w; x += 8) {
+                    const y = h * 0.5 + Math.cos(x * 0.01 - t * 1.1) * (h * 0.14);
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                requestAnimationFrame(draw);
+            }
+            draw();
         }
 
-        function handleInquirySubmit(e) {
-            e.preventDefault();
-            const subject = encodeURIComponent(`Project Inquiry: ${document.getElementById('projectType').value}`);
-            const body = encodeURIComponent(getFormattedBrief());
-            window.location.href = `mailto:${SITE_CONFIG.email}?subject=${subject}&body=${body}`;
-            showToast('Opening your email client with the formatted project brief...');
-        }
-
-        function copyBriefToClipboard() {
-            copyTextHelper(getFormattedBrief());
-            showToast('Project brief copied! You can paste it in WhatsApp, Discord, or Email.');
-        }
-
+        /* ==========================================================================
+           9. UTILITIES & KEYBOARD SHORTCUTS
+           ========================================================================== */
         function copyTextHelper(text) {
             const textarea = document.createElement('textarea');
             textarea.value = text;
@@ -1528,11 +1722,7 @@
             textarea.style.opacity = '0';
             document.body.appendChild(textarea);
             textarea.select();
-            try {
-                document.execCommand('copy');
-            } catch (err) {
-                console.warn('Copy fallback failed', err);
-            }
+            try { document.execCommand('copy'); } catch (err) {}
             document.body.removeChild(textarea);
         }
 
@@ -1547,88 +1737,24 @@
             }, 3800);
         }
 
-        /* ==========================================================================
-           7. HERO SHOWREEL AMBIENT MOTION CANVAS
-           ========================================================================== */
-        function initHeroShowreelCanvas() {
-            const canvas = document.getElementById('heroShowreelCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let t = 0;
-
-            function resizeCanvas() {
-                const rect = canvas.parentElement.getBoundingClientRect();
-                canvas.width = rect.width || 960;
-                canvas.height = rect.height || 540;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-
-            function animateHero() {
-                t += 0.012;
-                const w = canvas.width;
-                const h = canvas.height;
-
-                // Deep Studio Gradient
-                const grad = ctx.createLinearGradient(0, 0, w, h);
-                grad.addColorStop(0, '#09090b');
-                grad.addColorStop(0.5, '#121217');
-                grad.addColorStop(1, '#09090b');
-                ctx.fillStyle = grad;
-                ctx.fillRect(0, 0, w, h);
-
-                // Subtle NLE Motion Grid Lines
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
-                ctx.lineWidth = 1;
-                const step = 60;
-                for (let x = (t * 25) % step; x < w; x += step) {
-                    ctx.beginPath();
-                    ctx.moveTo(x, 0);
-                    ctx.lineTo(x, h);
-                    ctx.stroke();
-                }
-
-                // Animated Bezier Motion Curves (After Effects Graph Editor Vibe)
-                ctx.beginPath();
-                ctx.strokeStyle = 'rgba(16, 185, 129, 0.28)';
-                ctx.lineWidth = 2;
-                for (let x = 0; x <= w; x += 12) {
-                    const y = h * 0.5 + Math.sin(x * 0.008 + t) * (h * 0.16) * Math.cos(x * 0.003 - t * 0.5);
-                    if (x === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-
-                // Secondary Motion Curve
-                ctx.beginPath();
-                ctx.strokeStyle = 'rgba(99, 102, 241, 0.2)';
-                ctx.lineWidth = 1.5;
-                for (let x = 0; x <= w; x += 12) {
-                    const y = h * 0.5 + Math.cos(x * 0.006 - t * 1.2) * (h * 0.12);
-                    if (x === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                }
-                ctx.stroke();
-
-                requestAnimationFrame(animateHero);
-            }
-            animateHero();
-        }
-
-        // Escape key closes modals
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeVideoLightbox();
                 document.getElementById('studioModal').classList.add('hidden');
                 document.getElementById('studioModal').classList.remove('flex');
             }
+            if (e.shiftKey && (e.key === 'M' || e.key === 'm')) {
+                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    toggleStudioModal();
+                }
+            }
         });
 
-        // Initialize on Window Load
         window.onload = function () {
             loadPortfolioData();
             renderShowcase();
-            initHeroShowreelCanvas();
+            startLiveTimecode();
+            initHeroMonitorCanvas();
         };
     </script>
 </body>
