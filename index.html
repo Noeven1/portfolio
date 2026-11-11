@@ -243,12 +243,12 @@
         <!-- Header -->
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-borderSubtle">
             <div>
-                <span class="text-xs font-bold uppercase tracking-wider text-signal block mb-2">Video Portfolio</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-signal block mb-2">Categorized Video Showcase</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                    Selected Work
+                    Selected Client &amp; Creator Work
                 </h2>
-                <p class="mt-2 text-sm sm:text-base text-softGray max-w-xl">
-                    Click any video to watch in full quality. Every edit is balanced with natural pacing, clean sound, and tailored motion graphics.
+                <p class="mt-2 text-sm sm:text-base text-softGray max-w-2xl">
+                    Browse by video style below. Click any project to watch in full HD/4K quality, or pick a style you like to start a similar edit for your channel or brand.
                 </p>
             </div>
 
@@ -261,24 +261,27 @@
             </div>
         </div>
 
-        <!-- Filter Tabs -->
-        <div class="py-6 flex flex-wrap items-center gap-2">
-            <button onclick="filterPortfolio('all')" data-filter="all" class="filter-tab px-4 py-2 rounded-xl text-xs font-bold transition-all bg-signal text-pitch">
-                All Work
+        <!-- Category Filter Tabs -->
+        <div class="py-6 flex flex-wrap items-center gap-2.5">
+            <button onclick="filterPortfolio('all')" data-filter="all" class="filter-tab px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-signal text-pitch shadow-lg shadow-signal/20">
+                All Work (<span id="count-all">9</span>)
             </button>
-            <button onclick="filterPortfolio('long-form')" data-filter="long-form" class="filter-tab px-4 py-2 rounded-xl text-xs font-medium text-softGray hover:text-white bg-surface border border-borderSubtle hover:border-borderHover transition-all">
-                YouTube Long-Form
+            <button onclick="filterPortfolio('talking-head')" data-filter="talking-head" class="filter-tab px-4 py-2.5 rounded-xl text-xs font-medium text-softGray hover:text-white bg-surface border border-borderSubtle hover:border-borderHover transition-all">
+                YouTube Talking-Head (<span id="count-talking-head">3</span>)
             </button>
-            <button onclick="filterPortfolio('short-form')" data-filter="short-form" class="filter-tab px-4 py-2 rounded-xl text-xs font-medium text-softGray hover:text-white bg-surface border border-borderSubtle hover:border-borderHover transition-all">
-                TikToks &amp; Reels (9:16)
+            <button onclick="filterPortfolio('educational')" data-filter="educational" class="filter-tab px-4 py-2.5 rounded-xl text-xs font-medium text-softGray hover:text-white bg-surface border border-borderSubtle hover:border-borderHover transition-all">
+                Educational &amp; Breakdowns (<span id="count-educational">2</span>)
             </button>
-            <button onclick="filterPortfolio('motion')" data-filter="motion" class="filter-tab px-4 py-2 rounded-xl text-xs font-medium text-softGray hover:text-white bg-surface border border-borderSubtle hover:border-borderHover transition-all">
-                Promos &amp; Motion
+            <button onclick="filterPortfolio('short-form')" data-filter="short-form" class="filter-tab px-4 py-2.5 rounded-xl text-xs font-medium text-softGray hover:text-white bg-surface border border-borderSubtle hover:border-borderHover transition-all">
+                TikToks, Reels &amp; Shorts (<span id="count-short-form">3</span>)
+            </button>
+            <button onclick="filterPortfolio('saas')" data-filter="saas" class="filter-tab px-4 py-2.5 rounded-xl text-xs font-medium text-softGray hover:text-white bg-surface border border-borderSubtle hover:border-borderHover transition-all">
+                SaaS &amp; Explainers (<span id="count-saas">1</span>)
             </button>
         </div>
 
-        <!-- Dynamic Grid -->
-        <div id="portfolioGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4">
+        <!-- Categorized / Filtered Showcase Container -->
+        <div id="portfolioGrid" class="pt-4 space-y-16">
             <!-- Populated via JavaScript -->
         </div>
 
@@ -682,20 +685,21 @@
                         <div>
                             <label class="block text-xs text-softGray mb-1">Category</label>
                             <select id="inputCategory" class="w-full px-3 py-2 rounded-lg bg-pitch border border-borderSubtle text-white text-xs">
-                                <option value="long-form">YouTube Long-Form</option>
-                                <option value="short-form">TikToks &amp; Shorts</option>
-                                <option value="motion">Promos &amp; Motion</option>
+                                <option value="talking-head">YouTube Talking-Head</option>
+                                <option value="educational">Educational &amp; Breakdowns</option>
+                                <option value="short-form">TikToks, Reels &amp; Shorts</option>
+                                <option value="saas">SaaS &amp; Explainers</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-xs text-softGray mb-1">Tag / Note</label>
-                            <input id="inputDuration" type="text" placeholder="e.g. 10 mins • 4K" class="w-full px-3 py-2 rounded-lg bg-pitch border border-borderSubtle text-white text-xs">
+                            <input id="inputDuration" type="text" placeholder="e.g. Retention Cut • 4K" class="w-full px-3 py-2 rounded-lg bg-pitch border border-borderSubtle text-white text-xs">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs text-softGray mb-1">Brief Description</label>
-                        <input id="inputDeliverables" type="text" placeholder="e.g. Narrative pacing, sound effects, and color grade" class="w-full px-3 py-2 rounded-lg bg-pitch border border-borderSubtle text-white text-xs">
+                        <label class="block text-xs text-softGray mb-1">Selling Description (What you did on this edit)</label>
+                        <input id="inputDeliverables" type="text" placeholder="e.g. Seamless pacing, B-roll cutaways, custom motion callouts & clean audio" class="w-full px-3 py-2 rounded-lg bg-pitch border border-borderSubtle text-white text-xs">
                     </div>
 
                     <div class="flex justify-end pt-1">
@@ -708,8 +712,8 @@
                 <!-- Current Projects -->
                 <div>
                     <div class="flex items-center justify-between mb-2 text-xs">
-                        <span class="text-softGray font-semibold uppercase">Current Projects (<span id="projectCount">0</span>)</span>
-                        <button onclick="restoreDefaults()" class="text-softGray hover:text-electric text-[11px]">Restore Sample Videos</button>
+                        <span class="text-softGray font-semibold uppercase">Current Projects (<span id="projectCount">9</span>)</span>
+                        <button onclick="restoreDefaults()" class="text-softGray hover:text-electric text-[11px]">Reset to 9 Curated Videos</button>
                     </div>
                     <div id="videoManagerList" class="space-y-2 max-h-48 overflow-y-auto pr-1">
                         <!-- Rendered via JS -->
@@ -753,84 +757,149 @@
             format: "YouTube Long-Form (16:9)"
         };
 
+        const CATEGORY_META = {
+            "talking-head": {
+                title: "YouTube Talking-Head & Creator Videos",
+                subtitle: "Engaging pacing, natural zoom cuts, B-roll storytelling, and clean graphics that hold viewer attention.",
+                badgeColor: "text-signal border-signal/30 bg-signal/10",
+                icon: "fa-brands fa-youtube text-signal",
+                scopeFormat: "YouTube Long-Form (16:9)"
+            },
+            "educational": {
+                title: "Educational Deep-Dives & Breakdowns",
+                subtitle: "Step-by-step visual frameworks, clear motion diagrams, and structured storytelling that make complex topics easy to grasp.",
+                badgeColor: "text-signal border-signal/30 bg-signal/10",
+                icon: "fa-solid fa-Graduation-cap fa-layer-group text-signal",
+                scopeFormat: "YouTube Long-Form (16:9)"
+            },
+            "short-form": {
+                title: "TikToks, Reels & YouTube Shorts (9:16)",
+                subtitle: "Scroll-stopping hooks in the first 3 seconds, dynamic captions, speed ramps, and punchy sound design.",
+                badgeColor: "text-electric border-electric/30 bg-electric/10",
+                icon: "fa-brands fa-tiktok text-electric",
+                scopeFormat: "Shorts / TikToks (9:16)"
+            },
+            "saas": {
+                title: "SaaS Explainers & Product Walkthroughs",
+                subtitle: "Clean UI motion graphics, smooth screen zooms, and product storytelling designed to convert viewers into users.",
+                badgeColor: "text-electric border-electric/30 bg-electric/10",
+                icon: "fa-solid fa-wand-magic-sparkles text-electric",
+                scopeFormat: "Promos & Ads"
+            }
+        };
+
         ///* PORTFOLIO_DATA_START */
         const DEFAULT_VIDEOS = [
             {
-                id: "v1",
-                title: "Next-Gen AI Hardware & Chips — Product Film",
-                category: "motion",
-                categoryBadge: "Promos & Motion",
+                id: "zf-th-1",
+                title: "Creator Talking-Head — Story Pacing & Visual Hooks",
+                category: "talking-head",
+                categoryBadge: "YouTube Talking-Head",
                 aspect: "16:9",
-                duration: "01:24 • 4K",
-                deliverables: "After Effects 3D UI, Custom Animation & Audio Mastering",
-                videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=85"
+                duration: "Retention Cut • 4K",
+                deliverables: "Seamless J-cuts, intentional zoom framing, and clean on-screen graphics that keep viewers locked in without overwhelming the speaker.",
+                videoUrl: "https://youtu.be/PRpm0ce9cQw",
+                thumbnail: "https://img.youtube.com/vi/PRpm0ce9cQw/maxresdefault.jpg"
             },
             {
-                id: "v2",
-                title: "Inside High-Volume Semiconductor Fabs — Video Essay",
-                category: "long-form",
-                categoryBadge: "YouTube Long-Form",
+                id: "zf-th-2",
+                title: "YouTube Commentary — Dynamic B-Roll & Narrative Flow",
+                category: "talking-head",
+                categoryBadge: "YouTube Talking-Head",
                 aspect: "16:9",
-                duration: "18:40 • 4K",
-                deliverables: "Narrative pacing, map tracking callouts, and clean dialogue",
-                videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85"
+                duration: "Story & Pacing • 4K",
+                deliverables: "Turned raw A-roll into an engaging commentary video with timed B-roll cutaways, subtle sound design, and smooth chapter transitions.",
+                videoUrl: "https://youtu.be/QCCbQpuxxpU",
+                thumbnail: "https://img.youtube.com/vi/QCCbQpuxxpU/maxresdefault.jpg"
             },
             {
-                id: "v3",
-                title: "Automotive Precision & Track Spec Commercial",
-                category: "long-form",
-                categoryBadge: "Commercial Spec",
+                id: "zf-th-3",
+                title: "Authority Talking-Head — Clean Brand & Business Cut",
+                category: "talking-head",
+                categoryBadge: "YouTube Talking-Head",
                 aspect: "16:9",
-                duration: "01:10 • 4K60",
-                deliverables: "Speed ramping & cinematic DaVinci Resolve color grade",
-                videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85"
+                duration: "Clean Polish • 4K",
+                deliverables: "Polished studio look with crisp dialogue mastering, balanced color grading, and minimal graphic callouts for founders and creators.",
+                videoUrl: "https://youtu.be/WV6HoouI8Ps",
+                thumbnail: "https://img.youtube.com/vi/WV6HoouI8Ps/maxresdefault.jpg"
             },
             {
-                id: "v4",
-                title: "Why Minimal Product Design Outperforms — Short Essay",
+                id: "zf-edu-1",
+                title: "Visual Deep-Dive — Educational Graphics & Breakdown",
+                category: "educational",
+                categoryBadge: "Educational YouTube",
+                aspect: "16:9",
+                duration: "Visual Frameworks • 4K",
+                deliverables: "Visualizing key ideas with custom motion diagrams, step-by-step on-screen frameworks, and distraction-free pacing so lessons stick.",
+                videoUrl: "https://youtu.be/1zfa0DYJJCc",
+                thumbnail: "https://img.youtube.com/vi/1zfa0DYJJCc/maxresdefault.jpg"
+            },
+            {
+                id: "zf-edu-2",
+                title: "Structured Explainer — Step-by-Step YouTube Lesson",
+                category: "educational",
+                categoryBadge: "Educational YouTube",
+                aspect: "16:9",
+                duration: "Structured Cut • 4K",
+                deliverables: "Clear visual hierarchy, highlighted takeaways, and smooth audio transitions that guide viewers effortlessly from intro hook to outro.",
+                videoUrl: "https://youtu.be/Xi_Fi89ZXfQ",
+                thumbnail: "https://img.youtube.com/vi/Xi_Fi89ZXfQ/maxresdefault.jpg"
+            },
+            {
+                id: "zf-sf-1",
+                title: "Real Estate Showcase — Speed Ramps & Hook Captions",
                 category: "short-form",
-                categoryBadge: "Reels & Shorts",
+                categoryBadge: "Real Estate • 9:16",
                 aspect: "9:16",
-                duration: "00:52 • 60FPS",
-                deliverables: "Kinetic typography, hook framing, and sound risers",
-                videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=700&q=85"
+                duration: "Vertical Reel • 4K",
+                deliverables: "Fast-paced property showcase with smooth speed-ramping, beat-synced transitions, and clean typography built to stop the scroll.",
+                videoUrl: "https://youtube.com/shorts/LicI4f7LuZE",
+                thumbnail: "https://img.youtube.com/vi/LicI4f7LuZE/maxresdefault.jpg"
             },
             {
-                id: "v5",
-                title: "Bootstrapping to Seven Figures — Founder Story",
+                id: "zf-sf-2",
+                title: "Viral Interview & Podcast Clip — Retention Subtitles",
                 category: "short-form",
-                categoryBadge: "Reels & Shorts",
+                categoryBadge: "Interview Clip • 9:16",
                 aspect: "9:16",
-                duration: "00:45 • 60FPS",
-                deliverables: "Tight A-roll cut, animated B-roll pops, and punchy captions",
-                videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85"
+                duration: "Viral Clip • 4K",
+                deliverables: "High-impact moment extracted from a long-form conversation, enhanced with animated word-by-word captions, punch-ins, and audio polish.",
+                videoUrl: "https://youtube.com/shorts/m69e_m2qQLY",
+                thumbnail: "https://img.youtube.com/vi/m69e_m2qQLY/maxresdefault.jpg"
             },
             {
-                id: "v6",
-                title: "Fintech Mobile Application — Feature Walkthrough",
-                category: "motion",
-                categoryBadge: "App Motion",
+                id: "zf-sf-3",
+                title: "Creator Authority Reel — Fast Hook & Kinetic Captions",
+                category: "short-form",
+                categoryBadge: "Talking-Head Reel • 9:16",
+                aspect: "9:16",
+                duration: "Short-Form • 4K",
+                deliverables: "First-3-second visual hook, dynamic B-roll overlays, tactile sound effects, and clean animated subtitles for TikTok, Reels, and Shorts.",
+                videoUrl: "https://youtu.be/EHtXBlRkHts?si=jlom480KTYaZnfmU",
+                thumbnail: "https://img.youtube.com/vi/EHtXBlRkHts/maxresdefault.jpg"
+            },
+            {
+                id: "zf-saas-1",
+                title: "SaaS Product Walkthrough & UI Motion Explainer",
+                category: "saas",
+                categoryBadge: "SaaS & Promo",
                 aspect: "16:9",
-                duration: "02:10 • 4K",
-                deliverables: "Vector app interactions, smooth zooms, and UI animations",
-                videoUrl: "",
-                thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85"
+                duration: "Custom Motion • 4K",
+                deliverables: "Custom UI animations, smooth screen-flow zooms, and clear visual callouts built to turn complex software into an easy-to-follow product demo.",
+                videoUrl: "https://youtu.be/stu4jgsWPRI",
+                thumbnail: "https://img.youtube.com/vi/stu4jgsWPRI/maxresdefault.jpg"
             }
         ];
         ///* PORTFOLIO_DATA_END */
 
+        const STORAGE_KEY = 'zf_portfolio_v4_categorized';
         let currentVideos = [];
         let activeFilter = 'all';
         let ytPlayer = null;
 
         function loadSavedVideos() {
             try {
-                const stored = localStorage.getItem('zf_portfolio_relaxing');
+                const stored = localStorage.getItem(STORAGE_KEY);
                 currentVideos = stored ? JSON.parse(stored) : [...DEFAULT_VIDEOS];
             } catch (e) {
                 currentVideos = [...DEFAULT_VIDEOS];
@@ -839,7 +908,7 @@
 
         function saveVideos() {
             try {
-                localStorage.setItem('zf_portfolio_relaxing', JSON.stringify(currentVideos));
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(currentVideos));
             } catch (e) {}
         }
 
@@ -856,7 +925,8 @@
                     videoId: vid,
                     embedUrl: `https://www.youtube.com/embed/${vid}?autoplay=1&enablejsapi=1&vq=hd2160&hd=1&rel=0&modestbranding=1`,
                     originalUrl: `https://www.youtube.com/watch?v=${vid}`,
-                    thumb: `https://img.youtube.com/vi/${vid}/maxresdefault.jpg`
+                    thumb: `https://img.youtube.com/vi/${vid}/maxresdefault.jpg`,
+                    fallbackThumb: `https://img.youtube.com/vi/${vid}/hqdefault.jpg`
                 };
             }
 
@@ -876,81 +946,184 @@
             };
         }
 
-        /* Render showcase cards */
-        function renderShowcase() {
-            const grid = document.getElementById('portfolioGrid');
-            const filtered = currentVideos.filter(item => {
-                if (activeFilter === 'all') return true;
-                return item.category === activeFilter;
+        function updateCategoryCounts() {
+            const counts = {
+                all: currentVideos.length,
+                'talking-head': currentVideos.filter(v => v.category === 'talking-head').length,
+                'educational': currentVideos.filter(v => v.category === 'educational').length,
+                'short-form': currentVideos.filter(v => v.category === 'short-form').length,
+                'saas': currentVideos.filter(v => v.category === 'saas').length
+            };
+            Object.keys(counts).forEach(key => {
+                const el = document.getElementById(`count-${key}`);
+                if (el) el.textContent = counts[key];
             });
+        }
 
+        function buildVideoCardHTML(item) {
+            const parsed = parseVideoLink(item.videoUrl);
+            const thumb = item.thumbnail || parsed.thumb || 'https://placehold.co/960x540/121216/00F076?text=Video+Preview';
+            const fallback = parsed.fallbackThumb || 'https://placehold.co/960x540/121216/00F076?text=Video+Preview';
+            const isVertical = item.aspect === '9:16';
+
+            return `
+            <div onclick="openVideoPlayer('${item.id}')" class="group rounded-2xl bg-card border border-borderSubtle hover:border-signal/60 overflow-hidden cursor-pointer transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-xl hover:shadow-signal/5">
+                <div class="relative ${isVertical ? 'aspect-[9/14]' : 'aspect-video'} w-full bg-pitch overflow-hidden">
+                    <img src="${thumb}" alt="${item.title}" onerror="this.onerror=null; this.src='${fallback}';" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-85"></div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-12 h-12 rounded-full bg-signal text-pitch flex items-center justify-center text-sm shadow-xl shadow-signal/30 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play ml-0.5"></i>
+                        </div>
+                    </div>
+
+                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-pitch/90 backdrop-blur-md text-[11px] font-semibold text-white border border-white/10">
+                        ${item.categoryBadge}
+                    </div>
+
+                    <div class="absolute bottom-3 right-3 px-2.5 py-0.5 rounded bg-pitch/90 text-[10px] font-mono text-signal border border-signal/20">
+                        ${item.duration || '4K'}
+                    </div>
+                </div>
+
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-base text-white group-hover:text-signal transition-colors leading-snug">
+                            ${item.title}
+                        </h3>
+                        <p class="mt-2 text-xs text-softGray leading-relaxed">
+                            ${item.deliverables}
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-3.5 border-t border-borderSubtle flex items-center justify-between text-xs font-medium">
+                        <span class="text-softGray group-hover:text-white flex items-center gap-1.5 transition-colors">
+                            <i class="fa-solid fa-circle-play text-signal"></i> Watch Cut
+                        </span>
+                        <button onclick="hireForStyle(event, '${item.category}', '${item.title.replace(/'/g, "\\'")}')" class="text-electric hover:text-white font-semibold flex items-center gap-1 transition-colors">
+                            <span>Hire for This Style</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        /* Render categorized or filtered showcase */
+        function renderShowcase() {
+            updateCategoryCounts();
+            const container = document.getElementById('portfolioGrid');
+
+            if (activeFilter === 'all') {
+                const categoryOrder = ['talking-head', 'educational', 'short-form', 'saas'];
+                const sectionsHTML = categoryOrder.map(catKey => {
+                    const items = currentVideos.filter(v => v.category === catKey);
+                    if (items.length === 0) return '';
+                    const meta = CATEGORY_META[catKey] || {
+                        title: catKey,
+                        subtitle: '',
+                        icon: 'fa-solid fa-video text-signal'
+                    };
+                    const gridCols = catKey === 'educational'
+                        ? 'grid-cols-1 md:grid-cols-2'
+                        : catKey === 'saas'
+                        ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-2'
+                        : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+
+                    return `
+                        <div class="space-y-6">
+                            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-4 border-b border-borderSubtle/70">
+                                <div>
+                                    <div class="flex items-center gap-2.5">
+                                        <i class="${meta.icon} text-sm"></i>
+                                        <h3 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">${meta.title}</h3>
+                                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-surface border border-borderSubtle text-softGray">${items.length}</span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm text-softGray mt-1">${meta.subtitle}</p>
+                                </div>
+                                <button onclick="filterPortfolio('${catKey}')" class="text-xs font-semibold text-signal hover:underline self-start sm:self-end whitespace-nowrap">
+                                    Focus on this category →
+                                </button>
+                            </div>
+                            <div class="grid ${gridCols} gap-6">
+                                ${items.map(item => buildVideoCardHTML(item)).join('')}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Include any uncategorized items if user added custom ones
+                const otherItems = currentVideos.filter(v => !['talking-head', 'educational', 'short-form', 'saas'].includes(v.category));
+                const otherHTML = otherItems.length > 0 ? `
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-extrabold text-white">Additional Featured Edits</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            ${otherItems.map(item => buildVideoCardHTML(item)).join('')}
+                        </div>
+                    </div>
+                ` : '';
+
+                container.innerHTML = sectionsHTML + otherHTML;
+                return;
+            }
+
+            const filtered = currentVideos.filter(item => item.category === activeFilter);
             if (filtered.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full py-16 text-center text-softGray">
-                        <p class="text-base">No projects found in this category.</p>
-                        <button onclick="filterPortfolio('all')" class="mt-3 px-4 py-2 rounded-xl bg-surface border border-borderSubtle text-xs text-white">Show All Projects</button>
+                container.innerHTML = `
+                    <div class="py-16 text-center text-softGray">
+                        <p class="text-base">No projects found in this category yet.</p>
+                        <button onclick="filterPortfolio('all')" class="mt-3 px-4 py-2 rounded-xl bg-surface border border-borderSubtle text-xs text-white">Show All Work</button>
                     </div>
                 `;
                 return;
             }
 
-            grid.innerHTML = filtered.map((item) => {
-                const parsed = parseVideoLink(item.videoUrl);
-                const thumb = item.thumbnail || parsed.thumb || 'https://placehold.co/960x540/121216/00F076?text=Video+Preview';
-                const isVertical = item.aspect === '9:16';
-
-                return `
-                <div onclick="openVideoPlayer('${item.id}')" class="group rounded-2xl bg-card border border-borderSubtle hover:border-borderHover overflow-hidden cursor-pointer transition-all duration-300 flex flex-col justify-between">
-                    <div class="relative ${isVertical ? 'aspect-[9/14]' : 'aspect-video'} w-full bg-pitch overflow-hidden">
-                        <img src="${thumb}" alt="${item.title}" onerror="this.src='https://placehold.co/960x540/121216/00F076?text=Video+Preview'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
-                        <div class="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-80"></div>
-                        
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-12 h-12 rounded-full bg-signal text-pitch flex items-center justify-center text-sm shadow-xl shadow-signal/30 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-play ml-0.5"></i>
-                            </div>
+            const meta = CATEGORY_META[activeFilter];
+            container.innerHTML = `
+                <div class="space-y-6">
+                    ${meta ? `
+                    <div class="pb-4 border-b border-borderSubtle/70">
+                        <div class="flex items-center gap-2.5">
+                            <i class="${meta.icon} text-sm"></i>
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">${meta.title}</h3>
                         </div>
-
-                        <div class="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-pitch/85 backdrop-blur-md text-[11px] font-semibold text-white border border-white/10">
-                            ${item.categoryBadge}
-                        </div>
-
-                        <div class="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-pitch/90 text-[10px] font-mono text-softGray">
-                            ${item.duration || '4K'}
-                        </div>
-                    </div>
-
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-base text-white group-hover:text-signal transition-colors leading-snug">
-                                ${item.title}
-                            </h3>
-                            <p class="mt-2 text-xs text-softGray leading-relaxed line-clamp-2">
-                                ${item.deliverables}
-                            </p>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-borderSubtle flex items-center justify-between text-xs font-medium text-softGray">
-                            <span class="text-white/80">${item.aspect === '9:16' ? 'Vertical 9:16' : 'Widescreen 16:9'}</span>
-                            <span class="group-hover:text-signal flex items-center gap-1 transition-colors">
-                                Watch Video <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </span>
-                        </div>
+                        <p class="text-xs sm:text-sm text-softGray mt-1">${meta.subtitle}</p>
+                    </div>` : ''}
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${filtered.map(item => buildVideoCardHTML(item)).join('')}
                     </div>
                 </div>
-                `;
-            }).join('');
+            `;
         }
 
         function filterPortfolio(cat) {
             activeFilter = cat;
             document.querySelectorAll('.filter-tab').forEach(tab => {
                 if (tab.getAttribute('data-filter') === cat) {
-                    tab.className = "filter-tab px-4 py-2 rounded-xl text-xs font-bold transition-all bg-signal text-pitch";
+                    tab.className = "filter-tab px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-signal text-pitch shadow-lg shadow-signal/20";
                 } else {
-                    tab.className = "filter-tab px-4 py-2 rounded-xl text-xs font-medium text-softGray hover:text-white bg-surface border border-borderSubtle hover:border-borderHover transition-all";
+                    tab.className = "filter-tab px-4 py-2.5 rounded-xl text-xs font-medium text-softGray hover:text-white bg-surface border border-borderSubtle hover:border-borderHover transition-all";
                 }
             });
             renderShowcase();
+        }
+
+        function hireForStyle(event, category, videoTitle) {
+            event.stopPropagation();
+            const meta = CATEGORY_META[category];
+            if (meta && meta.scopeFormat) {
+                selectScopeFormat(meta.scopeFormat);
+            }
+            const brief = `Hi Zayan, I loved your "${videoTitle}" edit and I'm looking for a ${selectedScope.type} in a similar style (${selectedScope.format}). Let's discuss the details!`;
+            document.getElementById('generatedBriefText').textContent = brief;
+            const emailSubject = encodeURIComponent(`Project Inquiry: Similar to "${videoTitle}"`);
+            const emailBody = encodeURIComponent(brief);
+            document.getElementById('briefEmailLink').href = `mailto:mdf042731@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+
+            const collabEl = document.getElementById('collaboration');
+            if (collabEl) collabEl.scrollIntoView({ behavior: 'smooth' });
+            showToast(`Selected style: "${videoTitle}"`);
         }
 
         /* Open Video Player Modal */
@@ -1122,12 +1295,13 @@
             const aspect = document.getElementById('inputAspect').value;
             const category = document.getElementById('inputCategory').value;
             const duration = document.getElementById('inputDuration').value.trim() || '4K';
-            const deliverables = document.getElementById('inputDeliverables').value.trim() || 'Edited by Zayan Fahad';
+            const deliverables = document.getElementById('inputDeliverables').value.trim() || 'Clean pacing, custom motion graphics, and mastered audio.';
 
             const badgeMap = {
-                'long-form': 'YouTube Long-Form',
-                'short-form': 'Reels & Shorts (9:16)',
-                'motion': 'Promos & Motion'
+                'talking-head': 'YouTube Talking-Head',
+                'educational': 'Educational YouTube',
+                'short-form': 'Reels & Shorts • 9:16',
+                'saas': 'SaaS & Promo'
             };
 
             const parsed = parseVideoLink(url);
@@ -1164,11 +1338,16 @@
             saveVideos();
             renderShowcase();
             renderManagerList();
-            showToast('Sample projects restored.');
+            showToast('Restored all 9 curated portfolio videos.');
         }
 
-        /* 1-Click HTML Exporter */
+        /* 1-Click Clean HTML Exporter (Closes Modals Before Saving) */
         function downloadCleanHtmlFile() {
+            const manageModal = document.getElementById('manageModal');
+            manageModal.classList.add('hidden');
+            manageModal.classList.remove('flex');
+            closeVideoModal();
+
             let pageSource = document.documentElement.outerHTML;
             const replacement = `///* PORTFOLIO_DATA_START */\n        const DEFAULT_VIDEOS = ${JSON.stringify(currentVideos, null, 4)};\n        ///* PORTFOLIO_DATA_END */`;
             pageSource = pageSource.replace(/\/\/\/\* PORTFOLIO_DATA_START \*\/[\s\S]*?\/\/\/\* PORTFOLIO_DATA_END \*\//, replacement);
@@ -1180,7 +1359,7 @@
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            showToast('Downloaded index.html! Ready to upload to GitHub.');
+            showToast('Downloaded clean index.html! Ready to upload to GitHub.');
         }
 
         /* Utilities */
@@ -1220,6 +1399,8 @@
         });
 
         window.onload = function () {
+            document.getElementById('manageModal').classList.add('hidden');
+            document.getElementById('manageModal').classList.remove('flex');
             loadSavedVideos();
             renderShowcase();
             updateBriefDisplay();
