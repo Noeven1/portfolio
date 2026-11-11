@@ -87,7 +87,7 @@
             
             <!-- Brand Name (STRICTLY SINGLE LINE) -->
             <a href="#" class="flex items-center gap-2.5 group focus:outline-none">
-                <span class="w-2.5 h-2.5 rounded-full bg-signal group-hover:bg-electric transition-colors"></span>
+                <img data-profile-img src="Gemini_Generated_Image_3xfn4y3xfn4y3xfn.jpg" alt="Zayan Fahad" onerror="handleAvatarError(this)" class="w-8 h-8 rounded-full object-cover border border-signal/60 shrink-0 bg-surface">
                 <span class="font-extrabold text-xl tracking-tight text-white whitespace-nowrap">
                     ZAYAN FAHAD
                 </span>
@@ -108,9 +108,9 @@
             <!-- Actions -->
             <div class="flex items-center gap-3">
                 <!-- Manage Videos Modal Button -->
-                <button onclick="toggleManageModal()" title="Add or edit portfolio videos" class="px-3.5 py-2 text-xs font-semibold rounded-xl bg-surface hover:bg-card border border-borderSubtle hover:border-electric text-softGray hover:text-white transition-all flex items-center gap-2">
+                <button onclick="toggleManageModal()" title="Manage videos, categories, order &amp; photo" class="px-3.5 py-2 text-xs font-semibold rounded-xl bg-surface hover:bg-card border border-borderSubtle hover:border-electric text-softGray hover:text-white transition-all flex items-center gap-2">
                     <i class="fa-solid fa-sliders text-electric"></i>
-                    <span class="hidden sm:inline">Manage Videos</span>
+                    <span class="hidden sm:inline">Manage Videos &amp; Photo</span>
                 </button>
 
                 <!-- Fiverr CTA -->
@@ -129,8 +129,24 @@
     <section class="relative pt-36 pb-20 sm:pt-44 sm:pb-28 overflow-hidden ambient-soft border-b border-borderSubtle">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             
+            <!-- Profile Portrait + Online Status + Quick Photo Upload Trigger -->
+            <div class="flex flex-col items-center justify-center mb-6">
+                <div onclick="triggerPhotoUpload()" title="Click to embed or change your profile photo" class="relative group cursor-pointer">
+                    <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-signal via-signal/40 to-electric shadow-xl shadow-signal/15">
+                        <img id="heroProfileImg" data-profile-img src="Gemini_Generated_Image_3xfn4y3xfn4y3xfn.jpg" alt="Zayan Fahad" onerror="handleAvatarError(this)" class="w-full h-full rounded-full object-cover bg-surface">
+                    </div>
+                    <!-- Camera Hover Overlay -->
+                    <div class="absolute inset-1 rounded-full bg-pitch/75 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-[10px] font-bold text-white">
+                        <i class="fa-solid fa-camera text-signal text-sm mb-0.5"></i>
+                        <span>Change</span>
+                    </div>
+                    <!-- Online Dot -->
+                    <span class="absolute bottom-1.5 right-1.5 w-4 h-4 rounded-full bg-signal border-2 border-pitch" title="Available for projects"></span>
+                </div>
+            </div>
+
             <!-- Availability Pill -->
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-borderSubtle text-xs sm:text-sm text-softGray mb-8">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-borderSubtle text-xs sm:text-sm text-softGray mb-6">
                 <span class="w-2 h-2 rounded-full bg-signal animate-pulse"></span>
                 <span class="text-white font-medium">Available for single projects &amp; monthly partnerships</span>
             </div>
@@ -261,7 +277,7 @@
             </div>
         </div>
 
-        <!-- Category Filter Tabs -->
+            <!-- Category Filter Tabs -->
         <div class="py-6 flex flex-wrap items-center gap-2.5">
             <button onclick="filterPortfolio('all')" data-filter="all" class="filter-tab px-4 py-2.5 rounded-xl text-xs font-bold transition-all bg-signal text-pitch shadow-lg shadow-signal/20">
                 All Work (<span id="count-all">9</span>)
@@ -547,10 +563,16 @@
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     
                     <div class="lg:col-span-7">
-                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-signal/10 text-signal border border-signal/20 text-xs font-semibold mb-4">
-                            <span class="w-1.5 h-1.5 rounded-full bg-signal"></span>
-                            Let's Make Great Videos
-                        </span>
+                        <div class="flex items-center gap-3.5 mb-4">
+                            <img data-profile-img src="Gemini_Generated_Image_3xfn4y3xfn4y3xfn.jpg" alt="Zayan Fahad" onerror="handleAvatarError(this)" class="w-12 h-12 rounded-full object-cover border-2 border-signal bg-surface shrink-0">
+                            <div>
+                                <span class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-signal/10 text-signal border border-signal/20 text-xs font-semibold">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-signal"></span>
+                                    Let's Make Great Videos
+                                </span>
+                                <p class="text-xs text-softGray mt-1">Direct response from Zayan Fahad</p>
+                            </div>
+                        </div>
                         <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
                             Ready to take editing off your plate?
                         </h2>
@@ -745,21 +767,249 @@
     <!-- ============================================================================ -->
     <!-- APPLICATION JAVASCRIPT                                                       -->
     <!-- ============================================================================ -->
+    <!-- VIDEO MANAGER, REORDER & PHOTO EMBEDDER MODAL                                -->
+    <!-- ============================================================================ -->
+    <div id="manageModal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 bg-black/90 backdrop-blur-md">
+        <div class="w-full max-w-3xl bg-card border border-borderSubtle rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+            
+            <div class="px-6 py-4 bg-surface border-b border-borderSubtle flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-sliders text-signal"></i>
+                    <h3 class="font-bold text-white text-base">Manage Videos, Categories, Order &amp; Photo</h3>
+                </div>
+                <button onclick="toggleManageModal()" class="w-8 h-8 rounded-lg bg-pitch hover:bg-surface border border-borderSubtle text-softGray hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-5 sm:p-6 overflow-y-auto space-y-6 text-sm">
+                
+                <!-- 1. Profile Photo Embedder (Bakes Photo Directly Into index.html) -->
+                <div class="p-4 rounded-xl bg-surface border border-borderSubtle flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-center gap-3.5">
+                        <img data-profile-img src="Gemini_Generated_Image_3xfn4y3xfn4y3xfn.jpg" alt="Zayan Fahad" onerror="handleAvatarError(this)" class="w-14 h-14 rounded-full object-cover border-2 border-signal bg-pitch shrink-0">
+                        <div>
+                            <div class="text-xs font-bold text-white flex items-center gap-2">
+                                <span>Your Profile Photo</span>
+                                <span class="px-2 py-0.5 rounded bg-signal/10 text-signal text-[10px]">No external hosting needed</span>
+                            </div>
+                            <p class="text-xs text-softGray mt-0.5">
+                                Click <strong class="text-white">"Select &amp; Bake Photo"</strong> to embed your photo directly inside <code class="text-signal">index.html</code> so it works permanently on GitHub.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="shrink-0">
+                        <input id="photoFileInput" type="file" accept="image/*" class="hidden" onchange="handlePhotoSelected(event)">
+                        <button type="button" onclick="triggerPhotoUpload()" class="px-4 py-2.5 rounded-xl bg-pitch hover:bg-card border border-signal/50 text-signal font-bold text-xs transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>Select &amp; Bake Photo</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Add or Edit Video Form -->
+                <form id="addVideoForm" onsubmit="handleSaveVideoForm(event)" class="space-y-4 p-5 rounded-xl bg-surface border border-borderSubtle">
+                    <div class="flex items-center justify-between">
+                        <div id="formHeading" class="text-xs font-bold uppercase tracking-wider text-signal">+ Add a Video to Portfolio</div>
+                        <button type="button" id="cancelEditBtn" onclick="resetVideoForm()" class="hidden text-xs text-electric hover:underline font-semibold">
+                            Cancel Editing
+                        </button>
+                    </div>
+                    <input type="hidden" id="editingVideoId" value="">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-softGray mb-1">Video Link (YouTube, Shorts, Vimeo) *</label>
+                            <input id="inputUrl" type="url" required placeholder="https://youtu.be/..." oninput="autoDetectUrlFormat(this.value)" class="w-full px-3 py-2 rounded-lg bg-pitch border border-borderSubtle text-white text-xs focus:outline-none focus:border-signal">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-softGray mb-1">Category Section (Where it goes) *</label>
+                            <select id="inputCategory" onchange="syncAspectWithCategory(this.value)" class="w-full px-3 py-2 rounded-lg bg-pitch border border-signal/40 text-white text-xs font-semibold focus:outline-none focus:border-signal">
+                                <option value="talking-head">1. YouTube Talking-Head &amp; Creator</option>
+                                <option value="educational">2. Educational &amp; Breakdowns</option>
+                                <option value="short-form">3. TikToks, Reels &amp; Shorts (9:16)</option>
+                                <option value="saas">4. SaaS &amp; Explainers</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs text-softGray mb-1">Selling Title *</label>
+                            <input id="inputTitle" type="text" required placeholder="e.g. Visual Deep-Dive — Educational Graphics &amp; Breakdown" class="w-full px-3 py-2 rounded-lg bg-pitch border border-borderSubtle text-white text-xs focus:outline-none focus:border-signal">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-xs text-softGray mb-1">Aspect</label>
+                                <select id="inputAspect" class="w-full px-2.5 py-2 rounded-lg bg-pitch border border-borderSubtle text-white text-xs">
+                                    <option value="16:9">16:9 Wide</option>
+                                    <option value="9:16">9:16 Short</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-softGray mb-1">Badge Tag</label>
+                                <input id="inputDuration" type="text" placeholder="4K" class="w-full px-2.5 py-2 rounded-lg bg-pitch border border-borderSubtle text-white text-xs">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-softGray mb-1">Selling Description (What makes this edit great)</label>
+                        <input id="inputDeliverables" type="text" placeholder="e.g. Seamless pacing, B-roll cutaways, custom motion callouts &amp; clean audio" class="w-full px-3 py-2 rounded-lg bg-pitch border border-borderSubtle text-white text-xs">
+                    </div>
+
+                    <div class="flex justify-end pt-1">
+                        <button type="submit" id="submitVideoBtn" class="px-5 py-2.5 rounded-xl bg-signal hover:bg-signalHover text-pitch font-bold text-xs transition-all">
+                            + Add Video to Selected Category
+                        </button>
+                    </div>
+                </form>
+
+                <!-- 3. Categorized & Reorderable Video List -->
+                <div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3 text-xs">
+                        <div>
+                            <span class="text-white font-bold uppercase tracking-wider">Organize &amp; Reorder Videos (<span id="projectCount">9</span>)</span>
+                            <p class="text-[11px] text-softGray mt-0.5">Use <strong class="text-white">↑ / ↓</strong> to move videos up or down, or use the dropdown to move a video to another section.</p>
+                        </div>
+                        <button onclick="restoreDefaults()" class="px-3 py-1.5 rounded-lg bg-pitch border border-borderSubtle text-softGray hover:text-electric text-[11px] transition-colors">
+                            Reset to Default Order
+                        </button>
+                    </div>
+                    <div id="videoManagerList" class="space-y-5 max-h-[340px] overflow-y-auto pr-1">
+                        <!-- Rendered via JS grouped by Category -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-6 py-4 bg-surface border-t border-borderSubtle flex flex-wrap items-center justify-between gap-3">
+                <button onclick="toggleManageModal()" class="px-4 py-2 rounded-xl bg-pitch text-softGray hover:text-white text-xs">
+                    Done / Preview Page
+                </button>
+                <button onclick="downloadCleanHtmlFile()" class="px-5 py-2.5 rounded-xl bg-signal hover:bg-signalHover text-pitch font-bold text-xs flex items-center gap-2 shadow-lg shadow-signal/20">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Download Ready-to-Host index.html</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden items-center gap-3 px-4 py-3 rounded-2xl bg-card border border-signal text-white text-xs shadow-2xl">
+        <span class="w-2 h-2 rounded-full bg-signal"></span>
+        <span id="toastText">Action completed.</span>
+    </div>
+
+    <!-- ============================================================================ -->
+    <!-- APPLICATION JAVASCRIPT                                                       -->
+    <!-- ============================================================================ -->
     <script>
+        ///* SITE_SETTINGS_START */
         const SITE_SETTINGS = {
             name: "Zayan Fahad",
             email: "mdf042731@gmail.com",
-            fiverr: "https://www.fiverr.com/s/7j1kDz1"
+            fiverr: "https://www.fiverr.com/s/7j1kDz1",
+            avatar: "Gemini_Generated_Image_3xfn4y3xfn4y3xfn.jpg"
         };
+        ///* SITE_SETTINGS_END */
+
+        const FALLBACK_AVATAR_SVG = "data:image/svg+xml;utf8," + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#11131A"/>
+                        <stop offset="100%" stop-color="#1D212E"/>
+                    </linearGradient>
+                </defs>
+                <rect width="200" height="200" rx="100" fill="url(#g)"/>
+                <circle cx="100" cy="78" r="34" fill="#00F076" fill-opacity="0.2" stroke="#00F076" stroke-width="3"/>
+                <path d="M44 176c10-32 34-48 56-48s46 16 56 48" fill="#00F076" fill-opacity="0.15" stroke="#00F076" stroke-width="3" stroke-linecap="round"/>
+                <text x="100" y="90" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-weight="800" font-size="26">ZF</text>
+            </svg>
+        `);
+
+        function handleAvatarError(img) {
+            if (!img.dataset.triedProfileJpg) {
+                img.dataset.triedProfileJpg = "true";
+                img.src = "profile.jpg";
+            } else {
+                img.onerror = null;
+                img.src = FALLBACK_AVATAR_SVG;
+            }
+        }
+
+        function applyProfilePhotos() {
+            let savedAvatar = SITE_SETTINGS.avatar;
+            try {
+                const localAvatar = localStorage.getItem('zf_portfolio_avatar_v5');
+                if (localAvatar) {
+                    savedAvatar = localAvatar;
+                    SITE_SETTINGS.avatar = localAvatar;
+                }
+            } catch (e) {}
+
+            document.querySelectorAll('[data-profile-img]').forEach(img => {
+                if (savedAvatar) {
+                    img.src = savedAvatar;
+                }
+            });
+        }
+
+        function triggerPhotoUpload() {
+            const input = document.getElementById('photoFileInput');
+            if (input) input.click();
+        }
+
+        function handlePhotoSelected(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const size = 360;
+                    canvas.width = size;
+                    canvas.height = size;
+                    const ctx = canvas.getContext('2d');
+
+                    // Center crop square
+                    const minDim = Math.min(img.width, img.height);
+                    const sx = (img.width - minDim) / 2;
+                    const sy = (img.height - minDim) / 2;
+                    ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, size, size);
+
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.88);
+                    SITE_SETTINGS.avatar = dataUrl;
+                    try {
+                        localStorage.setItem('zf_portfolio_avatar_v5', dataUrl);
+                    } catch (err) {}
+
+                    applyProfilePhotos();
+                    showToast('Profile photo embedded! Click "Download Ready-to-Host index.html" to save it permanently.');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
 
         let selectedScope = {
             type: "Single Video",
             format: "YouTube Long-Form (16:9)"
         };
 
+        const CATEGORY_ORDER = ['talking-head', 'educational', 'short-form', 'saas'];
+
         const CATEGORY_META = {
             "talking-head": {
                 title: "YouTube Talking-Head & Creator Videos",
+                shortLabel: "YouTube Talking-Head",
+                defaultBadge: "YouTube Talking-Head",
+                defaultAspect: "16:9",
                 subtitle: "Engaging pacing, natural zoom cuts, B-roll storytelling, and clean graphics that hold viewer attention.",
                 badgeColor: "text-signal border-signal/30 bg-signal/10",
                 icon: "fa-brands fa-youtube text-signal",
@@ -767,13 +1017,19 @@
             },
             "educational": {
                 title: "Educational Deep-Dives & Breakdowns",
+                shortLabel: "Educational & Breakdowns",
+                defaultBadge: "Educational YouTube",
+                defaultAspect: "16:9",
                 subtitle: "Step-by-step visual frameworks, clear motion diagrams, and structured storytelling that make complex topics easy to grasp.",
                 badgeColor: "text-signal border-signal/30 bg-signal/10",
-                icon: "fa-solid fa-Graduation-cap fa-layer-group text-signal",
+                icon: "fa-solid fa-layer-group text-signal",
                 scopeFormat: "YouTube Long-Form (16:9)"
             },
             "short-form": {
                 title: "TikToks, Reels & YouTube Shorts (9:16)",
+                shortLabel: "TikToks, Reels & Shorts",
+                defaultBadge: "Reels & Shorts • 9:16",
+                defaultAspect: "9:16",
                 subtitle: "Scroll-stopping hooks in the first 3 seconds, dynamic captions, speed ramps, and punchy sound design.",
                 badgeColor: "text-electric border-electric/30 bg-electric/10",
                 icon: "fa-brands fa-tiktok text-electric",
@@ -781,6 +1037,9 @@
             },
             "saas": {
                 title: "SaaS Explainers & Product Walkthroughs",
+                shortLabel: "SaaS & Explainers",
+                defaultBadge: "SaaS & Promo",
+                defaultAspect: "16:9",
                 subtitle: "Clean UI motion graphics, smooth screen zooms, and product storytelling designed to convert viewers into users.",
                 badgeColor: "text-electric border-electric/30 bg-electric/10",
                 icon: "fa-solid fa-wand-magic-sparkles text-electric",
@@ -831,8 +1090,8 @@
                 aspect: "16:9",
                 duration: "Visual Frameworks • 4K",
                 deliverables: "Visualizing key ideas with custom motion diagrams, step-by-step on-screen frameworks, and distraction-free pacing so lessons stick.",
-                videoUrl: "https://youtu.be/1zfa0DYJJCc",
-                thumbnail: "https://img.youtube.com/vi/1zfa0DYJJCc/maxresdefault.jpg"
+                videoUrl: "https://youtu.be/QU21h7PT1HY",
+                thumbnail: "https://img.youtube.com/vi/QU21h7PT1HY/maxresdefault.jpg"
             },
             {
                 id: "zf-edu-2",
@@ -892,7 +1151,7 @@
         ];
         ///* PORTFOLIO_DATA_END */
 
-        const STORAGE_KEY = 'zf_portfolio_v4_categorized';
+        const STORAGE_KEY = 'zf_portfolio_v5_ordered';
         let currentVideos = [];
         let activeFilter = 'all';
         let ytPlayer = null;
@@ -910,6 +1169,24 @@
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(currentVideos));
             } catch (e) {}
+        }
+
+        /* Auto-detect Shorts URL or sync Aspect Ratio when Category changes */
+        function autoDetectUrlFormat(url) {
+            if (!url) return;
+            if (url.includes('/shorts/')) {
+                document.getElementById('inputAspect').value = '9:16';
+                document.getElementById('inputCategory').value = 'short-form';
+            }
+        }
+
+        function syncAspectWithCategory(category) {
+            const aspectEl = document.getElementById('inputAspect');
+            if (category === 'short-form') {
+                aspectEl.value = '9:16';
+            } else {
+                aspectEl.value = '16:9';
+            }
         }
 
         /* Parse URLs and set quality parameters */
@@ -1016,8 +1293,7 @@
             const container = document.getElementById('portfolioGrid');
 
             if (activeFilter === 'all') {
-                const categoryOrder = ['talking-head', 'educational', 'short-form', 'saas'];
-                const sectionsHTML = categoryOrder.map(catKey => {
+                const sectionsHTML = CATEGORY_ORDER.map(catKey => {
                     const items = currentVideos.filter(v => v.category === catKey);
                     if (items.length === 0) return '';
                     const meta = CATEGORY_META[catKey] || {
@@ -1053,8 +1329,7 @@
                     `;
                 }).join('');
 
-                // Include any uncategorized items if user added custom ones
-                const otherItems = currentVideos.filter(v => !['talking-head', 'educational', 'short-form', 'saas'].includes(v.category));
+                const otherItems = currentVideos.filter(v => !CATEGORY_ORDER.includes(v.category));
                 const otherHTML = otherItems.length > 0 ? `
                     <div class="space-y-6">
                         <h3 class="text-xl font-extrabold text-white">Additional Featured Edits</h3>
@@ -1256,10 +1531,13 @@
             showToast('Brief message copied to clipboard!');
         }
 
-        /* Video Manager Modal Functions */
+        /* ========================================================================== */
+        /* VIDEO MANAGER: CATEGORIZE, MOVE UP/DOWN, EDIT & ADD                        */
+        /* ========================================================================== */
         function toggleManageModal() {
             const modal = document.getElementById('manageModal');
             if (modal.classList.contains('hidden')) {
+                resetVideoForm();
                 renderManagerList();
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
@@ -1273,23 +1551,157 @@
             const list = document.getElementById('videoManagerList');
             document.getElementById('projectCount').textContent = currentVideos.length;
 
-            list.innerHTML = currentVideos.map((item) => `
-                <div class="flex items-center justify-between p-3 rounded-xl bg-pitch border border-borderSubtle text-xs">
-                    <div class="truncate pr-2">
-                        <span class="text-white font-medium">${item.title}</span>
-                        <span class="text-softGray text-[11px] block">${item.aspect} • ${item.categoryBadge}</span>
+            const sections = CATEGORY_ORDER.map(catKey => {
+                const meta = CATEGORY_META[catKey];
+                const items = currentVideos.filter(v => v.category === catKey);
+
+                const rowsHTML = items.length === 0
+                    ? `<div class="p-3 rounded-xl bg-pitch/50 border border-borderSubtle/60 text-[11px] text-warmMuted">No videos in this section yet.</div>`
+                    : items.map((item, idx) => {
+                        const isFirst = idx === 0;
+                        const isLast = idx === items.length - 1;
+                        return `
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 p-3 rounded-xl bg-pitch border border-borderSubtle hover:border-borderHover text-xs transition-all">
+                            <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                                <span class="w-5 h-5 rounded-md bg-surface border border-borderSubtle text-[10px] font-bold text-softGray flex items-center justify-center shrink-0">${idx + 1}</span>
+                                <div class="truncate">
+                                    <span class="text-white font-semibold block truncate">${item.title}</span>
+                                    <span class="text-softGray text-[11px] block truncate">${item.aspect} • ${item.videoUrl}</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-1.5 shrink-0 flex-wrap sm:flex-nowrap">
+                                <!-- Category Selector Dropdown -->
+                                <select onchange="changeVideoCategory('${item.id}', this.value)" title="Move to another category section" class="px-2 py-1.5 rounded-lg bg-surface border border-borderSubtle text-white text-[11px] focus:outline-none focus:border-signal">
+                                    <option value="talking-head" ${item.category === 'talking-head' ? 'selected' : ''}>Talking-Head</option>
+                                    <option value="educational" ${item.category === 'educational' ? 'selected' : ''}>Educational</option>
+                                    <option value="short-form" ${item.category === 'short-form' ? 'selected' : ''}>Shorts (9:16)</option>
+                                    <option value="saas" ${item.category === 'saas' ? 'selected' : ''}>SaaS / Promo</option>
+                                </select>
+
+                                <!-- Move Up within Category -->
+                                <button type="button" onclick="moveVideoInCategory('${item.id}', -1)" ${isFirst ? 'disabled' : ''} class="px-2 py-1.5 rounded-lg bg-surface ${isFirst ? 'opacity-30 cursor-default' : 'hover:bg-cardHover hover:text-signal'} text-softGray transition-colors" title="Move Up in this section">
+                                    <i class="fa-solid fa-arrow-up text-[11px]"></i>
+                                </button>
+
+                                <!-- Move Down within Category -->
+                                <button type="button" onclick="moveVideoInCategory('${item.id}', 1)" ${isLast ? 'disabled' : ''} class="px-2 py-1.5 rounded-lg bg-surface ${isLast ? 'opacity-30 cursor-default' : 'hover:bg-cardHover hover:text-signal'} text-softGray transition-colors" title="Move Down in this section">
+                                    <i class="fa-solid fa-arrow-down text-[11px]"></i>
+                                </button>
+
+                                <!-- Edit Video Details -->
+                                <button type="button" onclick="startEditVideo('${item.id}')" class="px-2.5 py-1.5 rounded-lg bg-surface hover:bg-signal hover:text-pitch text-softGray transition-colors" title="Edit Title, Link or Description">
+                                    <i class="fa-solid fa-pen text-[11px]"></i>
+                                </button>
+
+                                <!-- Delete Video -->
+                                <button type="button" onclick="deleteVideoItem('${item.id}')" class="px-2.5 py-1.5 rounded-lg bg-surface hover:bg-electric text-softGray hover:text-white transition-colors" title="Delete Video">
+                                    <i class="fa-solid fa-trash-can text-[11px]"></i>
+                                </button>
+                            </div>
+                        </div>
+                        `;
+                    }).join('');
+
+                return `
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between px-1">
+                        <span class="text-xs font-bold text-white flex items-center gap-2">
+                            <i class="${meta.icon} text-xs"></i>
+                            <span>${meta.shortLabel}</span>
+                        </span>
+                        <span class="text-[11px] text-softGray">${items.length} video${items.length === 1 ? '' : 's'}</span>
                     </div>
-                    <div class="flex items-center gap-1.5 shrink-0">
-                        <button onclick="deleteVideoItem('${item.id}')" class="px-2.5 py-1.5 rounded-lg bg-surface hover:bg-electric text-softGray hover:text-white transition-colors" title="Delete">
-                            <i class="fa-solid fa-trash-can text-[11px]"></i>
-                        </button>
+                    <div class="space-y-2">
+                        ${rowsHTML}
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
+
+            list.innerHTML = sections;
         }
 
-        function handleAddNewVideo(e) {
+        /* Move a video Up (-1) or Down (+1) inside its category */
+        function moveVideoInCategory(videoId, direction) {
+            const targetVideo = currentVideos.find(v => v.id === videoId);
+            if (!targetVideo) return;
+
+            const cat = targetVideo.category;
+            const catIndices = [];
+            currentVideos.forEach((v, index) => {
+                if (v.category === cat) catIndices.push(index);
+            });
+
+            const currentPosInCat = catIndices.findIndex(idx => currentVideos[idx].id === videoId);
+            if (currentPosInCat === -1) return;
+
+            const newPosInCat = currentPosInCat + direction;
+            if (newPosInCat < 0 || newPosInCat >= catIndices.length) return;
+
+            const indexA = catIndices[currentPosInCat];
+            const indexB = catIndices[newPosInCat];
+
+            const temp = currentVideos[indexA];
+            currentVideos[indexA] = currentVideos[indexB];
+            currentVideos[indexB] = temp;
+
+            saveVideos();
+            renderShowcase();
+            renderManagerList();
+            showToast(`Moved "${targetVideo.title}" ${direction < 0 ? 'up ↑' : 'down ↓'}`);
+        }
+
+        /* Instant Category Switcher from Manager List */
+        function changeVideoCategory(videoId, newCategory) {
+            const item = currentVideos.find(v => v.id === videoId);
+            if (!item) return;
+
+            const meta = CATEGORY_META[newCategory];
+            item.category = newCategory;
+            if (meta) {
+                item.categoryBadge = meta.defaultBadge;
+                item.aspect = meta.defaultAspect;
+            }
+
+            saveVideos();
+            renderShowcase();
+            renderManagerList();
+            showToast(`Moved "${item.title}" to ${meta ? meta.shortLabel : newCategory}`);
+        }
+
+        /* Populate Form to Edit an Existing Video */
+        function startEditVideo(videoId) {
+            const item = currentVideos.find(v => v.id === videoId);
+            if (!item) return;
+
+            document.getElementById('editingVideoId').value = item.id;
+            document.getElementById('inputTitle').value = item.title;
+            document.getElementById('inputUrl').value = item.videoUrl;
+            document.getElementById('inputCategory').value = item.category;
+            document.getElementById('inputAspect').value = item.aspect;
+            document.getElementById('inputDuration').value = item.duration || '4K';
+            document.getElementById('inputDeliverables').value = item.deliverables || '';
+
+            document.getElementById('formHeading').textContent = `✎ Editing: ${item.title}`;
+            document.getElementById('submitVideoBtn').textContent = 'Save Changes to Video';
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+
+            document.getElementById('addVideoForm').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function resetVideoForm() {
+            const form = document.getElementById('addVideoForm');
+            if (form) form.reset();
+            document.getElementById('editingVideoId').value = '';
+            document.getElementById('formHeading').textContent = '+ Add a Video to Portfolio';
+            document.getElementById('submitVideoBtn').textContent = '+ Add Video to Selected Category';
+            document.getElementById('cancelEditBtn').classList.add('hidden');
+        }
+
+        function handleSaveVideoForm(e) {
             e.preventDefault();
+            const editingId = document.getElementById('editingVideoId').value.trim();
             const title = document.getElementById('inputTitle').value.trim();
             const url = document.getElementById('inputUrl').value.trim();
             const aspect = document.getElementById('inputAspect').value;
@@ -1297,32 +1709,41 @@
             const duration = document.getElementById('inputDuration').value.trim() || '4K';
             const deliverables = document.getElementById('inputDeliverables').value.trim() || 'Clean pacing, custom motion graphics, and mastered audio.';
 
-            const badgeMap = {
-                'talking-head': 'YouTube Talking-Head',
-                'educational': 'Educational YouTube',
-                'short-form': 'Reels & Shorts • 9:16',
-                'saas': 'SaaS & Promo'
-            };
-
+            const meta = CATEGORY_META[category];
             const parsed = parseVideoLink(url);
 
-            currentVideos.unshift({
-                id: 'custom-' + Date.now(),
-                title,
-                category,
-                categoryBadge: badgeMap[category] || 'Featured Cut',
-                aspect,
-                duration,
-                deliverables,
-                videoUrl: url,
-                thumbnail: parsed.thumb || ''
-            });
+            if (editingId) {
+                const existing = currentVideos.find(v => v.id === editingId);
+                if (existing) {
+                    existing.title = title;
+                    existing.videoUrl = url;
+                    existing.category = category;
+                    existing.categoryBadge = meta ? meta.defaultBadge : 'Featured Cut';
+                    existing.aspect = aspect;
+                    existing.duration = duration;
+                    existing.deliverables = deliverables;
+                    existing.thumbnail = parsed.thumb || existing.thumbnail || '';
+                }
+                showToast('Video updated! Click "Download Ready-to-Host index.html" to save permanently.');
+            } else {
+                currentVideos.unshift({
+                    id: 'custom-' + Date.now(),
+                    title,
+                    category,
+                    categoryBadge: meta ? meta.defaultBadge : 'Featured Cut',
+                    aspect,
+                    duration,
+                    deliverables,
+                    videoUrl: url,
+                    thumbnail: parsed.thumb || ''
+                });
+                showToast('Video added! Click "Download Ready-to-Host index.html" to save permanently.');
+            }
 
             saveVideos();
             renderShowcase();
             renderManagerList();
-            document.getElementById('addVideoForm').reset();
-            showToast('Video added! Click "Download Ready-to-Host index.html" to save permanently.');
+            resetVideoForm();
         }
 
         function deleteVideoItem(id) {
@@ -1334,23 +1755,37 @@
         }
 
         function restoreDefaults() {
-            currentVideos = [...DEFAULT_VIDEOS];
+            currentVideos = JSON.parse(JSON.stringify(DEFAULT_VIDEOS));
             saveVideos();
             renderShowcase();
             renderManagerList();
-            showToast('Restored all 9 curated portfolio videos.');
+            showToast('Restored all 9 curated portfolio videos in their proper categories.');
         }
 
-        /* 1-Click Clean HTML Exporter (Closes Modals Before Saving) */
+        /* 1-Click Clean HTML Exporter (Saves Videos, Order, Categories & Embedded Photo) */
         function downloadCleanHtmlFile() {
             const manageModal = document.getElementById('manageModal');
             manageModal.classList.add('hidden');
             manageModal.classList.remove('flex');
             closeVideoModal();
 
+            const toast = document.getElementById('toast');
+            toast.classList.add('hidden');
+            toast.classList.remove('flex');
+
             let pageSource = document.documentElement.outerHTML;
-            const replacement = `///* PORTFOLIO_DATA_START */\n        const DEFAULT_VIDEOS = ${JSON.stringify(currentVideos, null, 4)};\n        ///* PORTFOLIO_DATA_END */`;
-            pageSource = pageSource.replace(/\/\/\/\* PORTFOLIO_DATA_START \*\/[\s\S]*?\/\/\/\* PORTFOLIO_DATA_END \*\//, replacement);
+
+            // Save SITE_SETTINGS (including embedded Base64 photo if selected)
+            const settingsBlock = `///* SITE_SETTINGS_START */\n        const SITE_SETTINGS = ${JSON.stringify(SITE_SETTINGS, null, 4)};\n        ///* SITE_SETTINGS_END */`;
+            pageSource = pageSource.replace(/\/\/\/\* SITE_SETTINGS_START \*\/[\s\S]*?\/\/\/\* SITE_SETTINGS_END \*\//, settingsBlock);
+
+            // Save DEFAULT_VIDEOS in their exact current order & categories
+            const videosBlock = `///* PORTFOLIO_DATA_START */\n        const DEFAULT_VIDEOS = ${JSON.stringify(currentVideos, null, 4)};\n        ///* PORTFOLIO_DATA_END */`;
+            pageSource = pageSource.replace(/\/\/\/\* PORTFOLIO_DATA_START \*\/[\s\S]*?\/\/\/\* PORTFOLIO_DATA_END \*\//, videosBlock);
+
+            // Bump storage key so browser always loads the newly exported DEFAULT_VIDEOS cleanly
+            const newStorageKey = `zf_portfolio_v5_${Date.now()}`;
+            pageSource = pageSource.replace(/const STORAGE_KEY = '[^']+';/, `const STORAGE_KEY = '${newStorageKey}';`);
 
             const blob = new Blob(['<!DOCTYPE html>\n' + pageSource], { type: 'text/html' });
             const a = document.createElement('a');
@@ -1359,7 +1794,7 @@
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            showToast('Downloaded clean index.html! Ready to upload to GitHub.');
+            showToast('Downloaded clean index.html with your categories, order & photo!');
         }
 
         /* Utilities */
@@ -1401,6 +1836,7 @@
         window.onload = function () {
             document.getElementById('manageModal').classList.add('hidden');
             document.getElementById('manageModal').classList.remove('flex');
+            applyProfilePhotos();
             loadSavedVideos();
             renderShowcase();
             updateBriefDisplay();
