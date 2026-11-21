@@ -46,7 +46,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Subtle warm editorial grid */
         .editorial-grid {
             background-color: #FFFFFF;
             background-image:
@@ -75,6 +74,16 @@
             box-shadow: 0 20px 38px -18px rgba(23, 22, 20, 0.14);
         }
 
+        /* Drag cue active only while tuner is open */
+        .photo-edit-active {
+            cursor: grab;
+            outline: 2px dashed #B24C32;
+            outline-offset: 2px;
+        }
+        .photo-edit-active:active {
+            cursor: grabbing;
+        }
+
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #F9F7F3; }
         ::-webkit-scrollbar-thumb { background: #D4CCC0; border-radius: 9999px; }
@@ -91,8 +100,8 @@
 
             <a href="#" class="flex items-center gap-3 group focus:outline-none">
                 <div class="relative w-9 h-9 rounded-full overflow-hidden border border-stoneLine bg-white text-ink flex items-center justify-center shrink-0">
-                    <img data-avatar alt="Zayan Fahad" class="w-full h-full object-cover object-top hidden">
-                    <span data-avatar-fallback class="font-serif italic text-base text-ink">ZF</span>
+                    <img id="navAvatarImg" alt="Zayan Fahad" class="w-full h-full object-cover object-top hidden">
+                    <span id="navAvatarFallback" class="font-serif italic text-base text-ink">ZF</span>
                 </div>
                 <div class="flex items-center gap-2.5">
                     <span class="font-bold text-sm sm:text-base tracking-tight text-ink">Zayan Fahad</span>
@@ -153,14 +162,27 @@
                     </div>
                 </div>
 
-                <!-- Right: Prominent Director Portrait Card -->
+                <!-- Right: Prominent Director Portrait Card (Triple-click photo to open tuner) -->
                 <div class="lg:col-span-5">
                     <div class="rounded-2xl bg-card border border-stoneLine p-3.5 sm:p-4 editorial-shadow max-w-sm lg:max-w-none mx-auto">
-                        <div class="relative aspect-[4/3] sm:aspect-[5/4] w-full rounded-xl overflow-hidden bg-white border border-stoneLine/70 flex items-end justify-center pt-3">
-                            <img data-avatar alt="Zayan Fahad portrait" class="w-full h-full object-contain object-bottom hidden">
-                            <div data-avatar-fallback class="my-auto flex flex-col items-center justify-center text-center px-6">
+                        <div
+                            id="heroPhotoBox"
+                            onclick="handleSecretPhotoClick()"
+                            class="relative w-full rounded-xl overflow-hidden border border-stoneLine/70 select-none"
+                            style="aspect-ratio: 5 / 4; background-color: #F8F8F8;"
+                        >
+                            <img
+                                id="heroPortraitImg"
+                                alt="Zayan Fahad portrait"
+                                draggable="false"
+                                class="hidden absolute top-1/2 left-1/2 max-w-none pointer-events-none select-none"
+                            >
+                            <div id="heroAvatarFallback" class="w-full h-full flex flex-col items-center justify-center text-center px-6">
                                 <span class="font-serif italic text-5xl text-ink/80">ZF</span>
                                 <span class="mt-1 text-[11px] uppercase tracking-widest text-mutedText">Zayan Fahad</span>
+                            </div>
+                            <div id="dragHintBadge" class="hidden absolute bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-ink/85 text-white text-[11px] font-medium pointer-events-none whitespace-nowrap">
+                                Drag photo to reposition
                             </div>
                         </div>
 
@@ -232,7 +254,7 @@
     </section>
 
     <!-- ======================================================================== -->
-    <!-- WORKFLOW STRIP (Warm Linen Contrast Band)                                -->
+    <!-- WORKFLOW STRIP                                                           -->
     <!-- ======================================================================== -->
     <section id="workflow" class="py-14 sm:py-20 bg-linen/70 border-y border-stoneLine">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -377,6 +399,93 @@
     </footer>
 
     <!-- ======================================================================== -->
+    <!-- HIDDEN PHOTO TUNER PANEL (Triple-click photo, Shift+P, or #photo)        -->
+    <!-- ======================================================================== -->
+    <div id="photoTunerPanel" class="hidden fixed bottom-5 right-5 z-50 w-[330px] max-w-[92vw] rounded-2xl bg-card border border-stoneLine shadow-2xl p-4 text-xs">
+        <div class="flex items-center justify-between pb-3 border-b border-stoneLine">
+            <div>
+                <div class="font-bold text-ink text-sm">Photo Position &amp; Size</div>
+                <div class="text-[11px] text-mutedText">Drag photo directly or use sliders</div>
+            </div>
+            <button type="button" onclick="togglePhotoTuner(false)" class="w-7 h-7 rounded-full bg-paper hover:bg-linen border border-stoneLine text-ink font-bold flex items-center justify-center">
+                ✕
+            </button>
+        </div>
+
+        <div class="mt-3.5 space-y-3.5">
+            <!-- Frame Shape -->
+            <div>
+                <div class="flex items-center justify-between mb-1.5">
+                    <span class="font-semibold text-ink">Frame Shape</span>
+                    <span class="text-[11px] text-mutedText">Fill vs. Fit</span>
+                </div>
+                <div class="grid grid-cols-3 gap-1.5 mb-2">
+                    <button type="button" data-aspect="5/4" onclick="setPhotoAspect('5/4')" class="tuner-aspect-btn py-1.5 rounded-lg border border-stoneLine font-medium">5:4</button>
+                    <button type="button" data-aspect="4/3" onclick="setPhotoAspect('4/3')" class="tuner-aspect-btn py-1.5 rounded-lg border border-stoneLine font-medium">4:3</button>
+                    <button type="button" data-aspect="1/1" onclick="setPhotoAspect('1/1')" class="tuner-aspect-btn py-1.5 rounded-lg border border-stoneLine font-medium">1:1 Square</button>
+                </div>
+                <div class="grid grid-cols-2 gap-1.5">
+                    <button type="button" data-fit="cover" onclick="setPhotoFitMode('cover')" class="tuner-fit-btn py-1.5 rounded-lg border border-stoneLine font-medium">Fill Frame (No Edges)</button>
+                    <button type="button" data-fit="contain" onclick="setPhotoFitMode('contain')" class="tuner-fit-btn py-1.5 rounded-lg border border-stoneLine font-medium">Fit Whole Photo</button>
+                </div>
+            </div>
+
+            <!-- Zoom Slider -->
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <label for="sliderScale" class="font-semibold text-ink">Zoom</label>
+                    <span id="valScale" class="font-mono text-[11px] text-accent">100%</span>
+                </div>
+                <input id="sliderScale" type="range" min="0.7" max="2.5" step="0.01" value="1" oninput="onSliderInput()" class="w-full accent-[#B24C32] cursor-pointer">
+            </div>
+
+            <!-- Left / Right Slider -->
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <label for="sliderX" class="font-semibold text-ink">Left / Right (X)</label>
+                    <span id="valX" class="font-mono text-[11px] text-accent">0%</span>
+                </div>
+                <input id="sliderX" type="range" min="-50" max="50" step="0.5" value="0" oninput="onSliderInput()" class="w-full accent-[#B24C32] cursor-pointer">
+            </div>
+
+            <!-- Up / Down Slider -->
+            <div>
+                <div class="flex items-center justify-between mb-1">
+                    <label for="sliderY" class="font-semibold text-ink">Up / Down (Y)</label>
+                    <span id="valY" class="font-mono text-[11px] text-accent">9%</span>
+                </div>
+                <input id="sliderY" type="range" min="-50" max="50" step="0.5" value="9" oninput="onSliderInput()" class="w-full accent-[#B24C32] cursor-pointer">
+            </div>
+
+            <!-- Frame Background Color -->
+            <div class="flex items-center justify-between gap-2 pt-1">
+                <span class="font-semibold text-ink">Frame BG</span>
+                <div class="flex items-center gap-1.5">
+                    <button type="button" onclick="setPhotoBg('#FFFFFF')" title="Pure White" class="w-6 h-6 rounded-full border border-stoneLine bg-white"></button>
+                    <button type="button" onclick="setPhotoBg('#F8F8F8')" title="Studio Off-White" class="w-6 h-6 rounded-full border border-stoneLine bg-[#F8F8F8]"></button>
+                    <button type="button" onclick="setPhotoBg('#F2EDE5')" title="Warm Linen" class="w-6 h-6 rounded-full border border-stoneLine bg-[#F2EDE5]"></button>
+                    <input id="pickerBg" type="color" value="#F8F8F8" oninput="setPhotoBg(this.value)" class="w-6 h-6 rounded border border-stoneLine cursor-pointer bg-transparent p-0">
+                </div>
+            </div>
+
+            <!-- Save / Export Actions -->
+            <div class="pt-3 border-t border-stoneLine space-y-2">
+                <button type="button" onclick="downloadUpdatedHtml()" class="w-full py-2.5 rounded-full bg-ink hover:bg-accent text-white font-semibold transition-colors">
+                    Download Updated index.html
+                </button>
+                <div class="grid grid-cols-2 gap-2">
+                    <button type="button" onclick="copyPhotoConfig()" class="py-2 rounded-full bg-paper hover:bg-linen border border-stoneLine text-ink font-medium transition-colors">
+                        Copy Settings
+                    </button>
+                    <button type="button" onclick="resetPhotoFit()" class="py-2 rounded-full bg-paper hover:bg-linen border border-stoneLine text-stoneText hover:text-ink font-medium transition-colors">
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================================== -->
     <!-- VIDEO SCREENING MODAL (Mobile & Desktop Safe)                            -->
     <!-- ======================================================================== -->
     <div id="videoModal" onclick="closeVideoModal()" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-[#141311]/90 backdrop-blur-sm cursor-pointer overflow-y-auto">
@@ -406,7 +515,7 @@
     </div>
 
     <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 hidden items-center gap-2.5 px-4 py-2.5 rounded-full bg-ink text-white text-xs font-medium shadow-xl">
+    <div id="toast" class="fixed bottom-5 left-5 z-50 hidden items-center gap-2.5 px-4 py-2.5 rounded-full bg-ink text-white text-xs font-medium shadow-xl">
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
         <span id="toastText"></span>
     </div>
@@ -420,6 +529,20 @@
             email: "mdf042731@gmail.com",
             profilePhoto: "avatar.jpg"
         };
+
+        ///* PHOTO_FIT_START */
+        let PHOTO_FIT = {
+            fit: "cover",
+            aspect: "5/4",
+            scale: 1,
+            x: 0,
+            y: 9,
+            bg: "#F8F8F8"
+        };
+        ///* PHOTO_FIT_END */
+
+        const DEFAULT_PHOTO_FIT = { ...PHOTO_FIT };
+        const PHOTO_STORAGE_KEY = "zf_photo_fit_" + JSON.stringify(DEFAULT_PHOTO_FIT);
 
         const CATEGORIES = {
             "talking-head": {
@@ -442,10 +565,6 @@
             }
         };
 
-        /*
-         * Optional transparency tag: set `tag` to "Client Work" or "Spec Cut" on any video.
-         * Leave `tag: ""` to display only the format badge.
-         */
         const VIDEOS = [
             {
                 id: "th-1",
@@ -541,27 +660,296 @@
 
         let activeFilter = "all";
         let modalHistoryPushed = false;
+        let tunerOpen = false;
+        let isDraggingPhoto = false;
+        let dragStart = { mx: 0, my: 0, x: 0, y: 0 };
+        let photoClickCount = 0;
+        let photoClickTimer = null;
+
         let scope = {
             type: "Test Cut",
             format: "YouTube Long-Form (16:9)"
         };
 
-        function initAvatars() {
-            if (!CONFIG.profilePhoto) return;
-            document.querySelectorAll("[data-avatar]").forEach(img => {
-                const fallback = img.parentElement.querySelector("[data-avatar-fallback]");
-                img.onload = () => {
-                    img.classList.remove("hidden");
-                    if (fallback) fallback.classList.add("hidden");
+        /* ==================================================================== */
+        /* PHOTO LOADER + INTERACTIVE DRAG / ZOOM / POSITION TUNER              */
+        /* ==================================================================== */
+        function initPhotoSystem() {
+            try {
+                const draft = localStorage.getItem(PHOTO_STORAGE_KEY);
+                if (draft) PHOTO_FIT = { ...PHOTO_FIT, ...JSON.parse(draft) };
+            } catch (e) {}
+
+            const navImg = document.getElementById("navAvatarImg");
+            const navFallback = document.getElementById("navAvatarFallback");
+            const heroImg = document.getElementById("heroPortraitImg");
+            const heroFallback = document.getElementById("heroAvatarFallback");
+
+            if (CONFIG.profilePhoto) {
+                navImg.onload = () => {
+                    navImg.classList.remove("hidden");
+                    navFallback.classList.add("hidden");
                 };
-                img.onerror = () => {
-                    img.classList.add("hidden");
-                    if (fallback) fallback.classList.remove("hidden");
+                navImg.src = CONFIG.profilePhoto;
+
+                heroImg.onload = () => {
+                    heroImg.classList.remove("hidden");
+                    heroFallback.classList.add("hidden");
+                    applyPhotoFit();
                 };
-                img.src = CONFIG.profilePhoto;
+                heroImg.src = CONFIG.profilePhoto;
+            }
+
+            applyPhotoFit();
+            bindPhotoDrag();
+            checkPhotoHash();
+        }
+
+        function applyPhotoFit() {
+            const box = document.getElementById("heroPhotoBox");
+            const img = document.getElementById("heroPortraitImg");
+            if (!box || !img) return;
+
+            const aspectMap = { "5/4": "5 / 4", "4/3": "4 / 3", "1/1": "1 / 1" };
+            box.style.aspectRatio = aspectMap[PHOTO_FIT.aspect] || "5 / 4";
+            box.style.backgroundColor = PHOTO_FIT.bg || "#F8F8F8";
+
+            if (img.naturalWidth && img.naturalHeight) {
+                const boxRatio = box.clientWidth / (box.clientHeight || 1);
+                const imgRatio = img.naturalWidth / img.naturalHeight;
+
+                if (PHOTO_FIT.fit === "cover") {
+                    if (imgRatio <= boxRatio) {
+                        img.style.width = "100%";
+                        img.style.height = "auto";
+                    } else {
+                        img.style.height = "100%";
+                        img.style.width = "auto";
+                    }
+                } else {
+                    if (imgRatio <= boxRatio) {
+                        img.style.height = "100%";
+                        img.style.width = "auto";
+                    } else {
+                        img.style.width = "100%";
+                        img.style.height = "auto";
+                    }
+                }
+            }
+
+            img.style.transform = `translate(calc(-50% + ${PHOTO_FIT.x}%), calc(-50% + ${PHOTO_FIT.y}%)) scale(${PHOTO_FIT.scale})`;
+            syncTunerUI();
+        }
+
+        function syncTunerUI() {
+            const sScale = document.getElementById("sliderScale");
+            const sX = document.getElementById("sliderX");
+            const sY = document.getElementById("sliderY");
+            if (!sScale) return;
+
+            sScale.value = PHOTO_FIT.scale;
+            sX.value = PHOTO_FIT.x;
+            sY.value = PHOTO_FIT.y;
+            document.getElementById("valScale").textContent = `${Math.round(PHOTO_FIT.scale * 100)}%`;
+            document.getElementById("valX").textContent = `${Number(PHOTO_FIT.x).toFixed(1)}%`;
+            document.getElementById("valY").textContent = `${Number(PHOTO_FIT.y).toFixed(1)}%`;
+            document.getElementById("pickerBg").value = PHOTO_FIT.bg || "#F8F8F8";
+
+            document.querySelectorAll(".tuner-aspect-btn").forEach(btn => {
+                const active = btn.dataset.aspect === PHOTO_FIT.aspect;
+                btn.className = active
+                    ? "tuner-aspect-btn py-1.5 rounded-lg bg-ink text-white border border-ink font-semibold"
+                    : "tuner-aspect-btn py-1.5 rounded-lg bg-paper text-stoneText hover:text-ink border border-stoneLine font-medium";
+            });
+
+            document.querySelectorAll(".tuner-fit-btn").forEach(btn => {
+                const active = btn.dataset.fit === PHOTO_FIT.fit;
+                btn.className = active
+                    ? "tuner-fit-btn py-1.5 rounded-lg bg-accent text-white border border-accent font-semibold"
+                    : "tuner-fit-btn py-1.5 rounded-lg bg-paper text-stoneText hover:text-ink border border-stoneLine font-medium";
             });
         }
 
+        function savePhotoDraft() {
+            try {
+                localStorage.setItem(PHOTO_STORAGE_KEY, JSON.stringify(PHOTO_FIT));
+            } catch (e) {}
+        }
+
+        function onSliderInput() {
+            PHOTO_FIT.scale = parseFloat(document.getElementById("sliderScale").value);
+            PHOTO_FIT.x = parseFloat(document.getElementById("sliderX").value);
+            PHOTO_FIT.y = parseFloat(document.getElementById("sliderY").value);
+            applyPhotoFit();
+            savePhotoDraft();
+        }
+
+        function setPhotoAspect(val) {
+            PHOTO_FIT.aspect = val;
+            applyPhotoFit();
+            savePhotoDraft();
+        }
+
+        function setPhotoFitMode(val) {
+            PHOTO_FIT.fit = val;
+            applyPhotoFit();
+            savePhotoDraft();
+        }
+
+        function setPhotoBg(color) {
+            PHOTO_FIT.bg = color;
+            applyPhotoFit();
+            savePhotoDraft();
+        }
+
+        function resetPhotoFit() {
+            PHOTO_FIT = { ...DEFAULT_PHOTO_FIT };
+            try { localStorage.removeItem(PHOTO_STORAGE_KEY); } catch (e) {}
+            applyPhotoFit();
+            showToast("Photo framing reset");
+        }
+
+        function togglePhotoTuner(forceState) {
+            tunerOpen = typeof forceState === "boolean" ? forceState : !tunerOpen;
+            const panel = document.getElementById("photoTunerPanel");
+            const box = document.getElementById("heroPhotoBox");
+            const hint = document.getElementById("dragHintBadge");
+
+            if (tunerOpen) {
+                panel.classList.remove("hidden");
+                box.classList.add("photo-edit-active");
+                hint.classList.remove("hidden");
+                syncTunerUI();
+            } else {
+                panel.classList.add("hidden");
+                box.classList.remove("photo-edit-active");
+                hint.classList.add("hidden");
+            }
+        }
+
+        function handleSecretPhotoClick() {
+            if (tunerOpen) return;
+            photoClickCount++;
+            clearTimeout(photoClickTimer);
+            if (photoClickCount >= 3) {
+                photoClickCount = 0;
+                togglePhotoTuner(true);
+                return;
+            }
+            photoClickTimer = setTimeout(() => { photoClickCount = 0; }, 550);
+        }
+
+        function bindPhotoDrag() {
+            const box = document.getElementById("heroPhotoBox");
+            const img = document.getElementById("heroPortraitImg");
+
+            function startDrag(clientX, clientY) {
+                if (!tunerOpen) return;
+                isDraggingPhoto = true;
+                dragStart = { mx: clientX, my: clientY, x: PHOTO_FIT.x, y: PHOTO_FIT.y };
+            }
+
+            function moveDrag(clientX, clientY) {
+                if (!isDraggingPhoto || !tunerOpen) return;
+                const w = img.offsetWidth || box.clientWidth || 1;
+                const h = img.offsetHeight || box.clientHeight || 1;
+                const dxPct = ((clientX - dragStart.mx) / w) * 100;
+                const dyPct = ((clientY - dragStart.my) / h) * 100;
+                PHOTO_FIT.x = Math.max(-50, Math.min(50, Math.round((dragStart.x + dxPct) * 2) / 2));
+                PHOTO_FIT.y = Math.max(-50, Math.min(50, Math.round((dragStart.y + dyPct) * 2) / 2));
+                applyPhotoFit();
+            }
+
+            function endDrag() {
+                if (!isDraggingPhoto) return;
+                isDraggingPhoto = false;
+                savePhotoDraft();
+            }
+
+            box.addEventListener("mousedown", (e) => {
+                if (!tunerOpen) return;
+                e.preventDefault();
+                startDrag(e.clientX, e.clientY);
+            });
+            window.addEventListener("mousemove", (e) => moveDrag(e.clientX, e.clientY));
+            window.addEventListener("mouseup", endDrag);
+
+            box.addEventListener("touchstart", (e) => {
+                if (!tunerOpen || !e.touches[0]) return;
+                e.preventDefault();
+                startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: false });
+            window.addEventListener("touchmove", (e) => {
+                if (!isDraggingPhoto || !e.touches[0]) return;
+                moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+            window.addEventListener("touchend", endDrag);
+
+            box.addEventListener("wheel", (e) => {
+                if (!tunerOpen) return;
+                e.preventDefault();
+                const delta = e.deltaY < 0 ? 0.04 : -0.04;
+                PHOTO_FIT.scale = Math.max(0.7, Math.min(2.5, Math.round((PHOTO_FIT.scale + delta) * 100) / 100));
+                applyPhotoFit();
+                savePhotoDraft();
+            }, { passive: false });
+        }
+
+        function buildPhotoFitBlock() {
+            const clean = {
+                fit: PHOTO_FIT.fit,
+                aspect: PHOTO_FIT.aspect,
+                scale: Number(PHOTO_FIT.scale),
+                x: Number(PHOTO_FIT.x),
+                y: Number(PHOTO_FIT.y),
+                bg: PHOTO_FIT.bg
+            };
+            return `///* PHOTO_FIT_START */\n        let PHOTO_FIT = ${JSON.stringify(clean, null, 12).replace(/\}$/, '        }')};\n        ///* PHOTO_FIT_END */`;
+        }
+
+        function copyPhotoConfig() {
+            copyText(buildPhotoFitBlock(), "Copied PHOTO_FIT settings — paste into index.html");
+        }
+
+        async function downloadUpdatedHtml() {
+            const replacement = buildPhotoFitBlock();
+            try {
+                const url = window.location.href.split("#")[0];
+                const res = await fetch(url, { cache: "no-store" });
+                if (!res.ok) throw new Error("Fetch failed");
+                let src = await res.text();
+                if (!src.includes("PHOTO_FIT_START")) throw new Error("Marker missing");
+                src = src.replace(/\/\/\/\* PHOTO_FIT_START \*\/[\s\S]*?\/\/\/\* PHOTO_FIT_END \*\//, replacement);
+
+                const blob = new Blob([src], { type: "text/html" });
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(blob);
+                a.download = "index.html";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                try { localStorage.removeItem(PHOTO_STORAGE_KEY); } catch (e) {}
+                showToast("Downloaded index.html — upload to GitHub to save!");
+            } catch (err) {
+                copyPhotoConfig();
+                showToast("Copied PHOTO_FIT snippet — paste into index.html on GitHub");
+            }
+        }
+
+        function checkPhotoHash() {
+            const h = (window.location.hash || "").toLowerCase();
+            if (h === "#photo" || h === "#admin") {
+                togglePhotoTuner(true);
+                try { history.replaceState(null, "", window.location.pathname + window.location.search); } catch (e) {}
+            }
+        }
+
+        window.addEventListener("hashchange", checkPhotoHash);
+        window.addEventListener("resize", applyPhotoFit);
+
+        /* ==================================================================== */
+        /* PORTFOLIO GRID & VIDEO MODAL                                         */
+        /* ==================================================================== */
         function escapeHtml(str) {
             return String(str).replace(/[&<>"']/g, s => ({
                 '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -735,7 +1123,17 @@
 
         window.addEventListener("popstate", () => closeVideoModal(true));
         window.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") closeVideoModal();
+            if (e.key === "Escape") {
+                closeVideoModal();
+                if (tunerOpen) togglePhotoTuner(false);
+                return;
+            }
+            const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+            if (tag === "input" || tag === "textarea" || tag === "select") return;
+            if (e.shiftKey && (e.key === "P" || e.key === "p")) {
+                e.preventDefault();
+                togglePhotoTuner();
+            }
         });
 
         /* ==================================================================== */
@@ -828,12 +1226,12 @@
             toastTimer = setTimeout(() => {
                 el.classList.add("hidden");
                 el.classList.remove("flex");
-            }, 3000);
+            }, 3200);
         }
 
         document.getElementById("year").textContent = new Date().getFullYear();
         document.getElementById("displayEmail").textContent = CONFIG.email;
-        initAvatars();
+        initPhotoSystem();
         updateDraftText();
         renderPortfolio();
     </script>
