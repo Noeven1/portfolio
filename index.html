@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zayan Fahad — YouTube &amp; Content Partner</title>
-    <meta name="description" content="You hit record. Zayan Fahad handles the research, high-retention YouTube &amp; Short-form editing, hooks, and channel upload.">
+    <title>Zayan Fahad — YouTube &amp; Retention Editor</title>
+    <meta name="description" content="You hit record. Zayan Fahad shapes your raw footage into high-retention YouTube videos and custom After Effects motion.">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -211,10 +211,10 @@
                                 <span class="w-2 h-2 rounded-full bg-oceanTeal"></span>
                                 Instant Sample Preview
                             </span>
-                            <!-- Top-Right Craft Pill -->
-                            <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-oceanInk/85 backdrop-blur-md border border-white/15 text-[10px] font-bold text-emerald-300 flex items-center gap-1.5">
-                                <i class="fa-solid fa-sliders text-[9px]"></i>
-                                <span id="heroSampleMetric">3D Tracked Grid + Hook</span>
+                            <div class="flex items-center gap-1">
+                                <button type="button" onclick="switchHeroSample('zf-th-1', this)" class="hero-sample-tab px-2.5 py-1 rounded-full text-[10px] font-bold bg-oceanInk text-white transition-all">16:9 YT</button>
+                                <button type="button" onclick="switchHeroSample('zf-sf-3', this)" class="hero-sample-tab px-2.5 py-1 rounded-full text-[10px] font-semibold bg-white text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all">9:16 Short</button>
+                                <button type="button" onclick="switchHeroSample('zf-saas-1', this)" class="hero-sample-tab px-2.5 py-1 rounded-full text-[10px] font-semibold bg-white text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all">AE Motion</button>
                             </div>
                         </div>
 
@@ -223,16 +223,16 @@
                             <img id="heroSampleThumb" src="https://img.youtube.com/vi/WV6HoouI8Ps/maxresdefault.jpg" alt="Featured Sample" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
                             <div class="absolute inset-0 bg-gradient-to-t from-oceanInk/75 via-transparent to-transparent"></div>
 
-                            <!-- Top-Right Retention Graph Pill -->
+                            <!-- Top-Right Craft Pill -->
                             <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-oceanInk/85 backdrop-blur-md border border-white/15 text-[10px] font-bold text-emerald-300 flex items-center gap-1.5">
-                                <i class="fa-solid fa-chart-line text-[9px]"></i>
-                                <span id="heroSampleMetric">78% 0–30s Hook Hold</span>
+                                <i class="fa-solid fa-sliders text-[9px]"></i>
+                                <span id="heroSampleMetric">3D Tracked Grid + Hook</span>
                             </div>
 
                             <!-- Sleek Bottom-Left Play Trigger (Does NOT cover speaker's face) -->
                             <div class="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
                                 <div class="min-w-0">
-                                    <span id="heroSampleBadge" class="inline-block px-2 py-0.5 rounded bg-oceanTeal text-white text-[10px] font-bold uppercase tracking-wider mb-1">Flagship Re-Edit • 4K</span>
+                                    <span id="heroSampleBadge" class="inline-block px-2 py-0.5 rounded bg-oceanTeal text-white text-[10px] font-bold uppercase tracking-wider mb-1">YouTube Long-Form • 4K</span>
                                     <h3 id="heroSampleTitle" class="text-xs sm:text-sm font-bold text-white truncate">Why Most Small YouTube Channels Stay Stuck</h3>
                                 </div>
                                 <span class="shrink-0 px-3.5 py-2 rounded-full bg-white text-oceanInk group-hover:bg-oceanTeal group-hover:text-white font-bold text-xs shadow-lg flex items-center gap-1.5 transition-all">
@@ -650,7 +650,7 @@
                         Start With a Paid Trial Cut ($150–$250)
                     </h2>
                     <p class="text-xs sm:text-sm text-slateTide mt-1">
-                        Paid trials are available for active creators and brands publishing weekly. Configure your inquiry below or email me directly at <span id="displayEmailText" class="font-semibold text-oceanInk">mdf042731@gmail.com</span>.
+                        Paid trials are available for active creators and brands publishing weekly. Configure your inquiry below or email me directly at <span id="displayEmailText" class="font-semibold text-oceanInk">zayanfahad23@gmail.com</span>.
                     </p>
                 </div>
                 <button id="copyEmailBtn" type="button" onclick="copyEmailToClipboard()" class="self-start sm:self-auto px-4 py-2.5 rounded-full bg-seaSalt hover:bg-foamTint border border-seafoamBorder text-xs font-bold text-oceanInk flex items-center gap-2 transition-all shrink-0">
@@ -683,7 +683,7 @@
                     </div>
                 </div>
 
-                <!-- 3. Post-Production Scope Add-Ons (Zero VA / uploading fluff) -->
+                <!-- 3. Post-Production Scope Add-Ons -->
                 <div>
                     <label class="block text-xs font-semibold text-slateTide mb-2">3. Post-Production Scope (Click to toggle)</label>
                     <div id="addonsContainer" class="flex flex-wrap gap-2">
@@ -716,9 +716,9 @@
                     <textarea id="senderMessage" rows="4" class="w-full px-4 py-3 rounded-xl bg-seaSalt border border-seafoamBorder text-oceanInk text-xs sm:text-sm focus:outline-none focus:border-oceanTeal leading-relaxed"></textarea>
                 </div>
 
-                <!-- Direct Contact Actions (No fake form POST) -->
+                <!-- Direct Contact Actions -->
                 <div class="flex flex-wrap items-center gap-2.5 pt-2">
-                    <a id="directMailtoLink" href="mailto:mdf042731@gmail.com" onclick="prepareDirectMailto(event)" class="px-6 py-3 rounded-full bg-oceanInk hover:bg-oceanTeal text-white font-semibold text-xs sm:text-sm flex items-center gap-2 transition-all shadow-sm">
+                    <a id="directMailtoLink" href="mailto:zayanfahad23@gmail.com" onclick="prepareDirectMailto(event)" class="px-6 py-3 rounded-full bg-oceanInk hover:bg-oceanTeal text-white font-semibold text-xs sm:text-sm flex items-center gap-2 transition-all shadow-sm">
                         <i class="fa-regular fa-envelope"></i>
                         <span>Email Zayan Directly</span>
                     </a>
@@ -753,7 +753,7 @@
             </div>
             <div class="flex items-center gap-5">
                 <a href="#packages" class="hover:text-oceanTeal font-medium transition-colors">Packages</a>
-                <a id="footerEmailLink" href="mailto:mdf042731@gmail.com" class="hover:text-oceanTeal font-medium transition-colors">mdf042731@gmail.com</a>
+                <a id="footerEmailLink" href="mailto:zayanfahad23@gmail.com" class="hover:text-oceanTeal font-medium transition-colors">zayanfahad23@gmail.com</a>
                 <a href="#" class="hover:text-oceanInk font-medium transition-colors">Back to top ↑</a>
             </div>
         </div>
@@ -871,7 +871,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-oceanInk mb-1">Format Label (Below Thumb)</label>
-                            <input id="inputBadge" type="text" placeholder="e.g. YouTube Talking-Head • 16:9" class="w-full px-3 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs">
+                            <input id="inputBadge" type="text" placeholder="e.g. YouTube Talking-Head • 16:9" class="w-full px-3.5 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs">
                         </div>
                     </div>
 
@@ -932,8 +932,7 @@
     <script>
         const SITE_SETTINGS = {
             name: "Zayan Fahad",
-            // TODO: Swap to hello@zayanfahad.com or zayanfahad.work@gmail.com when ready
-            email: "mdf042731@gmail.com",
+            email: "zayanfahad23@gmail.com",
             // TODO: Optional Cal.com / Calendly link (e.g., "https://cal.com/zayanfahad/15min"). Leave "" if none.
             bookingLink: ""
         };
@@ -1335,7 +1334,6 @@
             const rawVsCutNote = item.rawVsCut || 'Raw camera file → Paced, color-balanced & mastered 4K cut';
             const fitClass = item.containThumb ? 'object-contain bg-[#060926]' : 'object-cover';
 
-            // Compact height for 9:16 cards so 3 vertical cards fit comfortably without pushing text off-screen
             const stageSizeClass = isVertical
                 ? 'h-[310px] sm:h-[340px] w-full bg-[#09151D]'
                 : 'aspect-video w-full bg-[#060926]';
@@ -1344,7 +1342,6 @@
             <div onclick="openVideoPlayer('${item.id}')" onmousemove="handleCardSpotlight(event, this)" class="video-card group rounded-2xl bg-pureCard border border-seafoamBorder hover:border-oceanTeal/50 overflow-hidden cursor-pointer flex flex-col justify-between">
                 <div class="relative ${stageSizeClass} overflow-hidden">
                     ${isVertical ? `
-                        <!-- Blurred ambient background + uncropped 9:16 center frame so vertical cards stay compact -->
                         <img src="${thumb}" alt="" onerror="this.onerror=null; this.src='${fallback}';" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-35 scale-110 pointer-events-none">
                         <div class="relative z-10 w-full h-full flex items-center justify-center py-2.5">
                             <img src="${thumb}" alt="${item.title}" onerror="this.onerror=null; this.src='${fallback}';" class="h-full aspect-[9/16] object-cover rounded-xl shadow-lg border border-white/15 group-hover:scale-[1.03] transition-transform duration-500">
@@ -1621,7 +1618,7 @@
         window.addEventListener('hashchange', checkSecretAdminHash);
 
         /* ============================================================================ */
-        /* DIRECT MAILBOX LOGIC (Scope + Format + Done-For-You Add-Ons)                 */
+        /* DIRECT MAILBOX LOGIC                                                         */
         /* ============================================================================ */
         function selectScopeType(type) {
             selectedScope.type = type;
@@ -1715,38 +1712,6 @@
             const { body } = buildMailSubjectAndBody();
             copyTextHelper(body);
             showToast('Inquiry brief copied to clipboard!');
-        }
-
-        function buildMailSubjectAndBody() {
-            const name = (document.getElementById('senderName').value || 'Prospective Client').trim();
-            const email = (document.getElementById('senderEmail').value || '').trim();
-            const msg = (document.getElementById('senderMessage').value || '').trim();
-            const subject = `Project Inquiry: ${selectedScope.type} (${selectedScope.format}) — ${name}`;
-            const addonsText = selectedScope.addons.length > 0 ? selectedScope.addons.join(', ') : 'Editing Only';
-            const body = `${msg}\n\n---\nFrom: ${name}${email ? ' (' + email + ')' : ''}\nScope: ${selectedScope.type} | Format: ${selectedScope.format}\nAdd-Ons: ${addonsText}`;
-            return { name, email, msg, subject, body };
-        }
-
-        function handleDirectMailSubmit(e) {
-            e.preventDefault();
-            openInDefaultMailApp();
-        }
-
-        function openInGmailWeb() {
-            const { subject, body } = buildMailSubjectAndBody();
-            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(SITE_SETTINGS.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.open(gmailUrl, '_blank', 'noopener');
-        }
-
-        function openInDefaultMailApp() {
-            const { subject, body } = buildMailSubjectAndBody();
-            window.location.href = `mailto:${SITE_SETTINGS.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        }
-
-        function copyComposedMessage() {
-            const { body } = buildMailSubjectAndBody();
-            copyTextHelper(body);
-            showToast('Project note copied to clipboard!');
         }
 
         /* ============================================================================ */
