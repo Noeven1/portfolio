@@ -1,0 +1,374 @@
+<!-- Thumbnail Frame -->
+                        <div onclick="openVideoPlayer(currentHeroSampleId)" class="relative aspect-video bg-oceanInk cursor-pointer group overflow-hidden">
+                            <img id="heroSampleThumb" src="https://img.youtube.com/vi/WV6HoouI8Ps/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/WV6HoouI8Ps/hqdefault.jpg'" alt="Featured Retention Edit" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-oceanInk/85 via-oceanInk/15 to-transparent"></div>
+
+                            <!-- Metric Pill (Top Right) -->
+                            <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-oceanInk/85 backdrop-blur-md border border-white/15 text-white text-[10px] font-semibold flex items-center gap-1.5">
+                                <i class="fa-solid fa-layer-group text-cyan-300 text-[9px]"></i>
+                                <span id="heroSampleMetric">3D Tracked Grid + Hook</span>
+                            </div>
+
+                            <!-- Bottom Overlay Info + Play Pill -->
+                            <div class="absolute bottom-3 left-3.5 right-3.5 flex items-end justify-between gap-3">
+                                <div class="min-w-0">
+                                    <span id="heroSampleBadge" class="inline-block px-2 py-0.5 rounded bg-oceanTeal text-white text-[9px] font-bold uppercase tracking-wider mb-1">YouTube Long-Form • 4K</span>
+                                    <p id="heroSampleTitle" class="text-white text-xs sm:text-sm font-bold truncate">Why Most Small YouTube Channels Stay Stuck</p>
+                                </div>
+                                <span class="shrink-0 px-3 py-1.5 rounded-full bg-white text-oceanInk text-[11px] font-bold shadow-md group-hover:bg-oceanTeal group-hover:text-white transition-colors flex items-center gap-1.5">
+                                    <i class="fa-solid fa-play text-[9px]"></i> Play
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Before vs After Mini Strip -->
+                        <div class="p-3.5 bg-pureCard grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-left">
+                            <div class="p-2.5 rounded-xl bg-seaSalt border border-seafoamBorder">
+                                <div class="text-[9px] font-bold uppercase tracking-wider text-amber-700 mb-0.5">Before (Raw Take)</div>
+                                <p id="heroSampleBefore" class="text-[11px] text-slateTide leading-snug">Single-camera talking head with breath pauses &amp; static framing.</p>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-oceanTeal/5 border border-oceanTeal/20">
+                                <div class="text-[9px] font-bold uppercase tracking-wider text-oceanTeal mb-0.5">After (My Cut)</div>
+                                <p id="heroSampleAfter" class="text-[11px] text-oceanInk font-medium leading-snug">Compressed 0–30s hook, tracked 3D 300K milestone grid &amp; cut dead air.</p>
+                            </div>
+                        </div>
+                <!-- Filter Pills -->
+                <div class="flex flex-wrap items-center gap-2 shrink-0" id="filterPills">
+                    <button type="button" onclick="setFilter('all', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-oceanInk text-white transition-all shadow-sm">
+                        All Work (<span id="countAll">8</span>)
+                    </button>
+                    <button type="button" onclick="setFilter('talking-head', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-medium bg-pureCard text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all">
+                        YouTube Long-Form (<span id="countTalkingHead">2</span>)
+                    </button>
+                    <button type="button" onclick="setFilter('short-form', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-medium bg-pureCard text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all">
+                        Shorts &amp; Reels 9:16 (<span id="countShortForm">3</span>)
+                    </button>
+                    <button type="button" onclick="setFilter('educational', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-medium bg-pureCard text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all">
+                        Educational &amp; SaaS Motion (<span id="countEducational">3</span>)
+                    </button>
+                </div>
+                <!-- 3. Reorder, Edit & Delete Existing Videos -->
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slateTide">Gallery Videos (<span id="projectCount">8</span>) — Reorder With ↑ ↓ or Edit ✎</span>
+                        <button type="button" onclick="resetToDefaultVideos()" class="text-xs text-rose-600 hover:underline font-medium">Reset Default 8 Videos</button>
+                    </div>
+                    <div id="videoManagerList" class="space-y-2.5 max-h-[300px] overflow-y-auto pr-1"></div>
+                </div>
+
+                <!-- 1B. Separate Hero Preview Box Editor (Independent from Video #1) -->
+                <form onsubmit="handleSaveHeroFeature(event)" class="space-y-3 p-5 rounded-2xl bg-seaSalt border border-seafoamBorder">
+                    <div class="flex items-center justify-between">
+                        <div class="text-xs font-bold uppercase tracking-wider text-oceanTeal">Hero Preview Box (Top-Right Card — Separate From Gallery)</div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-oceanInk mb-1">Hero Preview Title</label>
+                            <input id="heroInputTitle" type="text" required class="w-full px-3.5 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs focus:outline-none focus:border-oceanTeal">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-oceanInk mb-1">Hero YouTube Link</label>
+                            <input id="heroInputUrl" type="url" required class="w-full px-3.5 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs focus:outline-none focus:border-oceanTeal">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-oceanInk mb-1">Before (Raw Take)</label>
+                            <input id="heroInputBefore" type="text" class="w-full px-3.5 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs focus:outline-none focus:border-oceanTeal">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-oceanInk mb-1">After (My Cut)</label>
+                            <input id="heroInputAfter" type="text" class="w-full px-3.5 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs focus:outline-none focus:border-oceanTeal">
+                        </div>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="px-4 py-2 rounded-full bg-oceanInk hover:bg-oceanTeal text-white font-semibold text-xs transition-all">
+                            Update Hero Box
+                        </button>
+                    </div>
+                </form>
+
+                <!-- 2. Add / Edit Video Form -->
+<!-- ... existing code ... -->
+        ///* HERO_FEATURE_START */
+        let HERO_FEATURE = {
+            id: "hero-main",
+            title: "Why Most Small YouTube Channels Stay Stuck",
+            categoryBadge: "YouTube Long-Form • 4K",
+            metric: "3D Tracked Grid + Hook",
+            videoUrl: "https://youtu.be/WV6HoouI8Ps",
+            before: "Single-camera talking head with breath pauses & static framing.",
+            after: "Compressed 0–30s hook, tracked 3D 300K milestone grid & cut dead air."
+        };
+        ///* HERO_FEATURE_END */
+
+        ///* PORTFOLIO_DATA_START */
+        const DEFAULT_VIDEOS = [
+            {
+                id: "zf-yt-2",
+                title: "How Quitting TV Changed My Daily Focus",
+                category: "talking-head",
+                categoryBadge: "Creator Commentary • 16:9",
+                strategicMeta: "J-CUT RHYTHM",
+                rawVsCut: "Unscripted monologue → Overlapped J-cuts + subtle beat punch-ins",
+                aspect: "16:9",
+                duration: "4K",
+                deliverables: "Shaped a flat unscripted monologue using overlapped J-cuts, subtle scale punch-ins on key beats, and warm vocal leveling.",
+                retentionLogic: "Invisible J-cuts hide edit seams and keep conversational energy natural without fatiguing the viewer.",
+                videoUrl: "https://youtu.be/PRpm0ce9cQw"
+            },
+            {
+                id: "zf-yt-3",
+                title: "Biggest Money Lessons From a Tony Robbins Event",
+                category: "talking-head",
+                categoryBadge: "Finance & Story • 16:9",
+                strategicMeta: "CHAPTER PACING",
+                rawVsCut: "Long raw story → Chapter callouts + B-roll cutaways + audio polish",
+                aspect: "16:9",
+                duration: "4K",
+                deliverables: "Structured a long-form financial story with on-screen chapter callouts, timed B-roll cutaways, and crisp vocal compression.",
+                retentionLogic: "Visual chapter anchors reset viewer attention across a multi-point story.",
+                videoUrl: "https://youtu.be/QCCbQpuxxpU"
+            },
+            {
+                id: "zf-sf-3",
+                title: "Why a $10k Skill Pays $100k to the Right Buyer",
+                category: "short-form",
+                categoryBadge: "Business Short • 9:16",
+                strategicMeta: "SUB-2S HOOK",
+                rawVsCut: "Long podcast clip → Visual hook frame + B-roll + kinetic captions",
+                aspect: "9:16",
+                duration: "9:16",
+                deliverables: "Recut a talking-head clip on the 'Magic Wand' pricing lesson—tightened the opening 3 seconds, layered B-roll, and added kinetic word captions.",
+                retentionLogic: "Immediate visual movement and bold text framing beat the 2-second vertical swipe reflex.",
+                videoUrl: "https://youtu.be/EHtXBlRkHts"
+            },
+            {
+                id: "zf-sf-2",
+                title: "Street-Style Founder Interview at BizChat Event",
+                category: "short-form",
+                categoryBadge: "Live Event Clip • 9:16",
+                strategicMeta: "NOISE ISOLATION",
+                rawVsCut: "Noisy crowd audio → Cleaned dialogue + dynamic dual-speaker crop",
+                aspect: "9:16",
+                duration: "9:16",
+                deliverables: "Isolated spoken dialogue over loud outdoor event noise, dynamically reframed both speakers for vertical mobile viewing, and synced pop-in captions.",
+                retentionLogic: "Clean vocal clarity in the first second stops mobile viewers from scrolling past event footage.",
+                videoUrl: "https://youtube.com/shorts/m69e_m2qQLY"
+            },
+            {
+                id: "zf-sf-1",
+                title: "Modern Home Walkthrough With Speed-Ramped Cuts",
+                category: "short-form",
+                categoryBadge: "Property Reel • 9:16",
+                strategicMeta: "BEAT SYNC",
+                rawVsCut: "Raw gimbal takes → Optical stabilization + beat-synced speed ramps",
+                aspect: "9:16",
+                duration: "9:16",
+                deliverables: "Connected raw room-to-room gimbal clips using smooth velocity speed-ramps, optical stabilization, and clean title overlays.",
+                retentionLogic: "Seamless camera momentum carries viewers smoothly from room to room until the final frame.",
+                videoUrl: "https://youtube.com/shorts/LicI4f7LuZE"
+            },
+            {
+                id: "zf-edu-1",
+                title: "How to Stop Translating in Your Head & Speak Natural English",
+                category: "educational",
+                categoryBadge: "Educational Guide • 16:9",
+                strategicMeta: "CLEAR CUES",
+                rawVsCut: "Bookstore recording → Room noise cleanup + on-screen vocab prompts",
+                aspect: "16:9",
+                duration: "4K",
+                deliverables: "Cleaned background bookstore noise, built clean on-screen vocabulary prompts, and structured the lesson into digestible teaching segments.",
+                retentionLogic: "Visual text reinforcement helps educational viewers retain key takeaways effortlessly.",
+                videoUrl: "https://youtu.be/QU21h7PT1HY"
+            },
+            {
+                id: "zf-edu-2",
+                title: "The 9×9 Mandala System for Goal Setting",
+                category: "educational",
+                categoryBadge: "Framework Breakdown • 16:9",
+                strategicMeta: "VISUAL SYSTEM",
+                rawVsCut: "Static whiteboard take → Guided zoom highlights + grid callouts",
+                aspect: "16:9",
+                duration: "4K",
+                deliverables: "Paired a whiteboard explanation with step-by-step camera zoom highlights and visual callouts so viewers can follow the 9-box framework easily.",
+                retentionLogic: "Guided visual focus eliminates confusion during complex framework explanations.",
+                videoUrl: "https://youtu.be/Xi_Fi89ZXfQ"
+            },
+            {
+                id: "zf-saas-1",
+                title: "Product Onboarding & Software Workflow Explainer",
+                category: "educational",
+                categoryBadge: "SaaS & UI Motion • 16:9",
+                strategicMeta: "AE UI MOTION",
+                rawVsCut: "Flat screen capture → Custom 3D UI tilts + cursor motion + callouts",
+                aspect: "16:9",
+                duration: "4K",
+                deliverables: "Built custom After Effects UI cursor animations, smooth 3D screen tilts, and callout highlights to explain a software workflow in under 60 seconds.",
+                retentionLogic: "Dynamic UI motion turns dry screen recordings into an engaging, easy-to-follow product story.",
+                videoUrl: "https://youtu.be/stu4jgsWPRI"
+            }
+        ];
+        ///* PORTFOLIO_DATA_END */
+                title: document.getElementById('heroInputTitle').value.trim(),
+                videoUrl: document.getElementById('heroInputUrl').value.trim(),
+                before: document.getElementById('heroInputBefore').value.trim(),
+                after: document.getElementById('heroInputAfter').value.trim()
+            };
+            HERO_FEATURE = { ...currentHeroFeature };
+            try {
+                localStorage.setItem(STORAGE_KEY + '_hero', JSON.stringify(currentHeroFeature));
+            } catch (e) {}
+            const firstTab = document.querySelector('.hero-sample-tab');
+            switchHeroSample('hero-main', firstTab);
+            showToast('Hero preview updated! Click "Download Ready-to-Host index.html" to export.');
+        }
+
+        function startEditVideo(id) {
+            const item = currentVideos.find(v => v.id === id);
+            if (!item) return;
+            document.getElementById('editVideoId').value = item.id;
+            document.getElementById('inputTitle').value = item.title || '';
+            document.getElementById('inputUrl').value = item.videoUrl || '';
+            document.getElementById('inputAspect').value = item.aspect || '16:9';
+            document.getElementById('inputCategory').value = item.category || 'talking-head';
+            document.getElementById('inputBadge').value = item.categoryBadge || '';
+            document.getElementById('inputDeliverables').value = item.deliverables || '';
+            document.getElementById('inputRetentionLogic').value = item.retentionLogic || '';
+            document.getElementById('inputCustomThumb').value = item.customThumbnail || '';
+            document.getElementById('formHeading').textContent = `Editing: ${item.title}`;
+            document.getElementById('submitVideoBtn').textContent = 'Update Video';
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+            document.getElementById('addVideoForm').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function resetVideoForm() {
+            const form = document.getElementById('addVideoForm');
+            if (form) form.reset();
+            document.getElementById('editVideoId').value = '';
+            document.getElementById('formHeading').textContent = '+ Add or Edit Video Case Study';
+            document.getElementById('submitVideoBtn').textContent = 'Save Video';
+            document.getElementById('cancelEditBtn').classList.add('hidden');
+        }
+
+        function handleSaveVideo(event) {
+            event.preventDefault();
+            const editId = document.getElementById('editVideoId').value.trim();
+            const title = document.getElementById('inputTitle').value.trim();
+            const videoUrl = document.getElementById('inputUrl').value.trim();
+            const aspect = document.getElementById('inputAspect').value;
+            const category = document.getElementById('inputCategory').value;
+            const badgeInput = document.getElementById('inputBadge').value.trim();
+            const deliverables = document.getElementById('inputDeliverables').value.trim() || 'Paced cut, custom graphics, and clean dialogue polish.';
+            const retentionLogic = document.getElementById('inputRetentionLogic').value.trim() || 'Engineered to hold viewer attention through clean pacing and audio.';
+            const customThumb = document.getElementById('inputCustomThumb').value.trim();
+
+            const parsed = parseVideoLink(videoUrl);
+            const defaultBadges = {
+                'talking-head': 'YouTube Talking-Head • 16:9',
+                'short-form': 'Vertical Short • 9:16',
+                'educational': 'Educational & Motion • 16:9'
+            };
+
+            if (editId) {
+                const idx = currentVideos.findIndex(v => v.id === editId);
+                if (idx !== -1) {
+                    currentVideos[idx] = {
+        function switchHeroSample(videoId, btnEl) {
+            currentHeroSampleId = videoId;
+
+            if (videoId === "hero-main") {
+                const parsedHero = parseVideoLink(currentHeroFeature.videoUrl);
+                const heroThumb = (parsedHero && parsedHero.thumb) || "https://img.youtube.com/vi/WV6HoouI8Ps/maxresdefault.jpg";
+                document.getElementById('heroSampleThumb').src = heroThumb;
+                document.getElementById('heroSampleTitle').textContent = currentHeroFeature.title;
+                document.getElementById('heroSampleBadge').textContent = currentHeroFeature.categoryBadge || "YouTube Long-Form • 4K";
+                document.getElementById('heroSampleMetric').textContent = currentHeroFeature.metric || "3D Tracked Grid + Hook";
+                document.getElementById('heroSampleBefore').textContent = currentHeroFeature.before;
+                document.getElementById('heroSampleAfter').textContent = currentHeroFeature.after;
+            } else {
+                currentVideos.unshift({
+        function loadSavedState() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                const parsedStored = stored ? JSON.parse(stored) : [...DEFAULT_VIDEOS];
+                currentVideos = parsedStored.filter(v => v.id !== 'zf-yt-1');
+            } catch (e) {
+                currentVideos = [...DEFAULT_VIDEOS];
+            }
+
+            try {
+                const storedHero = localStorage.getItem(STORAGE_KEY + '_hero');
+                currentHeroFeature = storedHero ? JSON.parse(storedHero) : { ...HERO_FEATURE };
+            } catch (e) {
+                currentHeroFeature = { ...HERO_FEATURE };
+            }
+        function updateFilterCounts() {
+            const allEl = document.getElementById('countAll');
+            const thEl = document.getElementById('countTalkingHead');
+            const sfEl = document.getElementById('countShortForm');
+            const edEl = document.getElementById('countEducational');
+            if (allEl) allEl.textContent = currentVideos.length;
+            if (thEl) thEl.textContent = currentVideos.filter(v => v.category === 'talking-head').length;
+            if (sfEl) sfEl.textContent = currentVideos.filter(v => v.category === 'short-form').length;
+            if (edEl) edEl.textContent = currentVideos.filter(v => v.category === 'educational').length;
+        }
+
+        function renderShowcase() {
+            const container = document.getElementById('showcaseContainer');
+            updateFilterCounts();
+            let html = '';
+
+            if (activeFilter === 'all') {
+                Object.keys(CATEGORIES).forEach(catKey => {
+                    const groupItems = currentVideos.filter(v => v.category === catKey);
+                    if (groupItems.length === 0) return;
+                    const meta = CATEGORIES[catKey];
+                    const gridColsClass = groupItems.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3';
+                    html += `
+                        <div>
+                            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-4 mb-6 border-b border-seafoamBorder">
+                                <div>
+                                    <h3 class="text-xl font-bold text-oceanInk tracking-tight">${escapeHtml(meta.title)}</h3>
+                                    <p class="text-xs sm:text-sm text-slateTide mt-0.5">${escapeHtml(meta.subtitle)}</p>
+                                </div>
+                                <span class="text-xs font-medium text-mistSlate shrink-0">${groupItems.length} case ${groupItems.length === 1 ? 'study' : 'studies'}</span>
+                            </div>
+                            <div class="grid grid-cols-1 ${gridColsClass} gap-6">
+                                ${groupItems.map(item => createVideoCard(item)).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                const filtered = currentVideos.filter(v => v.category === activeFilter);
+                const gridColsClass = filtered.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3';
+                html = `
+                    <div class="grid grid-cols-1 ${gridColsClass} gap-6">
+                        ${filtered.map(item => createVideoCard(item)).join('')}
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+// ... existing code ...
+        function renderManagerList() {
+            const list = document.getElementById('videoManagerList');
+            document.getElementById('projectCount').textContent = currentVideos.length;
+
+            if (document.getElementById('heroInputTitle')) {
+                document.getElementById('heroInputTitle').value = currentHeroFeature.title || '';
+                document.getElementById('heroInputUrl').value = currentHeroFeature.videoUrl || '';
+                document.getElementById('heroInputBefore').value = currentHeroFeature.before || '';
+                document.getElementById('heroInputAfter').value = currentHeroFeature.after || '';
+            }
+
+            list.innerHTML = currentVideos.map((item, idx) => `
+// ... existing code ...
+            const photoReplacement = `///* PROFILE_PHOTO_START */\n        let SAVED_PROFILE_PHOTO = ${JSON.stringify(SAVED_PROFILE_PHOTO || "")};\n        ///* PROFILE_PHOTO_END */`;
+            pageSource = pageSource.replace(/\/\/\/\* PROFILE_PHOTO_START \*\/[\s\S]*?\/\/\/\* PROFILE_PHOTO_END \*\//, photoReplacement);
+
+            const heroReplacement = `///* HERO_FEATURE_START */\n        let HERO_FEATURE = ${JSON.stringify(currentHeroFeature, null, 8)};\n        ///* HERO_FEATURE_END */`;
+            pageSource = pageSource.replace(/\/\/\/\* HERO_FEATURE_START \*\/[\s\S]*?\/\/\/\* HERO_FEATURE_END \*\//, heroReplacement);
+// ... existing code ...
