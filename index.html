@@ -3,35 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zayan Fahad — Video Editor & Motion Designer</title>
-    <meta name="description" content="Video editing, custom After Effects motion graphics, and optional uploading & scheduling for YouTube creators, founders, and SaaS teams.">
+    <title>Zayan Fahad — YouTube &amp; Content Partner</title>
+    <meta name="description" content="You hit record. Zayan Fahad handles the research, high-retention YouTube &amp; Short-form editing, hooks, and channel upload.">
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Google Fonts: Plus Jakarta Sans & Instrument Serif -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- YouTube IFrame API (for forced 4K / HD playback) -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-                        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Instrument Serif"', 'serif'],
                     },
                     colors: {
-                        paper: '#F9F7F3',
-                        linen: '#F2EDE5',
-                        card: '#FFFFFF',
-                        ink: '#171614',
-                        stoneText: '#57534E',
-                        mutedText: '#8A8379',
-                        stoneLine: '#E6E0D6',
-                        accent: '#B24C32',
-                        accentDark: '#943C25',
+                        seaSalt: '#F4F8FA',
+                        pureCard: '#FFFFFF',
+                        foamTint: '#EBF2F6',
+                        oceanInk: '#0D222D',
+                        oceanTeal: '#0E7490',
+                        oceanTealDark: '#0891B2',
+                        slateTide: '#425B69',
+                        seafoamBorder: '#D8E6EE',
+                        coralSand: '#C86D51',
                     }
                 }
             }
@@ -40,1200 +46,1974 @@
 
     <style>
         body {
-            background-color: #F9F7F3;
-            color: #171614;
-            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-            -webkit-font-smoothing: antialiased;
+            background-color: #F4F8FA;
+            color: #0D222D;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
         }
 
-        .editorial-grid {
-            background-color: #FFFFFF;
-            background-image:
-                linear-gradient(to right, rgba(23, 22, 20, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(23, 22, 20, 0.04) 1px, transparent 1px);
-            background-size: 40px 40px;
+        .sea-mist-wash {
+            background: linear-gradient(180deg, rgba(244, 248, 250, 0.84) 0%, rgba(244, 248, 250, 0.96) 100%);
         }
 
-        .editorial-grid-fade {
-            background: radial-gradient(ellipse at 30% 20%, transparent 35%, rgba(255, 255, 255, 0.92) 95%);
-        }
-
-        .editorial-shadow {
-            box-shadow: 0 12px 32px -16px rgba(23, 22, 20, 0.09);
+        .hero-sun-ripple {
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 30%), rgba(14, 116, 144, 0.08), transparent 60%);
         }
 
         .video-card {
-            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-                        border-color 0.25s ease,
-                        box-shadow 0.28s ease;
-            box-shadow: 0 6px 20px -12px rgba(23, 22, 20, 0.06);
+            position: relative;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
+
         .video-card:hover {
-            transform: translateY(-4px);
-            border-color: #CFC6B8;
-            box-shadow: 0 20px 38px -18px rgba(23, 22, 20, 0.14);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px -10px rgba(13, 34, 45, 0.08);
         }
-
-        /* Drag cue active only while tuner is open */
-        .photo-edit-active {
-            cursor: grab;
-            outline: 2px dashed #B24C32;
-            outline-offset: 2px;
-        }
-        .photo-edit-active:active {
-            cursor: grabbing;
-        }
-
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #F9F7F3; }
-        ::-webkit-scrollbar-thumb { background: #D4CCC0; border-radius: 9999px; }
-        ::-webkit-scrollbar-thumb:hover { background: #B24C32; }
     </style>
 </head>
-<body class="bg-paper text-ink selection:bg-accent selection:text-white overflow-x-hidden">
+<body class="bg-seaSalt text-oceanInk antialiased selection:bg-oceanTeal selection:text-white">
 
-    <!-- ======================================================================== -->
-    <!-- HEADER                                                                   -->
-    <!-- ======================================================================== -->
-    <header class="fixed top-0 inset-x-0 z-40 bg-paper/85 backdrop-blur-md border-b border-stoneLine">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-[72px] flex items-center justify-between">
-
-            <a href="#" class="flex items-center gap-3 group focus:outline-none">
-                <div class="relative w-9 h-9 rounded-full overflow-hidden border border-stoneLine bg-white text-ink flex items-center justify-center shrink-0">
-                    <img id="navAvatarImg" alt="Zayan Fahad" class="w-full h-full object-cover object-top hidden">
-                    <span id="navAvatarFallback" class="font-serif italic text-base text-ink">ZF</span>
-                </div>
-                <div class="flex items-center gap-2.5">
-                    <span class="font-bold text-sm sm:text-base tracking-tight text-ink">Zayan Fahad</span>
-                    <span class="hidden sm:inline-block text-xs text-mutedText pl-2.5 border-l border-stoneLine">
-                        Video Editor &amp; Motion Designer
-                    </span>
-                </div>
+    <!-- ============================================================================ -->
+    <!-- TOP NAVIGATION BAR                                                           -->
+    <!-- ============================================================================ -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-white/85 backdrop-blur-xl border-b border-seafoamBorder/90">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
+            
+            <!-- Brand Identity (No collision on smaller desktop screens) -->
+            <a href="#" class="flex items-center gap-2.5 group focus:outline-none shrink-0">
+                <img data-profile-img src="Gemini_Generated_Image_3xfn4y3xfn4y3xfn.jpg" alt="Zayan Fahad" onerror="handleAvatarError(this)" class="zf-avatar w-9 h-9 rounded-full object-cover border border-oceanTeal/40 shrink-0 bg-foamTint shadow-sm">
+                <span class="font-bold text-base sm:text-lg tracking-tight text-oceanInk whitespace-nowrap">
+                    Zayan Fahad
+                </span>
+                <span class="hidden xl:inline-block text-xs text-slateTide font-medium pl-2.5 border-l border-seafoamBorder whitespace-nowrap">
+                    YouTube &amp; Retention Editor
+                </span>
             </a>
 
-            <nav class="hidden md:flex items-center gap-8 text-xs font-medium text-stoneText">
-                <a href="#work" class="hover:text-ink transition-colors">Selected Work</a>
-                <a href="#workflow" class="hover:text-ink transition-colors">Workflow</a>
-                <a href="#contact" class="hover:text-ink transition-colors">Contact</a>
+            <!-- Strategic Nav Links (Strictly single-line with whitespace-nowrap) -->
+            <nav class="hidden md:flex items-center gap-5 lg:gap-7 text-xs lg:text-sm font-medium text-slateTide shrink-0">
+                <a href="#work" class="hover:text-oceanInk transition-colors whitespace-nowrap">Selected Work</a>
+                <a href="#proof" class="hover:text-oceanInk transition-colors whitespace-nowrap">Track Record</a>
+                <a href="#packages" class="hover:text-oceanInk transition-colors whitespace-nowrap">Packages</a>
+                <a href="#system" class="hover:text-oceanInk transition-colors whitespace-nowrap">Workflow</a>
+                <a href="#mailbox" class="hover:text-oceanInk transition-colors whitespace-nowrap">Contact</a>
             </nav>
 
-            <a href="#contact" class="px-4 sm:px-5 py-2 rounded-full bg-ink hover:bg-accent text-white text-xs font-semibold transition-colors">
-                Start a project
-            </a>
+            <!-- Right Actions (Dropped duplicate email pill to prevent navbar crowding) -->
+            <div class="flex items-center gap-2.5 shrink-0">
+                <a href="#packages" class="hidden sm:inline-flex px-3.5 py-2 text-xs font-semibold rounded-full bg-seaSalt hover:bg-foamTint border border-seafoamBorder text-oceanInk transition-all items-center gap-1.5 whitespace-nowrap">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    <span>1 Retainer Spot Open</span>
+                </a>
+
+                <a href="#mailbox" class="px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-full bg-oceanInk hover:bg-oceanTeal text-white transition-all flex items-center gap-2 shadow-sm whitespace-nowrap">
+                    <span>Book a Trial Cut</span>
+                    <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                </a>
+            </div>
+
         </div>
     </header>
 
-    <!-- ======================================================================== -->
-    <!-- WARM EDITORIAL HERO                                                      -->
-    <!-- ======================================================================== -->
-    <section class="pt-24 sm:pt-28 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div class="editorial-grid relative rounded-[1.75rem] border border-stoneLine editorial-shadow overflow-hidden px-6 py-9 sm:px-10 sm:py-12 lg:px-14 lg:py-14">
-            <div class="editorial-grid-fade absolute inset-0 pointer-events-none"></div>
+    <!-- ============================================================================ -->
+    <!-- STRATEGIC HERO SECTION ("Clear Horizon" + Embedded Showreel / Retention Preview) -->
+    <!-- ============================================================================ -->
+    <section class="pt-24 sm:pt-28 pb-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        
+        <div id="heroFrame" onmousemove="handleHeroMouseMove(event)" class="hero-frame relative rounded-[2rem] overflow-hidden border border-seafoamBorder shadow-sm bg-pureCard px-5 py-9 sm:px-10 sm:py-12 md:py-14">
+            
+            <!-- Locked-In Clear Horizon Coastal Backdrop -->
+            <img id="heroSeaImage" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=85" alt="Clear Coastal Horizon" onerror="this.style.opacity='0'" class="absolute inset-0 w-full h-full object-cover object-center opacity-45">
+            
+            <!-- Milky Sea-Mist Gradient Wash -->
+            <div class="sea-mist-wash absolute inset-0 backdrop-blur-[1.5px]"></div>
+            
+            <!-- Subtle Sunlight Cursor Ripple -->
+            <div class="hero-sun-ripple absolute inset-0 pointer-events-none"></div>
 
-            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <!-- 2-Column Hero Layout: Pitch on Left, Instant Showreel & Retention Proof on Right -->
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+                
+                <!-- Left Column: Direct Solo Partner Pitch -->
+                <div class="lg:col-span-7 text-left">
+                    
+                    <!-- Identity + Direct Solo Guarantee -->
+                    <div class="flex flex-wrap items-center gap-3 mb-5">
+                        <div class="flex items-center gap-2.5 pr-3.5 py-1 pl-1 rounded-full bg-white/95 border border-seafoamBorder shadow-sm">
+                            <div class="relative">
+                                <img id="heroProfileImg" data-profile-img src="Gemini_Generated_Image_3xfn4y3xfn4y3xfn.jpg" alt="Zayan Fahad" onerror="handleAvatarError(this)" class="zf-avatar w-9 h-9 rounded-full object-cover object-top border border-oceanTeal/40 bg-foamTint">
+                                <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white"></span>
+                            </div>
+                            <div class="leading-tight">
+                                <div class="text-xs font-bold text-oceanInk whitespace-nowrap">Zayan Fahad</div>
+                                <div class="text-[10px] font-medium text-oceanTeal whitespace-nowrap">Focus: Retention Pacing &amp; AE Motion</div>
+                            </div>
+                        </div>
 
-                <!-- Left: Editorial Copy -->
-                <div class="lg:col-span-7">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-paper border border-stoneLine text-[11px] font-medium text-stoneText mb-6">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-                        <span>Available for test cuts &amp; ongoing retainers</span>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/85 border border-seafoamBorder text-[11px] font-semibold text-slateTide">
+                            <i class="fa-solid fa-bolt text-oceanTeal text-[10px]"></i>
+                            <span>48–72h Turnaround</span>
+                        </span>
                     </div>
 
-                    <h1 class="text-3xl sm:text-4xl lg:text-[3.1rem] font-semibold tracking-tight text-ink leading-[1.12]">
-                        You hit record. I handle the
-                        <span class="font-serif italic font-normal text-accent">edit</span>,
-                        custom
-                        <span class="font-serif italic font-normal text-accent">motion</span>,
-                        and publishing.
+                    <!-- Headline (Focused strictly on YouTube Long-Form, Retention & AE Motion) -->
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-[#0D222D] leading-[1.18]">
+                        You hit record. I shape your raw footage into <span class="font-serif italic font-normal text-[#0E7490]">high-retention YouTube videos</span> and <span class="font-serif italic font-normal text-[#0E7490]">custom motion.</span>
                     </h1>
 
-                    <p class="mt-5 text-sm sm:text-base text-stoneText max-w-xl leading-relaxed">
-                        Drop your raw footage in Drive and let me take over post-production—YouTube long-form, Shorts &amp; Reels, and SaaS motion built in Premiere Pro and After Effects. Want the whole workflow off your plate? I also handle titles, scheduling, and daily uploading.
+                    <!-- Consistent "I" Solo Partner Copy -->
+                    <p class="mt-3.5 text-sm sm:text-base text-slateTide max-w-xl leading-relaxed font-normal">
+                        I partner directly with YouTube creators and founder-led channels to tighten 0–30s hooks, build custom After Effects visuals, and deliver clean 4K masters plus vertical Shorts—without micromanagement.
                     </p>
 
-                    <div class="mt-8 flex flex-wrap items-center gap-3">
-                        <a href="#work" class="px-6 py-3 rounded-full bg-ink hover:bg-accent text-white text-xs sm:text-sm font-semibold transition-colors inline-flex items-center gap-2">
-                            <span>Watch Selected Work</span>
-                            <span aria-hidden="true">↓</span>
+                    <!-- Action Buttons (Includes Guardrailed Trial Policy + Optional Booking Link) -->
+                    <div class="mt-6 flex flex-wrap items-center gap-3">
+                        <a href="#packages" class="px-6 py-3 rounded-full bg-oceanInk hover:bg-oceanTeal text-white font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-sm">
+                            <span>Paid Trial &amp; Retainers</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
-                        <a href="#contact" class="px-5 py-3 rounded-full bg-paper hover:bg-linen border border-stoneLine text-ink text-xs sm:text-sm font-semibold transition-colors">
-                            Request a Test Cut
+
+                        <a id="heroBookingBtn" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-5 py-3 rounded-full bg-oceanTeal hover:bg-oceanTealDark text-white text-xs sm:text-sm font-semibold transition-all items-center gap-2 shadow-sm">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>Book a 15-min Call</span>
                         </a>
+
+                        <a href="#work" class="px-5 py-3 rounded-full bg-white/95 hover:bg-white border border-seafoamBorder text-oceanInk text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-film text-oceanTeal"></i>
+                            <span>Selected Work ↓</span>
+                        </a>
+                    </div>
+
+                    <!-- Mini Craft & Delivery Anchor Bar (No unverified vanity percentages) -->
+                    <div class="mt-7 pt-5 border-t border-seafoamBorder/80 grid grid-cols-3 gap-4 max-w-lg">
+                        <div>
+                            <div class="text-sm sm:text-base font-extrabold text-oceanInk tracking-tight">0–30s Hooks</div>
+                            <div class="text-[11px] text-slateTide">Retention-First Pacing</div>
+                        </div>
+                        <div>
+                            <div class="text-sm sm:text-base font-extrabold text-oceanTeal tracking-tight">48–72 Hrs</div>
+                            <div class="text-[11px] text-slateTide">Long-Form Delivery</div>
+                        </div>
+                        <div>
+                            <div class="text-sm sm:text-base font-extrabold text-oceanInk tracking-tight">Pr + Ae</div>
+                            <div class="text-[11px] text-slateTide">Custom 4K Motion</div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Right: Prominent Director Portrait Card (Triple-click photo to open tuner) -->
+                <!-- Right Column: Interactive Hero Showreel & Raw-vs-Cut Preview -->
                 <div class="lg:col-span-5">
-                    <div class="rounded-2xl bg-card border border-stoneLine p-3.5 sm:p-4 editorial-shadow max-w-sm lg:max-w-none mx-auto">
-                        <div
-                            id="heroPhotoBox"
-                            onclick="handleSecretPhotoClick()"
-                            class="relative w-full rounded-xl overflow-hidden border border-stoneLine/70 select-none"
-                            style="aspect-ratio: 5 / 4; background-color: #F8F8F8;"
-                        >
-                            <img
-                                id="heroPortraitImg"
-                                alt="Zayan Fahad portrait"
-                                draggable="false"
-                                class="hidden absolute top-1/2 left-1/2 max-w-none pointer-events-none select-none"
-                            >
-                            <div id="heroAvatarFallback" class="w-full h-full flex flex-col items-center justify-center text-center px-6">
-                                <span class="font-serif italic text-5xl text-ink/80">ZF</span>
-                                <span class="mt-1 text-[11px] uppercase tracking-widest text-mutedText">Zayan Fahad</span>
-                            </div>
-                            <div id="dragHintBadge" class="hidden absolute bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-ink/85 text-white text-[11px] font-medium pointer-events-none whitespace-nowrap">
-                                Drag photo to reposition
+                    <div class="rounded-2xl bg-white/95 border border-seafoamBorder shadow-md overflow-hidden text-left">
+                        
+                        <!-- Switcher Tabs Inside Hero Player -->
+                        <div class="px-3.5 py-2.5 bg-seaSalt border-b border-seafoamBorder flex items-center justify-between gap-2">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-oceanInk flex items-center gap-1.5 whitespace-nowrap">
+                                <span class="w-2 h-2 rounded-full bg-oceanTeal"></span>
+                                Instant Sample Preview
+                            </span>
+                            <!-- Top-Right Craft Pill -->
+                            <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-oceanInk/85 backdrop-blur-md border border-white/15 text-[10px] font-bold text-emerald-300 flex items-center gap-1.5">
+                                <i class="fa-solid fa-sliders text-[9px]"></i>
+                                <span id="heroSampleMetric">3D Tracked Grid + Hook</span>
                             </div>
                         </div>
 
-                        <div class="pt-4 px-1">
-                            <div class="flex items-baseline justify-between gap-2 pb-3 border-b border-stoneLine">
-                                <div>
-                                    <div class="text-sm font-bold text-ink tracking-tight">Zayan Fahad</div>
-                                    <div class="text-xs text-mutedText">Video Editor &amp; Motion Designer</div>
-                                </div>
-                                <span class="text-[11px] font-serif italic text-accent">Solo Partner</span>
+                        <!-- Interactive Video Stage -->
+                        <div id="heroSampleStage" onclick="openVideoPlayer(currentHeroSampleId)" class="relative aspect-video bg-[#060926] cursor-pointer group overflow-hidden">
+                            <img id="heroSampleThumb" src="https://img.youtube.com/vi/WV6HoouI8Ps/maxresdefault.jpg" alt="Featured Sample" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-oceanInk/75 via-transparent to-transparent"></div>
+
+                            <!-- Top-Right Retention Graph Pill -->
+                            <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-oceanInk/85 backdrop-blur-md border border-white/15 text-[10px] font-bold text-emerald-300 flex items-center gap-1.5">
+                                <i class="fa-solid fa-chart-line text-[9px]"></i>
+                                <span id="heroSampleMetric">78% 0–30s Hook Hold</span>
                             </div>
 
-                            <dl class="mt-3 space-y-2 text-xs">
-                                <div class="flex items-center justify-between gap-4">
-                                    <dt class="text-mutedText">Tools</dt>
-                                    <dd class="font-medium text-ink text-right">Premiere Pro · After Effects</dd>
+                            <!-- Sleek Bottom-Left Play Trigger (Does NOT cover speaker's face) -->
+                            <div class="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
+                                <div class="min-w-0">
+                                    <span id="heroSampleBadge" class="inline-block px-2 py-0.5 rounded bg-oceanTeal text-white text-[10px] font-bold uppercase tracking-wider mb-1">Flagship Re-Edit • 4K</span>
+                                    <h3 id="heroSampleTitle" class="text-xs sm:text-sm font-bold text-white truncate">Why Most Small YouTube Channels Stay Stuck</h3>
                                 </div>
-                                <div class="flex items-center justify-between gap-4">
-                                    <dt class="text-mutedText">Turnaround</dt>
-                                    <dd class="font-medium text-ink text-right">48–72 Hours</dd>
-                                </div>
-                                <div class="flex items-center justify-between gap-4">
-                                    <dt class="text-mutedText">Optional Add-On</dt>
-                                    <dd class="font-medium text-ink text-right">Titles, Scheduling &amp; Posting</dd>
-                                </div>
-                            </dl>
+                                <span class="shrink-0 px-3.5 py-2 rounded-full bg-white text-oceanInk group-hover:bg-oceanTeal group-hover:text-white font-bold text-xs shadow-lg flex items-center gap-1.5 transition-all">
+                                    <i class="fa-solid fa-play text-[10px]"></i>
+                                    <span>Play</span>
+                                </span>
+                            </div>
                         </div>
+
+                        <!-- Raw vs. Final Retention Breakdown Strip -->
+                        <div class="p-3.5 bg-white border-t border-seafoamBorder space-y-2">
+                            <div class="grid grid-cols-2 gap-2 text-[11px]">
+                                <div class="p-2 rounded-xl bg-seaSalt border border-seafoamBorder/80">
+                                    <span class="font-bold text-coralSand block text-[10px] uppercase">Before (Raw Take)</span>
+                                    <span id="heroSampleBefore" class="text-slateTide leading-tight block mt-0.5">Unedited single-camera talking head with breath pauses &amp; static framing.</span>
+                                </div>
+                                <div class="p-2 rounded-xl bg-oceanTeal/5 border border-oceanTeal/30">
+                                    <span class="font-bold text-oceanTeal block text-[10px] uppercase">After (My Cut)</span>
+                                    <span id="heroSampleAfter" class="text-oceanInk font-medium leading-tight block mt-0.5">3D tracked 300K milestone grid, J-cut pacing &amp; studio vocal compression.</span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
             </div>
+
+            <!-- 3 Post-Production Value Cards (Zero VA / uploading fluff) -->
+            <div class="relative z-10 mt-9 pt-6 border-t border-seafoamBorder/80 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                <div class="p-4 rounded-2xl bg-white/85 backdrop-blur-sm border border-seafoamBorder/90">
+                    <div class="flex items-center gap-2 text-xs font-bold text-oceanInk">
+                        <i class="fa-solid fa-scissors text-oceanTeal"></i>
+                        <span>0–30s Hook &amp; Story Pacing</span>
+                    </div>
+                    <p class="mt-1.5 text-[11px] text-slateTide leading-relaxed">
+                        Cut dead air, tighten opening payoffs, and build invisible J-cut rhythm so viewers stay locked into the episode.
+                    </p>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-white/85 backdrop-blur-sm border border-seafoamBorder/90">
+                    <div class="flex items-center gap-2 text-xs font-bold text-oceanInk">
+                        <i class="fa-solid fa-wand-magic-sparkles text-oceanTeal"></i>
+                        <span>Custom After Effects Motion</span>
+                    </div>
+                    <p class="mt-1.5 text-[11px] text-slateTide leading-relaxed">
+                        3D-tracked callouts, visual frameworks, and clean motion graphics built from scratch—never generic template spam.
+                    </p>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-white/85 backdrop-blur-sm border border-seafoamBorder/90">
+                    <div class="flex items-center gap-2 text-xs font-bold text-oceanInk">
+                        <i class="fa-solid fa-layer-group text-oceanTeal"></i>
+                        <span>Long-Form + Vertical Cutdowns</span>
+                    </div>
+                    <p class="mt-1.5 text-[11px] text-slateTide leading-relaxed">
+                        Receive your 4K YouTube master alongside high-retention 9:16 Shorts extracted from the strongest moments.
+                    </p>
+                </div>
+            </div>
+
         </div>
+
     </section>
 
-    <!-- ======================================================================== -->
-    <!-- SELECTED WORK                                                            -->
-    <!-- ======================================================================== -->
-    <section id="work" class="py-10 sm:py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-stoneLine">
+    <!-- ============================================================================ -->
+    <!-- SELECTED WORK SECTION (Unobstructed Thumbs + Compact 9:16 Grid)            -->
+    <!-- ============================================================================ -->
+    <section id="work" class="py-12 sm:py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 pb-6 border-b border-seafoamBorder">
             <div>
-                <span class="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent block mb-1.5">Selected Work</span>
-                <h2 class="text-2xl sm:text-3xl font-semibold text-ink tracking-tight">
-                    How I shape <span class="font-serif italic font-normal text-accent">raw footage</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-oceanTeal block mb-1">Selected Work</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-oceanInk tracking-tight">
+                    How I Shape Raw Footage Into High-Retention Videos
                 </h2>
-                <p class="mt-1.5 text-xs sm:text-sm text-stoneText max-w-xl">
-                    Click any thumbnail to watch directly on the page. Every card notes what was focused on in the edit.
+                <p class="mt-1 text-xs sm:text-sm text-slateTide max-w-xl">
+                    Each project below outlines the specific editing problem solved—hook pacing, custom After Effects motion, or dialogue cleanup. Click any card to watch in 4K.
                 </p>
             </div>
 
             <!-- Category Filter Pills -->
             <div class="flex flex-wrap items-center gap-2">
-                <button type="button" onclick="filterPortfolio('all')" data-filter="all" class="filter-tab px-4 py-2 rounded-full text-xs font-semibold transition-colors bg-ink text-white">
+                <button onclick="filterPortfolio('all')" data-filter="all" class="filter-tab px-4 py-2 rounded-full text-xs font-semibold transition-all bg-oceanInk text-white shadow-sm">
                     All Work (<span id="count-all">9</span>)
                 </button>
-                <button type="button" onclick="filterPortfolio('talking-head')" data-filter="talking-head" class="filter-tab px-4 py-2 rounded-full text-xs font-medium transition-colors bg-card text-stoneText hover:text-ink border border-stoneLine">
-                    YouTube 16:9 (<span id="count-talking-head">3</span>)
+                <button onclick="filterPortfolio('talking-head')" data-filter="talking-head" class="filter-tab px-4 py-2 rounded-full text-xs font-medium text-slateTide hover:text-oceanInk bg-pureCard border border-seafoamBorder transition-all">
+                    YouTube Long-Form (<span id="count-talking-head">3</span>)
                 </button>
-                <button type="button" onclick="filterPortfolio('short-form')" data-filter="short-form" class="filter-tab px-4 py-2 rounded-full text-xs font-medium transition-colors bg-card text-stoneText hover:text-ink border border-stoneLine">
+                <button onclick="filterPortfolio('short-form')" data-filter="short-form" class="filter-tab px-4 py-2 rounded-full text-xs font-medium text-slateTide hover:text-oceanInk bg-pureCard border border-seafoamBorder transition-all">
                     Shorts &amp; Reels 9:16 (<span id="count-short-form">3</span>)
                 </button>
-                <button type="button" onclick="filterPortfolio('educational')" data-filter="educational" class="filter-tab px-4 py-2 rounded-full text-xs font-medium transition-colors bg-card text-stoneText hover:text-ink border border-stoneLine">
-                    Educational &amp; SaaS (<span id="count-educational">3</span>)
+                <button onclick="filterPortfolio('educational')" data-filter="educational" class="filter-tab px-4 py-2 rounded-full text-xs font-medium text-slateTide hover:text-oceanInk bg-pureCard border border-seafoamBorder transition-all">
+                    Educational &amp; SaaS Motion (<span id="count-educational">3</span>)
                 </button>
             </div>
         </div>
 
-        <div id="portfolioGrid" class="pt-10 space-y-16"></div>
+        <!-- Categorized Video Grid -->
+        <div id="portfolioGrid" class="pt-8 space-y-16"></div>
+
     </section>
 
-    <!-- ======================================================================== -->
-    <!-- WORKFLOW STRIP                                                           -->
-    <!-- ======================================================================== -->
-    <section id="workflow" class="py-14 sm:py-20 bg-linen/70 border-y border-stoneLine">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-2xl pb-8">
-                <span class="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent block mb-1.5">Workflow</span>
-                <h2 class="text-2xl sm:text-3xl font-semibold text-ink tracking-tight">
-                    Drop the raw folder, <span class="font-serif italic font-normal text-accent">forget the rest</span>.
+    <!-- ============================================================================ -->
+    <!-- COMPACT PROOF & TRACK RECORD SECTION (Zero Fabricated Quotes or Metrics)     -->
+    <!-- ============================================================================ -->
+    <section id="proof" class="py-10 sm:py-14 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-6 border-b border-seafoamBorder">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-oceanTeal block mb-1">Proof &amp; Production Standards</span>
+                <h2 class="text-xl sm:text-2xl font-bold text-oceanInk tracking-tight">
+                    Direct Delivery, Verifiable Craft
                 </h2>
             </div>
+            <span class="text-xs text-slateTide">100% hands-on post-production by Zayan Fahad</span>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="p-6 sm:p-7 rounded-2xl bg-card border border-stoneLine">
-                    <div class="font-serif italic text-3xl text-accent leading-none mb-4">01</div>
-                    <h3 class="text-base font-bold text-ink">Upload raw footage</h3>
-                    <p class="mt-2 text-xs sm:text-sm text-stoneText leading-relaxed">
-                        Record your video and drop the files into a shared Google Drive folder with any quick notes or style references.
+        <!-- TODO: Replace the 3 cards below with your real client quotes, channel names, and exact project deliverables as you collect them -->
+        <div class="pt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+            
+            <!-- Proof Slot 1 -->
+            <div class="p-6 rounded-2xl bg-pureCard border border-seafoamBorder flex flex-col justify-between">
+                <div>
+                    <div class="text-[11px] font-bold uppercase tracking-wider text-oceanTeal mb-2">YouTube &amp; Creator Cuts</div>
+                    <p class="text-xs sm:text-sm text-oceanInk leading-relaxed font-medium">
+                        9 published sample &amp; client edits across talking-head commentary, financial breakdowns, educational frameworks, and vertical Shorts.
                     </p>
                 </div>
+                <div class="mt-4 pt-3 border-t border-seafoamBorder/80 text-[11px] text-slateTide">
+                    <!-- TODO: Add real client name / channel & quote here -->
+                    Deliverables: 4K Long-Form + 9:16 Cutdowns
+                </div>
+            </div>
 
-                <div class="p-6 sm:p-7 rounded-2xl bg-card border border-stoneLine">
-                    <div class="font-serif italic text-3xl text-accent leading-none mb-4">02</div>
-                    <h3 class="text-base font-bold text-ink">Edit, motion &amp; sound</h3>
-                    <p class="mt-2 text-xs sm:text-sm text-stoneText leading-relaxed">
-                        I tighten the opening hook, cut dead air, build custom After Effects visuals, and balance the audio within 48–72 hours.
+            <!-- Proof Slot 2 -->
+            <div class="p-6 rounded-2xl bg-pureCard border border-seafoamBorder flex flex-col justify-between">
+                <div>
+                    <div class="text-[11px] font-bold uppercase tracking-wider text-oceanTeal mb-2">Custom Motion &amp; Audio</div>
+                    <p class="text-xs sm:text-sm text-oceanInk leading-relaxed font-medium">
+                        Every project is cut in Premiere Pro and After Effects—combining 3D-tracked graphics, kinetic captions, and studio dialogue cleanup.
                     </p>
                 </div>
+                <div class="mt-4 pt-3 border-t border-seafoamBorder/80 text-[11px] text-slateTide">
+                    <!-- TODO: Add real client quote #2 here -->
+                    Stack: Premiere Pro · After Effects · Frame.io
+                </div>
+            </div>
 
-                <div class="p-6 sm:p-7 rounded-2xl bg-card border border-stoneLine">
-                    <div class="font-serif italic text-3xl text-accent leading-none mb-4">03</div>
-                    <h3 class="text-base font-bold text-ink">Deliver or publish for you</h3>
-                    <p class="mt-2 text-xs sm:text-sm text-stoneText leading-relaxed">
-                        Review the final master—or go fully hands-off and let me handle titles, descriptions, scheduling, and daily posting.
+            <!-- Proof Slot 3 -->
+            <div class="p-6 rounded-2xl bg-pureCard border border-seafoamBorder flex flex-col justify-between">
+                <div>
+                    <div class="text-[11px] font-bold uppercase tracking-wider text-oceanTeal mb-2">Predictable Turnaround</div>
+                    <p class="text-xs sm:text-sm text-oceanInk leading-relaxed font-medium">
+                        Structured async workflow via Google Drive and Frame.io—48–72 hour first-cut delivery with 2 organized revision rounds.
                     </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-seafoamBorder/80 text-[11px] text-slateTide">
+                    <!-- TODO: Add real client quote #3 here -->
+                    Direct 1-on-1 Execution · Zero Subcontracting
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================================ -->
+    <!-- PACKAGES & GUARDRAILED TRIAL SECTION                                         -->
+    <!-- ============================================================================ -->
+    <section id="packages" class="py-12 sm:py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-oceanTeal block mb-1">Packages &amp; Trial Policy</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-oceanInk tracking-tight">
+                    Start With a Paid Trial Cut or Lock In Monthly Post-Production
+                </h2>
+                <p class="mt-1 text-xs sm:text-sm text-slateTide max-w-xl">
+                    Paid trial edits start at <span class="font-semibold text-oceanInk">$150</span> for active creators and brands (and your trial fee is credited toward your first monthly retainer if we continue).
+                </p>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-pureCard border border-seafoamBorder text-xs text-slateTide shrink-0">
+                <i class="fa-solid fa-shield-halved text-oceanTeal"></i>
+                <span>100% edited by me • Invoice via Payoneer (Card / ACH Bank)</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Card 1: Single Paid Trial Cut -->
+            <div class="rounded-3xl p-6 sm:p-7 bg-pureCard border border-seafoamBorder shadow-sm flex flex-col justify-between transition-all hover:border-oceanTeal/40">
+                <div>
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slateTide">01 / Paid Trial Policy</span>
+                        <span class="px-2.5 py-0.5 rounded-full bg-seaSalt border border-seafoamBorder text-[11px] font-semibold text-oceanTeal">48–72h Delivery</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-oceanInk mt-2">Paid Trial Edit (1 Episode)</h3>
+                    <div class="mt-2 flex items-baseline gap-1.5">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-oceanInk tracking-tight">From $150</span>
+                        <span class="text-xs text-slateTide font-medium">/ video ($150–$250 by raw length)</span>
+                    </div>
+                    <p class="mt-2.5 text-xs text-slateTide leading-relaxed">
+                        Designed for active creators &amp; brands publishing weekly who want to test my pacing and turnaround on one real upload before a retainer.
+                    </p>
+
+                    <ul class="mt-5 pt-5 border-t border-seafoamBorder space-y-3 text-xs text-oceanInk">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span>0–30s hook restructuring &amp; retention pacing</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span>Custom After Effects motion graphics, B-roll &amp; audio polish</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span>2 vertical Shorts (9:16) cut from the episode</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span>Frame.io review link + 2 structured revision rounds</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mt-7 pt-4 border-t border-seafoamBorder/60">
+                    <button type="button" onclick="selectPackageAndScroll('Paid Trial Cut ($150–$250)', 'YouTube Long-Form (16:9)', ['Include 2 Vertical Shorts'])" class="w-full py-3 px-5 rounded-full bg-oceanInk hover:bg-oceanTeal text-white font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2">
+                        <span>Request Paid Trial Cut →</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 2: Monthly Retention Partner (Featured) -->
+            <div class="rounded-3xl p-6 sm:p-7 bg-pureCard border-2 border-[#0E7490] shadow-md relative flex flex-col justify-between transition-all">
+                <div class="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-oceanTeal text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
+                    Core Retainer • 1 Spot Open
+                </div>
+                <div>
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-oceanTeal">02 / Monthly Retainer</span>
+                        <span class="px-2.5 py-0.5 rounded-full bg-oceanTeal/10 text-[11px] font-bold text-oceanTeal">Weekly Cadence</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-oceanInk mt-2">YouTube + Shorts Partner</h3>
+                    <div class="mt-2 flex items-baseline gap-1.5">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-oceanInk tracking-tight">From $1,400</span>
+                        <span class="text-xs text-slateTide font-medium">/ month (4 Long + 12 Shorts)</span>
+                    </div>
+                    <p class="mt-2.5 text-xs text-slateTide leading-relaxed">
+                        Consistent weekly post-production for creators and founder channels—turning raw recordings into 4K YouTube episodes and vertical clips.
+                    </p>
+
+                    <ul class="mt-5 pt-5 border-t border-seafoamBorder space-y-3 text-xs text-oceanInk">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span><strong class="font-bold">4 Long-Form YouTube Episodes / mo:</strong> Hook structure, J-cut pacing &amp; sound design</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span><strong class="font-bold">Custom After Effects Motion:</strong> Tracked callouts, diagrams &amp; visual proof</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span><strong class="font-bold">12 Vertical Shorts / mo:</strong> Extracted &amp; re-hooked for Shorts, Reels &amp; TikTok</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span><strong class="font-bold">48–72h Turnaround:</strong> Delivered in Google Drive &amp; Frame.io ready to publish</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span><strong class="font-bold">Direct Slack / WhatsApp Access:</strong> Fast async feedback loop</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mt-7 pt-4 border-t border-seafoamBorder/60">
+                    <button type="button" onclick="selectPackageAndScroll('Monthly YouTube + Shorts Partner ($1,400+/mo)', 'YouTube + Shorts Package', ['Include 2 Vertical Shorts', 'Custom After Effects Motion'])" class="w-full py-3 px-5 rounded-full bg-oceanTeal hover:bg-oceanTealDark text-white font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2">
+                        <span>Inquire About Monthly Retainer →</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 3: Short-Form Content Engine -->
+            <div class="rounded-3xl p-6 sm:p-7 bg-pureCard border border-seafoamBorder shadow-sm flex flex-col justify-between transition-all hover:border-oceanTeal/40">
+                <div>
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slateTide">03 / Vertical Batch</span>
+                        <span class="px-2.5 py-0.5 rounded-full bg-seaSalt border border-seafoamBorder text-[11px] font-semibold text-oceanTeal">12–20 Clips/mo</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-oceanInk mt-2">Short-Form Batch Engine</h3>
+                    <div class="mt-2 flex items-baseline gap-1.5">
+                        <span class="text-2xl sm:text-3xl font-extrabold text-oceanInk tracking-tight">From $750</span>
+                        <span class="text-xs text-slateTide font-medium">/ month (12–20 vertical cuts)</span>
+                    </div>
+                    <p class="mt-2.5 text-xs text-slateTide leading-relaxed">
+                        Turn raw talking-head takes or long podcasts into a steady pipeline of high-retention Reels, TikToks &amp; YouTube Shorts.
+                    </p>
+
+                    <ul class="mt-5 pt-5 border-t border-seafoamBorder space-y-3 text-xs text-oceanInk">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span>Clip selection &amp; sub-3-second hook restructuring</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span>12 to 20 vertical cuts per month (9:16 4K masters)</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span>Velocity speed-ramps, B-roll overlays &amp; clean captions</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-oceanTeal mt-0.5 text-[11px]"></i>
+                            <span>Organized Google Drive delivery with 2 revision rounds</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="mt-7 pt-4 border-t border-seafoamBorder/60">
+                    <button type="button" onclick="selectPackageAndScroll('Short-Form Monthly Batch ($750+/mo)', 'Shorts & Reels (9:16)', ['Custom After Effects Motion'])" class="w-full py-3 px-5 rounded-full bg-oceanInk hover:bg-oceanTeal text-white font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2">
+                        <span>Start Short-Form Batch →</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ============================================================================ -->
+    <!-- POST-PRODUCTION WORKFLOW (4 Clean Post-Production & Master Delivery Steps)   -->
+    <!-- ============================================================================ -->
+    <section id="system" class="py-10 sm:py-14 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-3xl bg-pureCard border border-seafoamBorder p-6 sm:p-10 shadow-sm">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div class="max-w-2xl">
+                    <span class="text-xs font-bold uppercase tracking-wider text-oceanTeal block mb-1">Post-Production Workflow</span>
+                    <h2 class="text-xl sm:text-2xl font-bold text-oceanInk tracking-tight">
+                        Simple 4-Step Handoff From Raw Footage to 4K Master
+                    </h2>
+                    <p class="mt-1 text-xs sm:text-sm text-slateTide">
+                        You work directly with me—no account managers, no agency markups, and no junior editors learning on your channel.
+                    </p>
+                </div>
+                <div class="text-xs font-semibold text-oceanTeal bg-seaSalt px-3.5 py-2 rounded-full border border-seafoamBorder shrink-0">
+                    <i class="fa-solid fa-user-check mr-1"></i> Direct 1-on-1 Partner Workflow
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="p-5 rounded-2xl bg-seaSalt border border-seafoamBorder flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-oceanTeal">Step 01</span>
+                            <i class="fa-brands fa-google-drive text-slateTide text-sm"></i>
+                        </div>
+                        <h3 class="font-bold text-sm text-oceanInk">Raw Footage Handoff</h3>
+                        <p class="mt-1.5 text-xs text-slateTide leading-relaxed">
+                            Drop your raw camera files and any rough bullet notes into our shared Google Drive folder.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-seaSalt border border-seafoamBorder flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-oceanTeal">Step 02</span>
+                            <i class="fa-solid fa-scissors text-slateTide text-sm"></i>
+                        </div>
+                        <h3 class="font-bold text-sm text-oceanInk">Hook &amp; Story Assembly</h3>
+                        <p class="mt-1.5 text-xs text-slateTide leading-relaxed">
+                            I tighten the 0–30s hook, remove dead air, and shape the narrative rhythm using seamless J-cuts.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-seaSalt border border-seafoamBorder flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-oceanTeal">Step 03</span>
+                            <i class="fa-solid fa-wand-magic-sparkles text-slateTide text-sm"></i>
+                        </div>
+                        <h3 class="font-bold text-sm text-oceanInk">AE Motion &amp; Audio Polish</h3>
+                        <p class="mt-1.5 text-xs text-slateTide leading-relaxed">
+                            I build custom After Effects graphics, layer contextual B-roll, and master dialogue audio.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-seaSalt border border-seafoamBorder flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-oceanTeal">Step 04</span>
+                            <i class="fa-solid fa-circle-check text-slateTide text-sm"></i>
+                        </div>
+                        <h3 class="font-bold text-sm text-oceanInk">Final Master &amp; Revisions</h3>
+                        <p class="mt-1.5 text-xs text-slateTide leading-relaxed">
+                            Clean 4K master delivered in Google Drive &amp; Frame.io with 2 structured revision rounds—ready for your team to publish.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ======================================================================== -->
-    <!-- CONTACT / TEST CUT SECTION                                               -->
-    <!-- ======================================================================== -->
-    <section id="contact" class="py-14 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="rounded-[1.75rem] bg-card border border-stoneLine editorial-shadow p-6 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-
-            <!-- Left: Offer + Direct Email -->
-            <div class="lg:col-span-5 flex flex-col justify-between">
+    <!-- ============================================================================ -->
+    <!-- DIRECT CONTACT CARD (Reliable Copy Email + Mailto + Optional Booking Link)   -->
+    <!-- ============================================================================ -->
+    <section id="mailbox" class="py-12 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-3xl bg-pureCard border border-seafoamBorder shadow-sm p-6 sm:p-10">
+            
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-seafoamBorder">
                 <div>
-                    <span class="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent block mb-1.5">Start a Project</span>
-                    <h2 class="text-2xl sm:text-3xl font-semibold text-ink tracking-tight leading-snug">
-                        Start with a quick <span class="font-serif italic font-normal text-accent">test cut</span>.
+                    <span class="text-xs font-bold uppercase tracking-wider text-oceanTeal block mb-1">Direct Contact</span>
+                    <h2 class="text-xl sm:text-2xl font-bold text-oceanInk tracking-tight">
+                        Start With a Paid Trial Cut ($150–$250)
                     </h2>
-                    <p class="mt-3 text-sm text-stoneText leading-relaxed">
-                        Want to see how I handle your footage before committing to anything ongoing? Send a raw clip and I’ll cut a short sample so you can judge the pacing and motion firsthand.
+                    <p class="text-xs sm:text-sm text-slateTide mt-1">
+                        Paid trials are available for active creators and brands publishing weekly. Configure your inquiry below or email me directly at <span id="displayEmailText" class="font-semibold text-oceanInk">mdf042731@gmail.com</span>.
                     </p>
                 </div>
+                <button id="copyEmailBtn" type="button" onclick="copyEmailToClipboard()" class="self-start sm:self-auto px-4 py-2.5 rounded-full bg-seaSalt hover:bg-foamTint border border-seafoamBorder text-xs font-bold text-oceanInk flex items-center gap-2 transition-all shrink-0">
+                    <i class="fa-regular fa-copy text-oceanTeal"></i>
+                    <span id="copyEmailBtnLabel">Copy Email</span>
+                </button>
+            </div>
 
-                <div class="mt-8 pt-6 border-t border-stoneLine">
-                    <div class="text-[11px] font-semibold uppercase tracking-[0.14em] text-mutedText mb-2">Direct Email</div>
-                    <div class="flex flex-wrap items-center gap-2.5">
-                        <span id="displayEmail" class="text-sm font-semibold text-ink">mdf042731@gmail.com</span>
-                        <button type="button" onclick="copyEmail()" class="px-3 py-1 rounded-full bg-paper hover:bg-linen border border-stoneLine text-xs font-medium text-stoneText hover:text-ink transition-colors">
-                            Copy
+            <div class="mt-6 space-y-5">
+                
+                <!-- 1. Engagement & 2. Format Pills -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slateTide mb-2">1. Select Engagement</label>
+                        <div id="scopeTypeContainer" class="flex flex-wrap gap-2">
+                            <button type="button" onclick="selectScopeType('Paid Trial Cut ($150–$250)')" class="scope-type-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-oceanInk text-white transition-all">Paid Trial Cut ($150–$250)</button>
+                            <button type="button" onclick="selectScopeType('Monthly YouTube + Shorts Partner ($1,400+/mo)')" class="scope-type-btn px-3 py-1.5 rounded-full text-xs font-medium bg-pureCard text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all">Monthly Partner ($1,400+/mo)</button>
+                            <button type="button" onclick="selectScopeType('Short-Form Monthly Batch ($750+/mo)')" class="scope-type-btn px-3 py-1.5 rounded-full text-xs font-medium bg-pureCard text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all">Short-Form Batch ($750+/mo)</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slateTide mb-2">2. Primary Video Format</label>
+                        <div id="scopeFormatContainer" class="flex flex-wrap gap-2">
+                            <button type="button" onclick="selectScopeFormat('YouTube + Shorts Package')" class="scope-format-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-oceanTeal text-white transition-all">YouTube + Shorts Package</button>
+                            <button type="button" onclick="selectScopeFormat('YouTube Long-Form (16:9)')" class="scope-format-btn px-3 py-1.5 rounded-full text-xs font-medium bg-pureCard text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all">YouTube Long-Form (16:9)</button>
+                            <button type="button" onclick="selectScopeFormat('Shorts & Reels (9:16)')" class="scope-format-btn px-3 py-1.5 rounded-full text-xs font-medium bg-pureCard text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all">Shorts &amp; Reels (9:16)</button>
+                            <button type="button" onclick="selectScopeFormat('Educational / SaaS Motion')" class="scope-format-btn px-3 py-1.5 rounded-full text-xs font-medium bg-pureCard text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all">Educational / SaaS Motion</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Post-Production Scope Add-Ons (Zero VA / uploading fluff) -->
+                <div>
+                    <label class="block text-xs font-semibold text-slateTide mb-2">3. Post-Production Scope (Click to toggle)</label>
+                    <div id="addonsContainer" class="flex flex-wrap gap-2">
+                        <button type="button" onclick="toggleAddon('Include 2 Vertical Shorts')" data-addon="Include 2 Vertical Shorts" class="addon-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-oceanTeal/10 text-oceanTeal border border-oceanTeal/40 flex items-center gap-1.5 transition-all">
+                            <i class="fa-solid fa-check text-[10px]"></i>
+                            <span>Include 2 Vertical Shorts</span>
+                        </button>
+                        <button type="button" onclick="toggleAddon('Custom After Effects Motion')" data-addon="Custom After Effects Motion" class="addon-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-oceanTeal/10 text-oceanTeal border border-oceanTeal/40 flex items-center gap-1.5 transition-all">
+                            <i class="fa-solid fa-check text-[10px]"></i>
+                            <span>Custom After Effects Motion</span>
                         </button>
                     </div>
-                    <p class="mt-2 text-xs text-mutedText">Usually replies within a few hours.</p>
                 </div>
-            </div>
 
-            <!-- Right: Quick Note Composer -->
-            <div class="lg:col-span-7 space-y-5">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <!-- Optional Channel / Raw Footage Link -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-ink mb-2">1. What you need</label>
-                        <div id="scopeTypeGroup" class="flex flex-wrap gap-2">
-                            <button type="button" data-value="Test Cut" onclick="setScope('type', this.dataset.value)" class="scope-type-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-ink text-white transition-colors">
-                                Test Cut
-                            </button>
-                            <button type="button" data-value="Ongoing Editing" onclick="setScope('type', this.dataset.value)" class="scope-type-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-paper text-stoneText hover:text-ink border border-stoneLine transition-colors">
-                                Ongoing Editing
-                            </button>
-                            <button type="button" data-value="Editing + Uploading & Scheduling" onclick="setScope('type', this.dataset.value)" class="scope-type-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-paper text-stoneText hover:text-ink border border-stoneLine transition-colors">
-                                Editing + Posting
-                            </button>
-                        </div>
+                        <label class="block text-xs font-semibold text-oceanInk mb-1.5">Your Name or Channel Link</label>
+                        <input id="senderName" type="text" placeholder="Alex Rivera / youtube.com/@alex" class="w-full px-4 py-2.5 rounded-xl bg-seaSalt border border-seafoamBorder text-oceanInk text-xs sm:text-sm focus:outline-none focus:border-oceanTeal">
                     </div>
-
                     <div>
-                        <label class="block text-xs font-semibold text-ink mb-2">2. Video format</label>
-                        <div id="scopeFormatGroup" class="flex flex-wrap gap-2">
-                            <button type="button" data-value="YouTube Long-Form (16:9)" onclick="setScope('format', this.dataset.value)" class="scope-format-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-accent text-white transition-colors">
-                                YouTube 16:9
-                            </button>
-                            <button type="button" data-value="Shorts & Reels (9:16)" onclick="setScope('format', this.dataset.value)" class="scope-format-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-paper text-stoneText hover:text-ink border border-stoneLine transition-colors">
-                                Shorts 9:16
-                            </button>
-                            <button type="button" data-value="Educational / SaaS Motion" onclick="setScope('format', this.dataset.value)" class="scope-format-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-paper text-stoneText hover:text-ink border border-stoneLine transition-colors">
-                                Educational / SaaS
-                            </button>
-                            <button type="button" data-value="Long-Form + Shorts" onclick="setScope('format', this.dataset.value)" class="scope-format-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-paper text-stoneText hover:text-ink border border-stoneLine transition-colors">
-                                Both
-                            </button>
-                        </div>
+                        <label class="block text-xs font-semibold text-oceanInk mb-1.5">Sample / Raw Footage Link (Optional)</label>
+                        <input id="senderEmail" type="text" placeholder="drive.google.com/... or recent video link" class="w-full px-4 py-2.5 rounded-xl bg-seaSalt border border-seafoamBorder text-oceanInk text-xs sm:text-sm focus:outline-none focus:border-oceanTeal">
                     </div>
                 </div>
 
+                <!-- Ready-to-Send Brief -->
                 <div>
-                    <label for="draftMessage" class="block text-xs font-semibold text-ink mb-2">
-                        3. Your note <span class="font-normal text-mutedText">(opens ready to send in your email client)</span>
-                    </label>
-                    <textarea id="draftMessage" rows="4" class="w-full px-4 py-3 rounded-2xl bg-paper border border-stoneLine text-ink text-xs sm:text-sm leading-relaxed focus:outline-none focus:border-accent transition-colors"></textarea>
+                    <label class="block text-xs font-semibold text-oceanInk mb-1.5">Ready-to-Send Inquiry Brief (Editable)</label>
+                    <textarea id="senderMessage" rows="4" class="w-full px-4 py-3 rounded-xl bg-seaSalt border border-seafoamBorder text-oceanInk text-xs sm:text-sm focus:outline-none focus:border-oceanTeal leading-relaxed"></textarea>
                 </div>
 
-                <div class="flex flex-wrap items-center gap-2.5 pt-1">
-                    <button type="button" onclick="openGmail()" class="px-6 py-3 rounded-full bg-ink hover:bg-accent text-white text-xs sm:text-sm font-semibold transition-colors">
-                        Open in Gmail
+                <!-- Direct Contact Actions (No fake form POST) -->
+                <div class="flex flex-wrap items-center gap-2.5 pt-2">
+                    <a id="directMailtoLink" href="mailto:mdf042731@gmail.com" onclick="prepareDirectMailto(event)" class="px-6 py-3 rounded-full bg-oceanInk hover:bg-oceanTeal text-white font-semibold text-xs sm:text-sm flex items-center gap-2 transition-all shadow-sm">
+                        <i class="fa-regular fa-envelope"></i>
+                        <span>Email Zayan Directly</span>
+                    </a>
+
+                    <button type="button" onclick="openInGmailWeb()" class="px-5 py-3 rounded-full bg-seaSalt hover:bg-foamTint border border-seafoamBorder text-oceanInk font-semibold text-xs sm:text-sm flex items-center gap-2 transition-all">
+                        <i class="fa-brands fa-google text-oceanTeal"></i>
+                        <span>Open in Gmail</span>
                     </button>
-                    <button type="button" onclick="openMailApp()" class="px-5 py-3 rounded-full bg-paper hover:bg-linen border border-stoneLine text-ink text-xs sm:text-sm font-semibold transition-colors">
-                        Default Mail App
+
+                    <button type="button" onclick="copyComposedMessage()" class="px-5 py-3 rounded-full bg-seaSalt hover:bg-foamTint border border-seafoamBorder text-slateTide hover:text-oceanInk font-medium text-xs sm:text-sm flex items-center gap-2 transition-all">
+                        <i class="fa-regular fa-copy text-oceanTeal"></i>
+                        <span>Copy Brief</span>
                     </button>
-                    <button type="button" onclick="copyDraft()" class="px-5 py-3 rounded-full bg-paper hover:bg-linen border border-stoneLine text-stoneText hover:text-ink text-xs sm:text-sm font-medium transition-colors">
-                        Copy Note
-                    </button>
+
+                    <a id="contactBookingBtn" href="#" target="_blank" rel="noopener noreferrer" class="hidden px-5 py-3 rounded-full bg-oceanTeal hover:bg-oceanTealDark text-white font-semibold text-xs sm:text-sm items-center gap-2 transition-all shadow-sm">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>Book a 15-min Call</span>
+                    </a>
                 </div>
+
             </div>
-
         </div>
     </section>
 
-    <!-- ======================================================================== -->
-    <!-- FOOTER                                                                   -->
-    <!-- ======================================================================== -->
-    <footer class="py-8 border-t border-stoneLine">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-mutedText">
-            <div class="font-medium text-ink">© <span id="year"></span> Zayan Fahad — Video Editor &amp; Motion Designer</div>
-            <div class="flex items-center gap-6">
-                <a href="#work" class="hover:text-ink transition-colors">Work</a>
-                <a href="#workflow" class="hover:text-ink transition-colors">Workflow</a>
-                <a href="#contact" class="hover:text-ink transition-colors">Contact</a>
-                <a href="#" class="hover:text-ink transition-colors">Top ↑</a>
+    <!-- ============================================================================ -->
+    <!-- MINIMAL FOOTER (Triple-click copyright to open hidden Site Manager)          -->
+    <!-- ============================================================================ -->
+    <footer class="py-10 border-t border-seafoamBorder/80 text-center text-xs text-slateTide">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div id="secretAdminCopyright" onclick="handleSecretCopyrightClick()" class="font-medium text-oceanInk whitespace-nowrap select-none cursor-default">
+                © Zayan Fahad — YouTube &amp; Retention Editor
+            </div>
+            <div class="flex items-center gap-5">
+                <a href="#packages" class="hover:text-oceanTeal font-medium transition-colors">Packages</a>
+                <a id="footerEmailLink" href="mailto:mdf042731@gmail.com" class="hover:text-oceanTeal font-medium transition-colors">mdf042731@gmail.com</a>
+                <a href="#" class="hover:text-oceanInk font-medium transition-colors">Back to top ↑</a>
             </div>
         </div>
     </footer>
 
-    <!-- ======================================================================== -->
-    <!-- HIDDEN PHOTO TUNER PANEL (Triple-click photo, Shift+P, or #photo)        -->
-    <!-- ======================================================================== -->
-    <div id="photoTunerPanel" class="hidden fixed bottom-5 right-5 z-50 w-[330px] max-w-[92vw] rounded-2xl bg-card border border-stoneLine shadow-2xl p-4 text-xs">
-        <div class="flex items-center justify-between pb-3 border-b border-stoneLine">
-            <div>
-                <div class="font-bold text-ink text-sm">Photo Position &amp; Size</div>
-                <div class="text-[11px] text-mutedText">Drag photo directly or use sliders</div>
-            </div>
-            <button type="button" onclick="togglePhotoTuner(false)" class="w-7 h-7 rounded-full bg-paper hover:bg-linen border border-stoneLine text-ink font-bold flex items-center justify-center">
-                ✕
-            </button>
-        </div>
+    <!-- ============================================================================ -->
+    <!-- VIDEO PLAYER MODAL (4 Simultaneous Mobile & Desktop Closing Mechanisms)      -->
+    <!-- ============================================================================ -->
+    <div id="videoModal" onclick="closeVideoModal()" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-oceanInk/85 backdrop-blur-md cursor-pointer overflow-y-auto overflow-x-hidden">
+        
+        <!-- Mechanism 1: Fixed Top-Left Screen Close Pill (Always Visible on Mobile) -->
+        <button type="button" onclick="event.stopPropagation(); closeVideoModal();" class="fixed top-4 left-4 z-[70] px-4 py-2 rounded-full bg-white text-oceanInk hover:bg-oceanTeal hover:text-white font-bold text-xs shadow-xl border border-seafoamBorder flex items-center gap-2 transition-all">
+            <span>← Close Video</span>
+        </button>
 
-        <div class="mt-3.5 space-y-3.5">
-            <!-- Frame Shape -->
-            <div>
-                <div class="flex items-center justify-between mb-1.5">
-                    <span class="font-semibold text-ink">Frame Shape</span>
-                    <span class="text-[11px] text-mutedText">Fill vs. Fit</span>
-                </div>
-                <div class="grid grid-cols-3 gap-1.5 mb-2">
-                    <button type="button" data-aspect="5/4" onclick="setPhotoAspect('5/4')" class="tuner-aspect-btn py-1.5 rounded-lg border border-stoneLine font-medium">5:4</button>
-                    <button type="button" data-aspect="4/3" onclick="setPhotoAspect('4/3')" class="tuner-aspect-btn py-1.5 rounded-lg border border-stoneLine font-medium">4:3</button>
-                    <button type="button" data-aspect="1/1" onclick="setPhotoAspect('1/1')" class="tuner-aspect-btn py-1.5 rounded-lg border border-stoneLine font-medium">1:1 Square</button>
-                </div>
-                <div class="grid grid-cols-2 gap-1.5">
-                    <button type="button" data-fit="cover" onclick="setPhotoFitMode('cover')" class="tuner-fit-btn py-1.5 rounded-lg border border-stoneLine font-medium">Fill Frame (No Edges)</button>
-                    <button type="button" data-fit="contain" onclick="setPhotoFitMode('contain')" class="tuner-fit-btn py-1.5 rounded-lg border border-stoneLine font-medium">Fit Whole Photo</button>
-                </div>
-            </div>
-
-            <!-- Zoom Slider -->
-            <div>
-                <div class="flex items-center justify-between mb-1">
-                    <label for="sliderScale" class="font-semibold text-ink">Zoom</label>
-                    <span id="valScale" class="font-mono text-[11px] text-accent">100%</span>
-                </div>
-                <input id="sliderScale" type="range" min="0.7" max="2.5" step="0.01" value="1" oninput="onSliderInput()" class="w-full accent-[#B24C32] cursor-pointer">
-            </div>
-
-            <!-- Left / Right Slider -->
-            <div>
-                <div class="flex items-center justify-between mb-1">
-                    <label for="sliderX" class="font-semibold text-ink">Left / Right (X)</label>
-                    <span id="valX" class="font-mono text-[11px] text-accent">0%</span>
-                </div>
-                <input id="sliderX" type="range" min="-50" max="50" step="0.5" value="0" oninput="onSliderInput()" class="w-full accent-[#B24C32] cursor-pointer">
-            </div>
-
-            <!-- Up / Down Slider -->
-            <div>
-                <div class="flex items-center justify-between mb-1">
-                    <label for="sliderY" class="font-semibold text-ink">Up / Down (Y)</label>
-                    <span id="valY" class="font-mono text-[11px] text-accent">9%</span>
-                </div>
-                <input id="sliderY" type="range" min="-50" max="50" step="0.5" value="9" oninput="onSliderInput()" class="w-full accent-[#B24C32] cursor-pointer">
-            </div>
-
-            <!-- Frame Background Color -->
-            <div class="flex items-center justify-between gap-2 pt-1">
-                <span class="font-semibold text-ink">Frame BG</span>
-                <div class="flex items-center gap-1.5">
-                    <button type="button" onclick="setPhotoBg('#FFFFFF')" title="Pure White" class="w-6 h-6 rounded-full border border-stoneLine bg-white"></button>
-                    <button type="button" onclick="setPhotoBg('#F8F8F8')" title="Studio Off-White" class="w-6 h-6 rounded-full border border-stoneLine bg-[#F8F8F8]"></button>
-                    <button type="button" onclick="setPhotoBg('#F2EDE5')" title="Warm Linen" class="w-6 h-6 rounded-full border border-stoneLine bg-[#F2EDE5]"></button>
-                    <input id="pickerBg" type="color" value="#F8F8F8" oninput="setPhotoBg(this.value)" class="w-6 h-6 rounded border border-stoneLine cursor-pointer bg-transparent p-0">
-                </div>
-            </div>
-
-            <!-- Save / Export Actions -->
-            <div class="pt-3 border-t border-stoneLine space-y-2">
-                <button type="button" onclick="downloadUpdatedHtml()" class="w-full py-2.5 rounded-full bg-ink hover:bg-accent text-white font-semibold transition-colors">
-                    Download Updated index.html
+        <!-- Mechanism 3: Constrained Card Width (Leaves Empty Backdrop Around All 4 Sides on Mobile) -->
+        <div id="videoModalCard" onclick="event.stopPropagation()" class="relative z-10 w-[92vw] max-w-4xl overflow-hidden flex flex-col items-center my-auto cursor-default rounded-2xl shadow-2xl">
+            
+            <!-- Mechanism 2: Card Header with Left-Side ← Back Button & Strict Title Truncation -->
+            <div class="w-full p-3 sm:p-4 bg-pureCard rounded-t-2xl border border-seafoamBorder border-b-0 flex items-center justify-between gap-2.5 overflow-hidden">
+                
+                <button type="button" onclick="closeVideoModal()" aria-label="Close video player" class="shrink-0 px-3.5 py-1.5 rounded-full bg-oceanInk hover:bg-oceanTeal text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all">
+                    <span>← Back</span>
                 </button>
-                <div class="grid grid-cols-2 gap-2">
-                    <button type="button" onclick="copyPhotoConfig()" class="py-2 rounded-full bg-paper hover:bg-linen border border-stoneLine text-ink font-medium transition-colors">
-                        Copy Settings
-                    </button>
-                    <button type="button" onclick="resetPhotoFit()" class="py-2 rounded-full bg-paper hover:bg-linen border border-stoneLine text-stoneText hover:text-ink font-medium transition-colors">
-                        Reset
-                    </button>
+
+                <div class="min-w-0 flex-1 overflow-hidden text-left px-1">
+                    <h3 id="modalVideoTitle" class="text-xs sm:text-sm font-bold text-oceanInk truncate">Project Title</h3>
+                    <p id="modalVideoSpecs" class="text-[11px] text-slateTide truncate">4K Playback</p>
                 </div>
+
+                <a id="modalExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="shrink-0 hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-seaSalt hover:bg-foamTint border border-seafoamBorder text-xs font-semibold text-slateTide hover:text-oceanInk transition-all">
+                    <span>YouTube</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
             </div>
+
+            <!-- Video IFrame Mount (Constrained to max-h-[72dvh] so it never fills 100% of mobile height) -->
+            <div id="modalPlayerMount" class="w-full aspect-video max-h-[72dvh] bg-black rounded-b-2xl border border-seafoamBorder relative flex items-center justify-center overflow-hidden"></div>
         </div>
     </div>
 
-    <!-- ======================================================================== -->
-    <!-- VIDEO SCREENING MODAL (Mobile & Desktop Safe)                            -->
-    <!-- ======================================================================== -->
-    <div id="videoModal" onclick="closeVideoModal()" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-[#141311]/90 backdrop-blur-sm cursor-pointer overflow-y-auto">
-
-        <button type="button" onclick="event.stopPropagation(); closeVideoModal();" class="fixed top-4 left-4 z-[60] px-4 py-2 rounded-full bg-card text-ink hover:bg-accent hover:text-white text-xs font-semibold shadow-xl border border-stoneLine transition-colors">
-            ← Close
-        </button>
-
-        <div id="videoModalCard" onclick="event.stopPropagation()" class="relative z-10 w-[92vw] max-w-4xl bg-card rounded-2xl border border-stoneLine/30 overflow-hidden shadow-2xl cursor-default my-auto">
-            <div class="px-4 py-3 border-b border-stoneLine flex items-center justify-between gap-3">
-                <div class="min-w-0 flex-1">
-                    <h3 id="modalTitle" class="text-xs sm:text-sm font-bold text-ink truncate"></h3>
-                    <p id="modalMeta" class="text-[11px] text-stoneText truncate mt-0.5"></p>
+    <!-- ============================================================================ -->
+    <!-- HIDDEN SITE MANAGER MODAL (Triggered ONLY via #admin, Shift+M, or 3x Click)  -->
+    <!-- ============================================================================ -->
+    <div id="manageModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-oceanInk/80 backdrop-blur-sm">
+        <div class="w-full max-w-3xl bg-pureCard border border-seafoamBorder rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            
+            <div class="px-6 py-4 bg-foamTint/70 border-b border-seafoamBorder flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-sliders text-oceanTeal"></i>
+                    <div>
+                        <h3 class="font-bold text-oceanInk text-base leading-tight">Private Site Manager (Hidden from Visitors)</h3>
+                        <p class="text-[11px] text-slateTide">Open anytime via <code class="text-oceanTeal font-semibold">#admin</code>, <code class="text-oceanTeal font-semibold">Shift + M</code>, or triple-clicking the footer copyright.</p>
+                    </div>
                 </div>
-                <div class="flex items-center gap-2 shrink-0">
-                    <a id="modalYoutubeLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex px-3 py-1.5 rounded-full bg-paper hover:bg-linen border border-stoneLine text-[11px] font-semibold text-stoneText hover:text-ink transition-colors">
-                        YouTube ↗
-                    </a>
-                    <button type="button" onclick="closeVideoModal()" class="px-3.5 py-1.5 rounded-full bg-ink hover:bg-accent text-white text-[11px] font-semibold transition-colors">
-                        Close
-                    </button>
-                </div>
+                <button onclick="toggleManageModal()" class="w-8 h-8 rounded-full bg-pureCard border border-seafoamBorder text-slateTide hover:text-oceanInk flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
 
-            <div id="modalPlayerMount" class="w-full aspect-video max-h-[74dvh] bg-black flex items-center justify-center"></div>
+            <div class="p-6 overflow-y-auto space-y-6 text-sm">
+                
+                <!-- 1. Portrait Photo Uploader -->
+                <div class="p-4 rounded-2xl bg-seaSalt border border-seafoamBorder flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3.5">
+                        <img data-profile-img src="Gemini_Generated_Image_3xfn4y3xfn4y3xfn.jpg" alt="Preview" onerror="handleAvatarError(this)" class="zf-avatar w-14 h-14 rounded-full object-cover border-2 border-oceanTeal bg-foamTint shrink-0">
+                        <div>
+                            <div class="text-xs font-bold text-oceanInk">Your Portrait Photo</div>
+                            <p class="text-[11px] text-slateTide">Select your photo to bake it directly into <code class="text-oceanTeal font-semibold">index.html</code> so it loads on phones and every device.</p>
+                        </div>
+                    </div>
+                    <div class="shrink-0">
+                        <input id="photoFileInput" type="file" accept="image/*" onchange="handlePhotoUpload(event)" class="hidden">
+                        <button type="button" onclick="triggerPhotoUpload()" class="px-4 py-2.5 rounded-full bg-oceanInk hover:bg-oceanTeal text-white text-xs font-semibold cursor-pointer transition-all shadow-sm flex items-center gap-1.5">
+                            <i class="fa-solid fa-camera"></i>
+                            <span>Select &amp; Bake Photo</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Add / Edit Video Form -->
+                <form id="addVideoForm" onsubmit="handleSaveVideo(event)" class="space-y-4 p-5 rounded-2xl bg-seaSalt border border-seafoamBorder">
+                    <div class="flex items-center justify-between">
+                        <div id="formHeading" class="text-xs font-bold uppercase tracking-wider text-oceanTeal">+ Add or Edit Video Case Study</div>
+                        <button type="button" id="cancelEditBtn" onclick="resetVideoForm()" class="hidden text-xs font-semibold text-coralSand hover:underline">Cancel Edit</button>
+                    </div>
+                    <input type="hidden" id="editVideoId" value="">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-oceanInk mb-1">Video Title *</label>
+                            <input id="inputTitle" type="text" required placeholder="e.g. Why Most Small YouTube Channels Stay Stuck" class="w-full px-3.5 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs focus:outline-none focus:border-oceanTeal">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-oceanInk mb-1">YouTube / Shorts / Vimeo Link *</label>
+                            <input id="inputUrl" type="url" required placeholder="https://youtu.be/..." class="w-full px-3.5 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs focus:outline-none focus:border-oceanTeal">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-oceanInk mb-1">Aspect Ratio</label>
+                            <select id="inputAspect" class="w-full px-3 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs">
+                                <option value="16:9">16:9 Widescreen</option>
+                                <option value="9:16">9:16 Vertical</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-oceanInk mb-1">Category Section</label>
+                            <select id="inputCategory" class="w-full px-3 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs font-semibold">
+                                <option value="talking-head">1. YouTube Long-Form</option>
+                                <option value="short-form">2. Shorts &amp; Reels (9:16)</option>
+                                <option value="educational">3. Educational &amp; SaaS Motion</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-oceanInk mb-1">Format Label (Below Thumb)</label>
+                            <input id="inputBadge" type="text" placeholder="e.g. YouTube Talking-Head • 16:9" class="w-full px-3 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-oceanInk mb-1">The Edit (Technical Execution)</label>
+                            <input id="inputDeliverables" type="text" placeholder="What you did to the raw footage..." class="w-full px-3.5 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-oceanInk mb-1">Why It Works (Retention Psychology)</label>
+                            <input id="inputRetentionLogic" type="text" placeholder="Why this keeps viewers watching..." class="w-full px-3.5 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-oceanInk mb-1">Custom Thumbnail URL (Optional)</label>
+                        <input id="inputCustomThumb" type="url" placeholder="Leave blank for YouTube HD thumb" class="w-full px-3.5 py-2 rounded-xl bg-pureCard border border-seafoamBorder text-oceanInk text-xs">
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button type="submit" id="submitVideoBtn" class="px-5 py-2 rounded-full bg-oceanInk hover:bg-oceanTeal text-white font-semibold text-xs transition-all">
+                            Save Video
+                        </button>
+                    </div>
+                </form>
+
+                <!-- 4. Reorder & Category List -->
+                <div>
+                    <div class="flex items-center justify-between mb-2 text-xs">
+                        <span class="text-oceanInk font-bold uppercase">Videos (<span id="projectCount">9</span>) — Reorder with ↑ ↓ or Edit ✎</span>
+                        <button onclick="restoreDefaults()" class="text-coralSand hover:underline font-semibold text-[11px]">Reset Strategic 9 Videos</button>
+                    </div>
+                    <div id="videoManagerList" class="space-y-2 max-h-60 overflow-y-auto pr-1"></div>
+                </div>
+
+            </div>
+
+            <div class="px-6 py-4 bg-foamTint/70 border-t border-seafoamBorder flex items-center justify-between">
+                <button onclick="toggleManageModal()" class="px-4 py-2 rounded-full bg-pureCard border border-seafoamBorder text-slateTide hover:text-oceanInk text-xs font-semibold">Close</button>
+                <button onclick="downloadCleanHtmlFile()" class="px-5 py-2.5 rounded-full bg-oceanTeal hover:bg-oceanTealDark text-white font-bold text-xs flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Download Ready-to-Host index.html</span>
+                </button>
+            </div>
+
         </div>
     </div>
 
     <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-5 left-5 z-50 hidden items-center gap-2.5 px-4 py-2.5 rounded-full bg-ink text-white text-xs font-medium shadow-xl">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-        <span id="toastText"></span>
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden items-center gap-3 px-5 py-3.5 rounded-full bg-oceanInk text-white text-xs font-medium shadow-xl">
+        <span class="w-2 h-2 rounded-full bg-teal-400"></span>
+        <span id="toastText">Saved!</span>
     </div>
 
-    <!-- ======================================================================== -->
-    <!-- DATA & INTERACTIONS                                                      -->
-    <!-- ======================================================================== -->
+    <!-- ============================================================================ -->
+    <!-- APPLICATION JAVASCRIPT                                                       -->
+    <!-- ============================================================================ -->
     <script>
-        const CONFIG = {
+        const SITE_SETTINGS = {
             name: "Zayan Fahad",
+            // TODO: Swap to hello@zayanfahad.com or zayanfahad.work@gmail.com when ready
             email: "mdf042731@gmail.com",
-            profilePhoto: "avatar.jpg"
+            // TODO: Optional Cal.com / Calendly link (e.g., "https://cal.com/zayanfahad/15min"). Leave "" if none.
+            bookingLink: ""
         };
 
-        ///* PHOTO_FIT_START */
-        let PHOTO_FIT = {
-            fit: "cover",
-            aspect: "5/4",
-            scale: 1,
-            x: 0,
-            y: 9,
-            bg: "#F8F8F8"
+        let selectedScope = {
+            type: "Paid Trial Cut ($150–$250)",
+            format: "YouTube + Shorts Package",
+            addons: [
+                "Include 2 Vertical Shorts",
+                "Custom After Effects Motion"
+            ],
+            referenceVideo: ""
         };
-        ///* PHOTO_FIT_END */
 
-        const DEFAULT_PHOTO_FIT = { ...PHOTO_FIT };
-        const PHOTO_STORAGE_KEY = "zf_photo_fit_" + JSON.stringify(DEFAULT_PHOTO_FIT);
+        let currentHeroSampleId = "zf-th-1";
 
-        const CATEGORIES = {
+        const HERO_SAMPLES_META = {
+            "zf-th-1": {
+                title: "Why Most Small YouTube Channels Stay Stuck",
+                badge: "YouTube Long-Form • 4K",
+                metric: "3D Tracked Grid + Hook",
+                thumb: "https://img.youtube.com/vi/WV6HoouI8Ps/maxresdefault.jpg",
+                before: "Single-camera talking head with breath pauses & static framing.",
+                after: "3D-tracked 300K milestone grid, tightened 0–30s hook & clean vocal leveling."
+            },
+            "zf-sf-3": {
+                title: "Why a $10k Skill Pays $100k to the Right Buyer",
+                badge: "Vertical Short • 9:16",
+                metric: "Sub-2s Hook + Kinetic Text",
+                thumb: "https://img.youtube.com/vi/EHtXBlRkHts/maxresdefault.jpg",
+                before: "Long podcast segment with slow ramp-up and flat room audio.",
+                after: "High-contrast visual hook frame, B-roll cutaways & kinetic word captions."
+            },
+            "zf-saas-1": {
+                title: "Product Onboarding & Software Workflow Explainer",
+                badge: "SaaS UI Motion • 16:9",
+                metric: "60s AE UI Walkthrough",
+                thumb: "https://img.youtube.com/vi/stu4jgsWPRI/maxresdefault.jpg",
+                before: "Flat screen recording with hard-to-follow cursor movements.",
+                after: "Custom After Effects 3D screen tilts, guided zooms & UI motion callouts."
+            }
+        };
+
+        function switchHeroSample(videoId, btnEl) {
+            currentHeroSampleId = videoId;
+            const meta = HERO_SAMPLES_META[videoId];
+            if (!meta) return;
+
+            document.getElementById('heroSampleThumb').src = meta.thumb;
+            document.getElementById('heroSampleTitle').textContent = meta.title;
+            document.getElementById('heroSampleBadge').textContent = meta.badge;
+            document.getElementById('heroSampleMetric').textContent = meta.metric;
+            document.getElementById('heroSampleBefore').textContent = meta.before;
+            document.getElementById('heroSampleAfter').textContent = meta.after;
+
+            document.querySelectorAll('.hero-sample-tab').forEach(btn => {
+                btn.className = "hero-sample-tab px-2.5 py-1 rounded-full text-[10px] font-semibold bg-white text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all";
+            });
+            if (btnEl) {
+                btnEl.className = "hero-sample-tab px-2.5 py-1 rounded-full text-[10px] font-bold bg-oceanInk text-white transition-all";
+            }
+        }
+
+        const CATEGORY_META = {
             "talking-head": {
-                num: "01",
-                title: "YouTube Long-Form & Talking-Head",
-                subtitle: "Opening hook pacing, subtle visual callouts, and seamless J-cut dialogue flow.",
-                defaultFormat: "YouTube Long-Form (16:9)"
+                title: "YouTube Long-Form & Creator Talking-Head",
+                subtitle: "Engineered 0–30s hooks, 3D tracked visual proof, and invisible J-cut dialogue pacing that holds Average View Duration.",
+                scopeFormat: "YouTube Long-Form (16:9)"
             },
             "short-form": {
-                num: "02",
-                title: "Shorts & Reels (9:16)",
-                subtitle: "Tight first-3-second hooks, synced captions, and rhythm-driven vertical cuts.",
-                defaultFormat: "Shorts & Reels (9:16)"
+                title: "Short-Form Reels, Shorts & Vertical Clips (9:16)",
+                subtitle: "Sub-3-second scroll-stop hooks, kinetic word-by-word captions, studio voice isolation, and beat-synced velocity cuts.",
+                scopeFormat: "Shorts & Reels (9:16)"
             },
             "educational": {
-                num: "03",
                 title: "Educational Breakdowns & SaaS Motion",
-                subtitle: "Clear on-screen frameworks, After Effects UI animations, and clean audio.",
-                defaultFormat: "Educational / SaaS Motion"
+                subtitle: "Step-by-step framework callouts, guided whiteboard zooms, and custom After Effects UI motion that simplify complex ideas.",
+                scopeFormat: "Educational / SaaS Motion"
             }
         };
 
-        const VIDEOS = [
+        const FALLBACK_AVATAR_SVG = "data:image/svg+xml;utf8," + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="coastalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#0D222D"/>
+                        <stop offset="100%" stop-color="#0E7490"/>
+                    </linearGradient>
+                </defs>
+                <rect width="200" height="200" rx="100" fill="url(#coastalGrad)"/>
+                <circle cx="100" cy="100" r="92" fill="none" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="3"/>
+                <text x="100" y="115" text-anchor="middle" fill="#FFFFFF" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="64" letter-spacing="-2">ZF</text>
+            </svg>
+        `);
+
+        ///* PROFILE_PHOTO_START */
+        let SAVED_PROFILE_PHOTO = "";
+        ///* PROFILE_PHOTO_END */
+
+        ///* PORTFOLIO_DATA_START */
+        const DEFAULT_VIDEOS = [
             {
-                id: "th-1",
-                title: "Why Most Small YouTube Channels Stay Stuck",
-                category: "talking-head",
-                formatLabel: "YouTube · 16:9",
-                tag: "",
-                aspect: "16:9",
-                notes: "Tightened the first 30 seconds, tracked a custom 300K milestone graphic behind the speaker, and removed dead air between points.",
-                youtubeId: "WV6HoouI8Ps"
+                "id": "zf-th-1",
+                "title": "Why Most Small YouTube Channels Stay Stuck",
+                "category": "talking-head",
+                "categoryBadge": "YouTube Talking-Head • 16:9",
+                "strategicMeta": "3D TRACKED GRID",
+                "rawVsCut": "Raw single-cam take → 3D tracked 300K grid + tight 30s hook",
+                "containThumb": true,
+                "aspect": "16:9",
+                "duration": "4K",
+                "deliverables": "Solved slow single-cam pacing by compressing the 0–30s hook, tracking a 3D 300K milestone grid behind the speaker, and cutting dead air.",
+                "retentionLogic": "Anchors viewer curiosity in the first 8 seconds with visual proof so cold viewers stay locked in.",
+                "videoUrl": "https://youtu.be/WV6HoouI8Ps",
+                "thumbnail": "https://img.youtube.com/vi/WV6HoouI8Ps/maxresdefault.jpg"
             },
             {
-                id: "th-2",
-                title: "How Quitting TV Changed My Daily Focus",
-                category: "talking-head",
-                formatLabel: "Commentary · 16:9",
-                tag: "",
-                aspect: "16:9",
-                notes: "Structured an unscripted talking-head take with J-cuts, subtle punch-ins on key story beats, and warm dialogue leveling.",
-                youtubeId: "PRpm0ce9cQw"
+                "id": "zf-th-2",
+                "title": "How Quitting TV Changed My Daily Focus",
+                "category": "talking-head",
+                "categoryBadge": "Creator Commentary • 16:9",
+                "strategicMeta": "J-CUT RHYTHM",
+                "rawVsCut": "Unscripted monologue → Overlapped J-cuts + subtle punch-ins",
+                "aspect": "16:9",
+                "duration": "4K",
+                "deliverables": "Solved flat unscripted monologue pacing using overlapped J-cuts, subtle scale punch-ins on key beats, and warm vocal leveling.",
+                "retentionLogic": "Invisible J-cuts hide edit seams and keep conversational energy natural without fatiguing the viewer.",
+                "videoUrl": "https://youtu.be/PRpm0ce9cQw",
+                "thumbnail": "https://img.youtube.com/vi/PRpm0ce9cQw/maxresdefault.jpg"
             },
             {
-                id: "th-3",
-                title: "Biggest Money Lessons From a Tony Robbins Event",
-                category: "talking-head",
-                formatLabel: "Long-Form · 16:9",
-                tag: "",
-                aspect: "16:9",
-                notes: "Paced a long-form story with clean chapter callouts, timed B-roll cutaways, and vocal compression.",
-                youtubeId: "QCCbQpuxxpU"
+                "id": "zf-th-3",
+                "title": "Biggest Money Lessons From a Tony Robbins Event",
+                "category": "talking-head",
+                "categoryBadge": "Finance & Story • 16:9",
+                "strategicMeta": "CHAPTER PACING",
+                "rawVsCut": "Long raw story → Chapter callouts + B-roll cutaways",
+                "aspect": "16:9",
+                "duration": "4K",
+                "deliverables": "Structured a long-form financial story with on-screen chapter callouts, timed B-roll cutaways, and crisp vocal compression.",
+                "retentionLogic": "Visual chapter anchors reset viewer attention across a multi-point story.",
+                "videoUrl": "https://youtu.be/QCCbQpuxxpU",
+                "thumbnail": "https://img.youtube.com/vi/QCCbQpuxxpU/maxresdefault.jpg"
             },
             {
-                id: "sf-1",
-                title: "Why a $10k Skill Pays $100k to the Right Buyer",
-                category: "short-form",
-                formatLabel: "Business Short · 9:16",
-                tag: "",
-                aspect: "9:16",
-                notes: "Tightened the opening 3 seconds, layered supporting B-roll, and synced word-by-word captions to the speaker's rhythm.",
-                youtubeId: "EHtXBlRkHts"
+                "id": "zf-sf-3",
+                "title": "Why a $10k Skill Pays $100k to the Right Buyer",
+                "category": "short-form",
+                "categoryBadge": "Business Short • 9:16",
+                "strategicMeta": "KINETIC CAPTIONS",
+                "rawVsCut": "Long talking-head → 3s visual hook + word-by-word captions",
+                "aspect": "9:16",
+                "duration": "4K",
+                "deliverables": "Compressed the opening 3 seconds into an immediate visual hook, layered contextual B-roll, and built kinetic word-by-word captions.",
+                "retentionLogic": "High-contrast opening frame and zero dead air beat the 2-second vertical scroll reflex.",
+                "videoUrl": "https://youtu.be/EHtXBlRkHts",
+                "thumbnail": "https://img.youtube.com/vi/EHtXBlRkHts/maxresdefault.jpg"
             },
             {
-                id: "sf-2",
-                title: "Street-Style Founder Interview at BizChat Event",
-                category: "short-form",
-                formatLabel: "Event Clip · 9:16",
-                tag: "",
-                aspect: "9:16",
-                notes: "Cleaned up dialogue recorded over loud event crowd noise, reframed both speakers for mobile, and synced pop-in subtitles.",
-                youtubeId: "m69e_m2qQLY"
+                "id": "zf-sf-2",
+                "title": "Street-Style Founder Interview at BizChat Event",
+                "category": "short-form",
+                "categoryBadge": "Live Event Interview • 9:16",
+                "strategicMeta": "VOICE ISOLATION",
+                "rawVsCut": "Noisy event floor → Studio voice isolation + 2-speaker crop",
+                "aspect": "9:16",
+                "duration": "4K",
+                "deliverables": "Solved heavy event crowd noise with vocal isolation, dynamically reframed two speakers for 9:16 mobile viewing, and synced pop-in captions.",
+                "retentionLogic": "Clean dialogue isolation and active speaker framing make on-location clips feel studio-recorded.",
+                "videoUrl": "https://youtube.com/shorts/m69e_m2qQLY",
+                "thumbnail": "https://img.youtube.com/vi/m69e_m2qQLY/maxresdefault.jpg"
             },
             {
-                id: "sf-3",
-                title: "Modern Home Walkthrough With Speed-Ramped Cuts",
-                category: "short-form",
-                formatLabel: "Property Reel · 9:16",
-                tag: "",
-                aspect: "9:16",
-                notes: "Synced gimbal walkthrough shots to the beat with smooth velocity speed-ramps, stabilization, and minimal title overlays.",
-                youtubeId: "LicI4f7LuZE"
+                "id": "zf-sf-1",
+                "title": "Modern Home Walkthrough With Speed-Ramped Cuts",
+                "category": "short-form",
+                "categoryBadge": "Property Tour Reel • 9:16",
+                "strategicMeta": "BEAT-SYNC VELOCITY",
+                "rawVsCut": "Raw gimbal walk → Beat-synced velocity speed ramps",
+                "aspect": "9:16",
+                "duration": "4K",
+                "deliverables": "Solved slow walkthrough pacing with beat-synced velocity speed-ramps, optical stabilization, and clean room title overlays.",
+                "retentionLogic": "Beat-matched speed ramps move viewers smoothly between spaces before visual drop-off.",
+                "videoUrl": "https://youtube.com/shorts/LicI4f7LuZE",
+                "thumbnail": "https://img.youtube.com/vi/LicI4f7LuZE/maxresdefault.jpg"
             },
             {
-                id: "edu-1",
-                title: "How to Stop Translating in Your Head & Speak Natural English",
-                category: "educational",
-                formatLabel: "Educational · 16:9",
-                tag: "",
-                aspect: "16:9",
-                notes: "Reduced background room noise from a busy bookstore shoot, added on-screen vocabulary prompts, and structured clear lesson segments.",
-                youtubeId: "QU21h7PT1HY"
+                "id": "zf-edu-1",
+                "title": "How to Stop Translating in Your Head & Speak Natural English",
+                "category": "educational",
+                "categoryBadge": "Educational Guide • 16:9",
+                "strategicMeta": "AUDIO & VISUAL CUES",
+                "rawVsCut": "Bookstore ambient noise → Cleaned dialogue + vocabulary prompts",
+                "aspect": "16:9",
+                "duration": "4K",
+                "deliverables": "Cleaned bookstore background noise, added on-screen vocabulary prompts, and structured the lesson into clear visual segments.",
+                "retentionLogic": "On-screen text cues reinforce spoken points so viewers follow along effortlessly.",
+                "videoUrl": "https://youtu.be/QU21h7PT1HY",
+                "thumbnail": "https://img.youtube.com/vi/QU21h7PT1HY/maxresdefault.jpg"
             },
             {
-                id: "edu-2",
-                title: "The 9x9 Mandala System for Goal Setting",
-                category: "educational",
-                formatLabel: "Framework · 16:9",
-                tag: "",
-                aspect: "16:9",
-                notes: "Paired a whiteboard explanation with step-by-step zoom highlights and visual callouts so viewers follow each grid step cleanly.",
-                youtubeId: "Xi_Fi89ZXfQ"
+                "id": "zf-edu-2",
+                "title": "The 9×9 Mandala System for Goal Setting",
+                "category": "educational",
+                "categoryBadge": "Framework Breakdown • 16:9",
+                "strategicMeta": "GUIDED ZOOM FOCUS",
+                "rawVsCut": "Wide whiteboard shot → Step-by-step camera zoom callouts",
+                "aspect": "16:9",
+                "duration": "4K",
+                "deliverables": "Solved distant whiteboard legibility using step-by-step camera zoom highlights and custom grid callouts across the 9×9 framework.",
+                "retentionLogic": "Guided zoom focus directs the viewer's eye exactly where the speaker is pointing.",
+                "videoUrl": "https://youtu.be/Xi_Fi89ZXfQ",
+                "thumbnail": "https://img.youtube.com/vi/Xi_Fi89ZXfQ/maxresdefault.jpg"
             },
             {
-                id: "edu-3",
-                title: "Product Onboarding & Software Workflow Explainer",
-                category: "educational",
-                formatLabel: "SaaS Motion · 16:9",
-                tag: "",
-                aspect: "16:9",
-                notes: "Built custom After Effects UI cursor animations, 3D screen tilts, and callout highlights to explain a software flow in under 60 seconds.",
-                youtubeId: "stu4jgsWPRI"
+                "id": "zf-saas-1",
+                "title": "Product Onboarding & Software Workflow Explainer",
+                "category": "educational",
+                "categoryBadge": "SaaS & UI Motion • 16:9",
+                "strategicMeta": "AFTER EFFECTS UI MOTION",
+                "rawVsCut": "Flat screen capture → 3D After Effects UI motion & callouts",
+                "aspect": "16:9",
+                "duration": "4K",
+                "deliverables": "Built custom After Effects UI cursor animations, 3D screen tilts, and callout highlights to explain a software workflow in under 60 seconds.",
+                "retentionLogic": "Focused UI motion turns complex software steps into a clear, fast walkthrough.",
+                "videoUrl": "https://youtu.be/stu4jgsWPRI",
+                "thumbnail": "https://img.youtube.com/vi/stu4jgsWPRI/maxresdefault.jpg"
             }
         ];
+        ///* PORTFOLIO_DATA_END */
 
-        let activeFilter = "all";
+        const STORAGE_KEY = 'zf_portfolio_strategic_v4';
+        const PHOTO_STORAGE_KEYS = [
+            'zf_profile_photo_v12_pro',
+            'zf_profile_photo_v11_pro',
+            'zf_profile_photo_v10_pro',
+            'zf_profile_photo_v9_fixed',
+            'zf_profile_photo_v8_horizon',
+            'zf_profile_photo_clear_horizon_v1',
+            'zf_profile_photo_coastal_v2',
+            'zf_profile_photo_coastal_v1',
+            'zf_profile_photo_nature_v1',
+            'zf_profile_photo_v1',
+            'zf_portfolio_avatar_v5'
+        ];
+        let currentVideos = [];
+        let activeFilter = 'all';
+        let ytPlayer = null;
         let modalHistoryPushed = false;
-        let tunerOpen = false;
-        let isDraggingPhoto = false;
-        let dragStart = { mx: 0, my: 0, x: 0, y: 0 };
-        let photoClickCount = 0;
-        let photoClickTimer = null;
+        let copyrightClickCount = 0;
+        let copyrightClickTimer = null;
 
-        let scope = {
-            type: "Test Cut",
-            format: "YouTube Long-Form (16:9)"
-        };
-
-        /* ==================================================================== */
-        /* PHOTO LOADER + INTERACTIVE DRAG / ZOOM / POSITION TUNER              */
-        /* ==================================================================== */
-        function initPhotoSystem() {
-            try {
-                const draft = localStorage.getItem(PHOTO_STORAGE_KEY);
-                if (draft) PHOTO_FIT = { ...PHOTO_FIT, ...JSON.parse(draft) };
-            } catch (e) {}
-
-            const navImg = document.getElementById("navAvatarImg");
-            const navFallback = document.getElementById("navAvatarFallback");
-            const heroImg = document.getElementById("heroPortraitImg");
-            const heroFallback = document.getElementById("heroAvatarFallback");
-
-            if (CONFIG.profilePhoto) {
-                navImg.onload = () => {
-                    navImg.classList.remove("hidden");
-                    navFallback.classList.add("hidden");
-                };
-                navImg.src = CONFIG.profilePhoto;
-
-                heroImg.onload = () => {
-                    heroImg.classList.remove("hidden");
-                    heroFallback.classList.add("hidden");
-                    applyPhotoFit();
-                };
-                heroImg.src = CONFIG.profilePhoto;
-            }
-
-            applyPhotoFit();
-            bindPhotoDrag();
-            checkPhotoHash();
+        function handleHeroMouseMove(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+            e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
         }
 
-        function applyPhotoFit() {
-            const box = document.getElementById("heroPhotoBox");
-            const img = document.getElementById("heroPortraitImg");
-            if (!box || !img) return;
-
-            const aspectMap = { "5/4": "5 / 4", "4/3": "4 / 3", "1/1": "1 / 1" };
-            box.style.aspectRatio = aspectMap[PHOTO_FIT.aspect] || "5 / 4";
-            box.style.backgroundColor = PHOTO_FIT.bg || "#F8F8F8";
-
-            if (img.naturalWidth && img.naturalHeight) {
-                const boxRatio = box.clientWidth / (box.clientHeight || 1);
-                const imgRatio = img.naturalWidth / img.naturalHeight;
-
-                if (PHOTO_FIT.fit === "cover") {
-                    if (imgRatio <= boxRatio) {
-                        img.style.width = "100%";
-                        img.style.height = "auto";
-                    } else {
-                        img.style.height = "100%";
-                        img.style.width = "auto";
-                    }
-                } else {
-                    if (imgRatio <= boxRatio) {
-                        img.style.height = "100%";
-                        img.style.width = "auto";
-                    } else {
-                        img.style.width = "100%";
-                        img.style.height = "auto";
-                    }
-                }
-            }
-
-            img.style.transform = `translate(calc(-50% + ${PHOTO_FIT.x}%), calc(-50% + ${PHOTO_FIT.y}%)) scale(${PHOTO_FIT.scale})`;
-            syncTunerUI();
+        function handleCardSpotlight(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            card.style.setProperty('--card-mouse-x', `${x}%`);
+            card.style.setProperty('--card-mouse-y', `${y}%`);
         }
 
-        function syncTunerUI() {
-            const sScale = document.getElementById("sliderScale");
-            const sX = document.getElementById("sliderX");
-            const sY = document.getElementById("sliderY");
-            if (!sScale) return;
-
-            sScale.value = PHOTO_FIT.scale;
-            sX.value = PHOTO_FIT.x;
-            sY.value = PHOTO_FIT.y;
-            document.getElementById("valScale").textContent = `${Math.round(PHOTO_FIT.scale * 100)}%`;
-            document.getElementById("valX").textContent = `${Number(PHOTO_FIT.x).toFixed(1)}%`;
-            document.getElementById("valY").textContent = `${Number(PHOTO_FIT.y).toFixed(1)}%`;
-            document.getElementById("pickerBg").value = PHOTO_FIT.bg || "#F8F8F8";
-
-            document.querySelectorAll(".tuner-aspect-btn").forEach(btn => {
-                const active = btn.dataset.aspect === PHOTO_FIT.aspect;
-                btn.className = active
-                    ? "tuner-aspect-btn py-1.5 rounded-lg bg-ink text-white border border-ink font-semibold"
-                    : "tuner-aspect-btn py-1.5 rounded-lg bg-paper text-stoneText hover:text-ink border border-stoneLine font-medium";
-            });
-
-            document.querySelectorAll(".tuner-fit-btn").forEach(btn => {
-                const active = btn.dataset.fit === PHOTO_FIT.fit;
-                btn.className = active
-                    ? "tuner-fit-btn py-1.5 rounded-lg bg-accent text-white border border-accent font-semibold"
-                    : "tuner-fit-btn py-1.5 rounded-lg bg-paper text-stoneText hover:text-ink border border-stoneLine font-medium";
-            });
-        }
-
-        function savePhotoDraft() {
-            try {
-                localStorage.setItem(PHOTO_STORAGE_KEY, JSON.stringify(PHOTO_FIT));
-            } catch (e) {}
-        }
-
-        function onSliderInput() {
-            PHOTO_FIT.scale = parseFloat(document.getElementById("sliderScale").value);
-            PHOTO_FIT.x = parseFloat(document.getElementById("sliderX").value);
-            PHOTO_FIT.y = parseFloat(document.getElementById("sliderY").value);
-            applyPhotoFit();
-            savePhotoDraft();
-        }
-
-        function setPhotoAspect(val) {
-            PHOTO_FIT.aspect = val;
-            applyPhotoFit();
-            savePhotoDraft();
-        }
-
-        function setPhotoFitMode(val) {
-            PHOTO_FIT.fit = val;
-            applyPhotoFit();
-            savePhotoDraft();
-        }
-
-        function setPhotoBg(color) {
-            PHOTO_FIT.bg = color;
-            applyPhotoFit();
-            savePhotoDraft();
-        }
-
-        function resetPhotoFit() {
-            PHOTO_FIT = { ...DEFAULT_PHOTO_FIT };
-            try { localStorage.removeItem(PHOTO_STORAGE_KEY); } catch (e) {}
-            applyPhotoFit();
-            showToast("Photo framing reset");
-        }
-
-        function togglePhotoTuner(forceState) {
-            tunerOpen = typeof forceState === "boolean" ? forceState : !tunerOpen;
-            const panel = document.getElementById("photoTunerPanel");
-            const box = document.getElementById("heroPhotoBox");
-            const hint = document.getElementById("dragHintBadge");
-
-            if (tunerOpen) {
-                panel.classList.remove("hidden");
-                box.classList.add("photo-edit-active");
-                hint.classList.remove("hidden");
-                syncTunerUI();
-            } else {
-                panel.classList.add("hidden");
-                box.classList.remove("photo-edit-active");
-                hint.classList.add("hidden");
-            }
-        }
-
-        function handleSecretPhotoClick() {
-            if (tunerOpen) return;
-            photoClickCount++;
-            clearTimeout(photoClickTimer);
-            if (photoClickCount >= 3) {
-                photoClickCount = 0;
-                togglePhotoTuner(true);
+        function handleAvatarError(img) {
+            if (SAVED_PROFILE_PHOTO && img.src !== SAVED_PROFILE_PHOTO) {
+                img.src = SAVED_PROFILE_PHOTO;
                 return;
             }
-            photoClickTimer = setTimeout(() => { photoClickCount = 0; }, 550);
+            img.onerror = null;
+            img.src = FALLBACK_AVATAR_SVG;
         }
 
-        function bindPhotoDrag() {
-            const box = document.getElementById("heroPhotoBox");
-            const img = document.getElementById("heroPortraitImg");
-
-            function startDrag(clientX, clientY) {
-                if (!tunerOpen) return;
-                isDraggingPhoto = true;
-                dragStart = { mx: clientX, my: clientY, x: PHOTO_FIT.x, y: PHOTO_FIT.y };
-            }
-
-            function moveDrag(clientX, clientY) {
-                if (!isDraggingPhoto || !tunerOpen) return;
-                const w = img.offsetWidth || box.clientWidth || 1;
-                const h = img.offsetHeight || box.clientHeight || 1;
-                const dxPct = ((clientX - dragStart.mx) / w) * 100;
-                const dyPct = ((clientY - dragStart.my) / h) * 100;
-                PHOTO_FIT.x = Math.max(-50, Math.min(50, Math.round((dragStart.x + dxPct) * 2) / 2));
-                PHOTO_FIT.y = Math.max(-50, Math.min(50, Math.round((dragStart.y + dyPct) * 2) / 2));
-                applyPhotoFit();
-            }
-
-            function endDrag() {
-                if (!isDraggingPhoto) return;
-                isDraggingPhoto = false;
-                savePhotoDraft();
-            }
-
-            box.addEventListener("mousedown", (e) => {
-                if (!tunerOpen) return;
-                e.preventDefault();
-                startDrag(e.clientX, e.clientY);
-            });
-            window.addEventListener("mousemove", (e) => moveDrag(e.clientX, e.clientY));
-            window.addEventListener("mouseup", endDrag);
-
-            box.addEventListener("touchstart", (e) => {
-                if (!tunerOpen || !e.touches[0]) return;
-                e.preventDefault();
-                startDrag(e.touches[0].clientX, e.touches[0].clientY);
-            }, { passive: false });
-            window.addEventListener("touchmove", (e) => {
-                if (!isDraggingPhoto || !e.touches[0]) return;
-                moveDrag(e.touches[0].clientX, e.touches[0].clientY);
-            }, { passive: true });
-            window.addEventListener("touchend", endDrag);
-
-            box.addEventListener("wheel", (e) => {
-                if (!tunerOpen) return;
-                e.preventDefault();
-                const delta = e.deltaY < 0 ? 0.04 : -0.04;
-                PHOTO_FIT.scale = Math.max(0.7, Math.min(2.5, Math.round((PHOTO_FIT.scale + delta) * 100) / 100));
-                applyPhotoFit();
-                savePhotoDraft();
-            }, { passive: false });
-        }
-
-        function buildPhotoFitBlock() {
-            const clean = {
-                fit: PHOTO_FIT.fit,
-                aspect: PHOTO_FIT.aspect,
-                scale: Number(PHOTO_FIT.scale),
-                x: Number(PHOTO_FIT.x),
-                y: Number(PHOTO_FIT.y),
-                bg: PHOTO_FIT.bg
-            };
-            return `///* PHOTO_FIT_START */\n        let PHOTO_FIT = ${JSON.stringify(clean, null, 12).replace(/\}$/, '        }')};\n        ///* PHOTO_FIT_END */`;
-        }
-
-        function copyPhotoConfig() {
-            copyText(buildPhotoFitBlock(), "Copied PHOTO_FIT settings — paste into index.html");
-        }
-
-        async function downloadUpdatedHtml() {
-            const replacement = buildPhotoFitBlock();
+        function loadSavedState() {
             try {
-                const url = window.location.href.split("#")[0];
-                const res = await fetch(url, { cache: "no-store" });
-                if (!res.ok) throw new Error("Fetch failed");
-                let src = await res.text();
-                if (!src.includes("PHOTO_FIT_START")) throw new Error("Marker missing");
-                src = src.replace(/\/\/\/\* PHOTO_FIT_START \*\/[\s\S]*?\/\/\/\* PHOTO_FIT_END \*\//, replacement);
-
-                const blob = new Blob([src], { type: "text/html" });
-                const a = document.createElement("a");
-                a.href = URL.createObjectURL(blob);
-                a.download = "index.html";
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                try { localStorage.removeItem(PHOTO_STORAGE_KEY); } catch (e) {}
-                showToast("Downloaded index.html — upload to GitHub to save!");
-            } catch (err) {
-                copyPhotoConfig();
-                showToast("Copied PHOTO_FIT snippet — paste into index.html on GitHub");
+                const stored = localStorage.getItem(STORAGE_KEY);
+                currentVideos = stored ? JSON.parse(stored) : [...DEFAULT_VIDEOS];
+            } catch (e) {
+                currentVideos = [...DEFAULT_VIDEOS];
             }
+
+            try {
+                let storedPhoto = null;
+                for (const key of PHOTO_STORAGE_KEYS) {
+                    const candidate = localStorage.getItem(key);
+                    if (candidate) {
+                        storedPhoto = candidate;
+                        break;
+                    }
+                }
+                const photoToUse = storedPhoto || SAVED_PROFILE_PHOTO;
+                if (photoToUse) {
+                    SAVED_PROFILE_PHOTO = photoToUse;
+                    applyProfilePhoto(photoToUse);
+                }
+            } catch (e) {}
         }
 
-        function checkPhotoHash() {
-            const h = (window.location.hash || "").toLowerCase();
-            if (h === "#photo" || h === "#admin") {
-                togglePhotoTuner(true);
-                try { history.replaceState(null, "", window.location.pathname + window.location.search); } catch (e) {}
+        function applyProfilePhoto(dataUrl) {
+            if (!dataUrl) return;
+            document.querySelectorAll('[data-profile-img], .zf-avatar').forEach(img => {
+                img.src = dataUrl;
+            });
+        }
+
+        function triggerPhotoUpload() {
+            const input = document.getElementById('photoFileInput');
+            if (input) input.click();
+        }
+
+        function handlePhotoUpload(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const size = 360;
+                    canvas.width = size;
+                    canvas.height = size;
+                    const ctx = canvas.getContext('2d');
+                    const minDim = Math.min(img.width, img.height);
+                    const sx = (img.width - minDim) / 2;
+                    const sy = (img.height - minDim) / 2;
+                    ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, size, size);
+                    const compressed = canvas.toDataURL('image/jpeg', 0.88);
+                    SAVED_PROFILE_PHOTO = compressed;
+                    try {
+                        PHOTO_STORAGE_KEYS.forEach(k => localStorage.setItem(k, compressed));
+                    } catch (err) {}
+                    applyProfilePhoto(compressed);
+                    showToast('Photo baked! Click "Download Ready-to-Host index.html" to save permanently.');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveVideos() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(currentVideos));
+            } catch (e) {}
+        }
+
+        function parseVideoLink(url) {
+            if (!url || !url.trim()) return { type: 'demo', embedUrl: '', originalUrl: '' };
+            const clean = url.trim();
+            const ytMatch = clean.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+            if (ytMatch && ytMatch[1]) {
+                const vid = ytMatch[1];
+                return {
+                    type: 'youtube',
+                    videoId: vid,
+                    embedUrl: `https://www.youtube.com/embed/${vid}?autoplay=1&enablejsapi=1&vq=hd2160&hd=1&rel=0&modestbranding=1`,
+                    originalUrl: `https://www.youtube.com/watch?v=${vid}`,
+                    thumb: `https://img.youtube.com/vi/${vid}/maxresdefault.jpg`,
+                    fallbackThumb: `https://img.youtube.com/vi/${vid}/hqdefault.jpg`
+                };
             }
+            const vimeoMatch = clean.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+            if (vimeoMatch && vimeoMatch[1]) {
+                return {
+                    type: 'vimeo',
+                    embedUrl: `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1&quality=4K`,
+                    originalUrl: clean
+                };
+            }
+            return { type: 'mp4', embedUrl: clean, originalUrl: clean };
         }
 
-        window.addEventListener("hashchange", checkPhotoHash);
-        window.addEventListener("resize", applyPhotoFit);
-
-        /* ==================================================================== */
-        /* PORTFOLIO GRID & VIDEO MODAL                                         */
-        /* ==================================================================== */
-        function escapeHtml(str) {
-            return String(str).replace(/[&<>"']/g, s => ({
-                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-            }[s]));
+        function updateCategoryCounts() {
+            const counts = {
+                all: currentVideos.length,
+                'talking-head': currentVideos.filter(v => v.category === 'talking-head').length,
+                'short-form': currentVideos.filter(v => v.category === 'short-form').length,
+                'educational': currentVideos.filter(v => v.category === 'educational' || v.category === 'saas').length
+            };
+            Object.keys(counts).forEach(key => {
+                const el = document.getElementById(`count-${key}`);
+                if (el) el.textContent = counts[key];
+            });
         }
 
-        function updateCounts() {
-            document.getElementById("count-all").textContent = VIDEOS.length;
-            document.getElementById("count-talking-head").textContent = VIDEOS.filter(v => v.category === "talking-head").length;
-            document.getElementById("count-short-form").textContent = VIDEOS.filter(v => v.category === "short-form").length;
-            document.getElementById("count-educational").textContent = VIDEOS.filter(v => v.category === "educational").length;
-        }
+        /* ============================================================================ */
+        /* STRATEGIC VIDEO CARD (Unobstructed Face + Compact 9:16 + Retention Proof)    */
+        /* ============================================================================ */
+        function buildVideoCardHTML(item) {
+            const parsed = parseVideoLink(item.videoUrl);
+            const thumb = item.customThumbnail || item.thumbnail || parsed.thumb || '';
+            const fallback = parsed.fallbackThumb || '';
+            const isVertical = item.aspect === '9:16';
+            const metaTag = item.strategicMeta || 'RETENTION CUT';
+            const retentionNote = item.retentionLogic || 'Engineered to hold viewer attention through clean visual pacing and studio audio.';
+            const rawVsCutNote = item.rawVsCut || 'Raw camera file → Paced, color-balanced & mastered 4K cut';
+            const fitClass = item.containThumb ? 'object-contain bg-[#060926]' : 'object-cover';
 
-        function renderCard(item) {
-            const isVertical = item.aspect === "9:16";
-            const thumb = `https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`;
-            const fallback = `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
-            const safeTitle = escapeHtml(item.title);
+            // Compact height for 9:16 cards so 3 vertical cards fit comfortably without pushing text off-screen
+            const stageSizeClass = isVertical
+                ? 'h-[310px] sm:h-[340px] w-full bg-[#09151D]'
+                : 'aspect-video w-full bg-[#060926]';
 
             return `
-                <article onclick="openVideoModal('${item.id}')" class="video-card group rounded-2xl bg-card border border-stoneLine overflow-hidden cursor-pointer flex flex-col justify-between">
-                    <div class="relative ${isVertical ? 'aspect-[9/14]' : 'aspect-video'} w-full bg-linen overflow-hidden">
-                        <img
-                            src="${thumb}"
-                            alt="${safeTitle}"
-                            loading="lazy"
-                            onerror="this.onerror=null; this.src='${fallback}';"
-                            class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                        >
-                        <div class="absolute inset-0 bg-ink/15 group-hover:bg-ink/25 transition-colors flex items-center justify-center">
-                            <div class="w-12 h-12 rounded-full bg-paper/95 text-ink group-hover:bg-accent group-hover:text-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-all">
-                                <svg class="w-4 h-4 ml-0.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </div>
+            <div onclick="openVideoPlayer('${item.id}')" onmousemove="handleCardSpotlight(event, this)" class="video-card group rounded-2xl bg-pureCard border border-seafoamBorder hover:border-oceanTeal/50 overflow-hidden cursor-pointer flex flex-col justify-between">
+                <div class="relative ${stageSizeClass} overflow-hidden">
+                    ${isVertical ? `
+                        <!-- Blurred ambient background + uncropped 9:16 center frame so vertical cards stay compact -->
+                        <img src="${thumb}" alt="" onerror="this.onerror=null; this.src='${fallback}';" class="absolute inset-0 w-full h-full object-cover blur-xl opacity-35 scale-110 pointer-events-none">
+                        <div class="relative z-10 w-full h-full flex items-center justify-center py-2.5">
+                            <img src="${thumb}" alt="${item.title}" onerror="this.onerror=null; this.src='${fallback}';" class="h-full aspect-[9/16] object-cover rounded-xl shadow-lg border border-white/15 group-hover:scale-[1.03] transition-transform duration-500">
                         </div>
+                    ` : `
+                        <img src="${thumb}" alt="${item.title}" onerror="this.onerror=null; this.src='${fallback}';" class="w-full h-full ${fitClass} group-hover:scale-[1.03] transition-transform duration-500">
+                    `}
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-oceanInk/65 via-transparent to-transparent pointer-events-none z-10"></div>
+                    
+                    <!-- Sleek Bottom-Left Play Pill (Leaves Speaker's Face 100% Unobstructed) -->
+                    <div class="absolute bottom-2.5 left-2.5 right-2.5 z-20 flex items-center justify-between gap-2 pointer-events-none">
+                        <span class="px-3 py-1.5 rounded-full bg-white/95 text-oceanInk group-hover:bg-oceanTeal group-hover:text-white font-bold text-[11px] shadow-md flex items-center gap-1.5 transition-all">
+                            <i class="fa-solid fa-play text-[9px]"></i>
+                            <span>Watch 4K Cut</span>
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full bg-oceanInk/85 backdrop-blur-md text-emerald-300 border border-white/10 font-bold text-[10px] tracking-wide flex items-center gap-1">
+                            <i class="fa-solid fa-chart-simple text-[9px]"></i>
+                            <span>${metaTag}</span>
+                        </span>
                     </div>
+                </div>
 
-                    <div class="p-5 flex-1 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between gap-2 mb-2.5">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-paper border border-stoneLine text-[11px] font-semibold text-stoneText">
-                                    ${escapeHtml(item.formatLabel)}
-                                </span>
-                                ${item.tag ? `<span class="text-[10px] font-semibold uppercase tracking-wider text-accent">${escapeHtml(item.tag)}</span>` : ''}
-                            </div>
-
-                            <h3 class="text-sm sm:text-base font-bold text-ink group-hover:text-accent transition-colors leading-snug">
-                                ${safeTitle}
-                            </h3>
-
-                            <p class="mt-2 text-xs text-stoneText leading-relaxed">
-                                ${escapeHtml(item.notes)}
-                            </p>
-                        </div>
-
-                        <div class="mt-4 pt-3 border-t border-stoneLine/80 flex items-center justify-between text-xs">
-                            <span class="font-medium text-stoneText group-hover:text-ink transition-colors">
-                                Play cut
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-seaSalt border border-seafoamBorder text-[11px] font-semibold text-oceanTeal">
+                                ${item.categoryBadge}
                             </span>
-                            <button
-                                type="button"
-                                onclick="requestStyle(event, '${item.id}')"
-                                class="font-semibold text-accent hover:underline"
-                            >
-                                Request similar →
-                            </button>
+                            <span class="text-[10px] font-semibold text-slateTide truncate">
+                                Re-Edited Case Study
+                            </span>
+                        </div>
+
+                        <h3 class="font-bold text-base text-oceanInk group-hover:text-oceanTeal transition-colors leading-snug">
+                            ${item.title}
+                        </h3>
+
+                        <!-- Before -> After Transformation Pill -->
+                        <div class="mt-2 px-2.5 py-1 rounded-lg bg-foamTint/70 border border-seafoamBorder text-[11px] font-medium text-oceanInk flex items-center gap-1.5">
+                            <i class="fa-solid fa-sliders text-oceanTeal text-[10px] shrink-0"></i>
+                            <span class="truncate">${rawVsCutNote}</span>
+                        </div>
+
+                        <p class="mt-2.5 text-xs text-slateTide leading-relaxed">
+                            <span class="font-bold text-oceanInk">The Edit:</span> ${item.deliverables}
+                        </p>
+
+                        <div class="mt-2.5 px-3 py-2 rounded-r-xl bg-seaSalt/90 border-l-2 border-oceanTeal text-[11px] text-slateTide leading-relaxed">
+                            <span class="font-bold text-oceanTeal">Why It Works:</span> ${retentionNote}
                         </div>
                     </div>
-                </article>
+
+                    <div class="mt-4 pt-3 border-t border-seafoamBorder/80 flex items-center justify-between text-xs">
+                        <span class="text-slateTide group-hover:text-oceanInk font-medium flex items-center gap-1.5 transition-colors">
+                            <i class="fa-solid fa-expand text-oceanTeal text-[11px]"></i> Open 4K Player
+                        </span>
+                        <button onclick="inquireForStyle(event, '${item.category}', '${item.title.replace(/'/g, "\\'")}')" class="text-oceanTeal hover:underline font-bold">
+                            Request this style →
+                        </button>
+                    </div>
+                </div>
+            </div>
             `;
         }
 
-        function renderPortfolio() {
-            updateCounts();
-            const grid = document.getElementById("portfolioGrid");
-            const groups = activeFilter === "all"
-                ? ["talking-head", "short-form", "educational"]
-                : [activeFilter];
+        function renderShowcase() {
+            updateCategoryCounts();
+            const container = document.getElementById('portfolioGrid');
 
-            grid.innerHTML = groups.map(key => {
-                const items = VIDEOS.filter(v => v.category === key);
-                if (!items.length) return "";
-                const meta = CATEGORIES[key];
-                return `
-                    <div class="space-y-6">
-                        <div class="flex items-baseline justify-between gap-4 pb-3 border-b border-stoneLine">
-                            <div class="flex items-baseline gap-3">
-                                <span class="font-serif italic text-xl text-accent">${meta.num}</span>
+            if (activeFilter === 'all') {
+                const order = ['talking-head', 'short-form', 'educational'];
+                container.innerHTML = order.map(catKey => {
+                    const items = currentVideos.filter(v =>
+                        catKey === 'educational'
+                            ? (v.category === 'educational' || v.category === 'saas')
+                            : v.category === catKey
+                    );
+                    if (items.length === 0) return '';
+                    const meta = CATEGORY_META[catKey];
+
+                    return `
+                        <div class="space-y-5">
+                            <div class="pb-3 border-b border-seafoamBorder flex items-baseline justify-between gap-2">
                                 <div>
-                                    <h3 class="text-base sm:text-lg font-bold text-ink tracking-tight">${meta.title}</h3>
-                                    <p class="text-xs text-stoneText mt-0.5">${meta.subtitle}</p>
+                                    <h3 class="text-lg sm:text-xl font-bold text-oceanInk tracking-tight">${meta.title}</h3>
+                                    <p class="text-xs text-slateTide mt-0.5">${meta.subtitle}</p>
                                 </div>
+                                <span class="text-xs font-semibold text-slateTide shrink-0">${items.length} ${items.length === 1 ? 'case study' : 'case studies'}</span>
                             </div>
-                            <span class="text-xs font-medium text-mutedText shrink-0">${items.length} cuts</span>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                ${items.map(item => buildVideoCardHTML(item)).join('')}
+                            </div>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            ${items.map(renderCard).join("")}
-                        </div>
+                    `;
+                }).join('');
+                return;
+            }
+
+            const filtered = currentVideos.filter(item =>
+                activeFilter === 'educational'
+                    ? (item.category === 'educational' || item.category === 'saas')
+                    : item.category === activeFilter
+            );
+            const meta = CATEGORY_META[activeFilter];
+            container.innerHTML = `
+                <div class="space-y-5">
+                    ${meta ? `<div class="pb-3 border-b border-seafoamBorder"><h3 class="text-lg sm:text-xl font-bold text-oceanInk">${meta.title}</h3><p class="text-xs text-slateTide mt-0.5">${meta.subtitle}</p></div>` : ''}
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${filtered.map(item => buildVideoCardHTML(item)).join('')}
                     </div>
-                `;
-            }).join("");
+                </div>
+            `;
         }
 
         function filterPortfolio(cat) {
             activeFilter = cat;
-            document.querySelectorAll(".filter-tab").forEach(btn => {
-                const active = btn.getAttribute("data-filter") === cat;
-                btn.className = active
-                    ? "filter-tab px-4 py-2 rounded-full text-xs font-semibold transition-colors bg-ink text-white"
-                    : "filter-tab px-4 py-2 rounded-full text-xs font-medium transition-colors bg-card text-stoneText hover:text-ink border border-stoneLine";
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                if (tab.getAttribute('data-filter') === cat) {
+                    tab.className = "filter-tab px-4 py-2 rounded-full text-xs font-semibold transition-all bg-oceanInk text-white shadow-sm";
+                } else {
+                    tab.className = "filter-tab px-4 py-2 rounded-full text-xs font-medium text-slateTide hover:text-oceanInk bg-pureCard border border-seafoamBorder transition-all";
+                }
             });
-            renderPortfolio();
+            renderShowcase();
         }
 
-        function openVideoModal(id) {
-            const item = VIDEOS.find(v => v.id === id);
+        /* ============================================================================ */
+        /* PACKAGE & VIDEO CARD -> DIRECT INBOX ROUTING                                 */
+        /* ============================================================================ */
+        function selectPackageAndScroll(scopeType, formatType, defaultAddons) {
+            selectedScope.referenceVideo = "";
+            if (Array.isArray(defaultAddons)) {
+                selectedScope.addons = [...defaultAddons];
+                renderAddonButtons();
+            }
+            selectScopeType(scopeType);
+            if (formatType) selectScopeFormat(formatType);
+
+            const mailbox = document.getElementById('mailbox');
+            if (mailbox) mailbox.scrollIntoView({ behavior: 'smooth' });
+            showToast(`Selected: ${scopeType}`);
+        }
+
+        function inquireForStyle(event, category, videoTitle) {
+            event.stopPropagation();
+            selectedScope.referenceVideo = videoTitle;
+            const meta = CATEGORY_META[category];
+            if (meta && meta.scopeFormat) {
+                selectScopeFormat(meta.scopeFormat);
+            }
+            syncMailboxDraft();
+            const mailbox = document.getElementById('mailbox');
+            if (mailbox) mailbox.scrollIntoView({ behavior: 'smooth' });
+            showToast(`Added "${videoTitle}" to your project note`);
+        }
+
+        /* ============================================================================ */
+        /* VIDEO PLAYER MODAL LOGIC (4 Mobile & Desktop Closing Mechanisms)             */
+        /* ============================================================================ */
+        function openVideoPlayer(id) {
+            const item = currentVideos.find(v => v.id === id);
             if (!item) return;
 
-            const modal = document.getElementById("videoModal");
-            const card = document.getElementById("videoModalCard");
-            const mount = document.getElementById("modalPlayerMount");
+            const modal = document.getElementById('videoModal');
+            const card = document.getElementById('videoModalCard');
+            const mount = document.getElementById('modalPlayerMount');
+            document.getElementById('modalVideoTitle').textContent = item.title;
+            document.getElementById('modalVideoSpecs').textContent = `${item.categoryBadge} • 4K Playback`;
 
-            document.getElementById("modalTitle").textContent = item.title;
-            document.getElementById("modalMeta").textContent = `${item.formatLabel} — ${item.notes}`;
-            document.getElementById("modalYoutubeLink").href = `https://www.youtube.com/watch?v=${item.youtubeId}`;
-
-            if (item.aspect === "9:16") {
-                card.className = "relative z-10 w-[86vw] max-w-[360px] bg-card rounded-2xl border border-stoneLine/30 overflow-hidden shadow-2xl cursor-default my-auto";
-                mount.className = "w-full aspect-[9/16] max-h-[74dvh] bg-black flex items-center justify-center";
+            const parsed = parseVideoLink(item.videoUrl);
+            const extLink = document.getElementById('modalExternalLink');
+            if (parsed.originalUrl) {
+                extLink.href = parsed.originalUrl;
+                extLink.classList.remove('hidden');
+                extLink.classList.add('sm:inline-flex');
             } else {
-                card.className = "relative z-10 w-[92vw] max-w-4xl bg-card rounded-2xl border border-stoneLine/30 overflow-hidden shadow-2xl cursor-default my-auto";
-                mount.className = "w-full aspect-video max-h-[74dvh] bg-black flex items-center justify-center";
+                extLink.classList.add('hidden');
+                extLink.classList.remove('sm:inline-flex');
             }
 
-            mount.innerHTML = `
-                <iframe
-                    src="https://www.youtube.com/embed/${item.youtubeId}?autoplay=1&rel=0&modestbranding=1"
-                    class="w-full h-full border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                    allowfullscreen
-                ></iframe>
-            `;
+            if (item.aspect === '9:16') {
+                card.className = "relative z-10 w-[82vw] max-w-[340px] overflow-hidden flex flex-col items-center my-auto cursor-default rounded-2xl shadow-2xl";
+                mount.className = "w-full aspect-[9/16] max-h-[72dvh] bg-black rounded-b-2xl border border-seafoamBorder relative flex items-center justify-center overflow-hidden mx-auto";
+            } else {
+                card.className = "relative z-10 w-[92vw] max-w-4xl overflow-hidden flex flex-col items-center my-auto cursor-default rounded-2xl shadow-2xl";
+                mount.className = "w-full aspect-video max-h-[72dvh] bg-black rounded-b-2xl border border-seafoamBorder relative flex items-center justify-center overflow-hidden";
+            }
 
-            modal.classList.remove("hidden");
-            modal.classList.add("flex");
-            document.body.style.overflow = "hidden";
+            if (parsed.type === 'youtube') {
+                mount.innerHTML = `<div id="ytModalFrame" class="w-full h-full"></div>`;
+                if (window.YT && window.YT.Player) {
+                    ytPlayer = new YT.Player('ytModalFrame', {
+                        videoId: parsed.videoId,
+                        playerVars: { autoplay: 1, vq: 'hd2160', hd: 1, rel: 0, modestbranding: 1 },
+                        events: {
+                            onReady: function(e) {
+                                try {
+                                    e.target.setPlaybackQuality('hd2160');
+                                    e.target.playVideo();
+                                } catch (err) {}
+                            }
+                        }
+                    });
+                } else {
+                    mount.innerHTML = `<iframe src="${parsed.embedUrl}" class="w-full h-full border-0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+                }
+            } else {
+                mount.innerHTML = `<iframe src="${parsed.embedUrl}" class="w-full h-full border-0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
 
             try {
-                history.pushState({ modalOpen: true }, "", "#watch");
+                window.history.pushState({ modalOpen: true }, '', '#watch');
                 modalHistoryPushed = true;
             } catch (e) {}
         }
 
-        function closeVideoModal(fromPopState = false) {
-            const modal = document.getElementById("videoModal");
-            if (modal.classList.contains("hidden")) return;
+        function closeVideoModal(fromPopState) {
+            const modal = document.getElementById('videoModal');
+            if (!modal || modal.classList.contains('hidden')) return;
 
-            document.getElementById("modalPlayerMount").innerHTML = "";
-            modal.classList.add("hidden");
-            modal.classList.remove("flex");
-            document.body.style.overflow = "";
+            if (ytPlayer && typeof ytPlayer.destroy === 'function') {
+                try { ytPlayer.destroy(); } catch (e) {}
+                ytPlayer = null;
+            }
+            const mount = document.getElementById('modalPlayerMount');
+            if (mount) mount.innerHTML = '';
+
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
 
             if (modalHistoryPushed && !fromPopState) {
                 modalHistoryPushed = false;
-                try { history.back(); } catch (e) {}
+                try {
+                    if (window.location.hash === '#watch') {
+                        window.history.back();
+                    }
+                } catch (e) {}
             } else {
                 modalHistoryPushed = false;
             }
         }
 
-        window.addEventListener("popstate", () => closeVideoModal(true));
-        window.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
-                closeVideoModal();
-                if (tunerOpen) togglePhotoTuner(false);
-                return;
-            }
-            const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
-            if (tag === "input" || tag === "textarea" || tag === "select") return;
-            if (e.shiftKey && (e.key === "P" || e.key === "p")) {
-                e.preventDefault();
-                togglePhotoTuner();
+        window.addEventListener('popstate', () => {
+            const modal = document.getElementById('videoModal');
+            if (modal && !modal.classList.contains('hidden')) {
+                closeVideoModal(true);
             }
         });
 
-        /* ==================================================================== */
-        /* CONTACT NOTE BUILDER                                                 */
-        /* ==================================================================== */
-        function setScope(key, value) {
-            scope[key] = value;
-            const selector = key === "type" ? "#scopeTypeGroup .scope-type-btn" : "#scopeFormatGroup .scope-format-btn";
-            const activeBg = key === "type" ? "bg-ink text-white" : "bg-accent text-white";
+        function handleSecretCopyrightClick() {
+            copyrightClickCount++;
+            if (copyrightClickTimer) clearTimeout(copyrightClickTimer);
+            if (copyrightClickCount >= 3) {
+                copyrightClickCount = 0;
+                toggleManageModal();
+                return;
+            }
+            copyrightClickTimer = setTimeout(() => {
+                copyrightClickCount = 0;
+            }, 900);
+        }
 
-            document.querySelectorAll(selector).forEach(btn => {
-                const isSelected = btn.dataset.value === value;
-                btn.className = isSelected
-                    ? `scope-${key}-btn px-3.5 py-1.5 rounded-full text-xs font-semibold ${activeBg} transition-colors`
-                    : `scope-${key}-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-paper text-stoneText hover:text-ink border border-stoneLine transition-colors`;
+        function checkSecretAdminHash() {
+            const h = (window.location.hash || '').toLowerCase();
+            if (h === '#admin' || h === '#manage') {
+                toggleManageModal();
+            }
+        }
+
+        window.addEventListener('hashchange', checkSecretAdminHash);
+
+        /* ============================================================================ */
+        /* DIRECT MAILBOX LOGIC (Scope + Format + Done-For-You Add-Ons)                 */
+        /* ============================================================================ */
+        function selectScopeType(type) {
+            selectedScope.type = type;
+            document.querySelectorAll('#scopeTypeContainer .scope-type-btn').forEach(btn => {
+                if (btn.textContent.trim() === type) {
+                    btn.className = "scope-type-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-oceanInk text-white transition-all";
+                } else {
+                    btn.className = "scope-type-btn px-3 py-1.5 rounded-full text-xs font-medium bg-pureCard text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all";
+                }
             });
-
-            updateDraftText();
+            syncMailboxDraft();
         }
 
-        function updateDraftText(referenceTitle = "") {
-            const box = document.getElementById("draftMessage");
-            if (referenceTitle) {
-                box.value = `Hey Zayan,\n\nI watched "${referenceTitle}" on your site and I'm looking for ${scope.type} (${scope.format}).\n\nHere's my channel / footage link: `;
+        function selectScopeFormat(format) {
+            selectedScope.format = format;
+            document.querySelectorAll('#scopeFormatContainer .scope-format-btn').forEach(btn => {
+                if (btn.textContent.trim() === format) {
+                    btn.className = "scope-format-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-oceanTeal text-white transition-all";
+                } else {
+                    btn.className = "scope-format-btn px-3 py-1.5 rounded-full text-xs font-medium bg-pureCard text-slateTide hover:text-oceanInk border border-seafoamBorder transition-all";
+                }
+            });
+            syncMailboxDraft();
+        }
+
+        function toggleAddon(addonName) {
+            const idx = selectedScope.addons.indexOf(addonName);
+            if (idx > -1) {
+                selectedScope.addons.splice(idx, 1);
             } else {
-                box.value = `Hey Zayan,\n\nI'm looking for ${scope.type} for ${scope.format}.\n\nHere's a link to my channel and what I'm aiming for: `;
+                selectedScope.addons.push(addonName);
+            }
+            renderAddonButtons();
+            syncMailboxDraft();
+        }
+
+        function renderAddonButtons() {
+            document.querySelectorAll('#addonsContainer .addon-btn').forEach(btn => {
+                const name = btn.getAttribute('data-addon');
+                const active = selectedScope.addons.includes(name);
+                if (active) {
+                    btn.className = "addon-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-oceanTeal/10 text-oceanTeal border border-oceanTeal/40 flex items-center gap-1.5 transition-all";
+                    btn.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i><span>${name}</span>`;
+                } else {
+                    btn.className = "addon-btn px-3.5 py-1.5 rounded-full text-xs font-medium bg-pureCard text-slateTide hover:text-oceanInk border border-seafoamBorder flex items-center gap-1.5 transition-all";
+                    btn.innerHTML = `<i class="fa-solid fa-plus text-[10px] text-slateTide"></i><span>${name}</span>`;
+                }
+            });
+        }
+
+        function syncMailboxDraft() {
+            const msgEl = document.getElementById('senderMessage');
+            if (!msgEl) return;
+
+            const styleLine = selectedScope.referenceVideo
+                ? ` I liked the pacing/motion in "${selectedScope.referenceVideo}" and want a similar feel.`
+                : '';
+
+            const addonLine = selectedScope.addons.length > 0
+                ? `\n\nIncluded scope: ${selectedScope.addons.map(a => a.replace('Include ', '')).join(', ')}.`
+                : '';
+
+            msgEl.value = `Hi Zayan, I'm interested in a ${selectedScope.type} for ${selectedScope.format}.${styleLine}${addonLine}\n\nHere is my channel/brand link and current upload cadence:`;
+        }
+
+        function buildMailSubjectAndBody() {
+            const name = (document.getElementById('senderName').value || 'Prospective Client').trim();
+            const linkOrRef = (document.getElementById('senderEmail').value || '').trim();
+            const msg = (document.getElementById('senderMessage').value || '').trim();
+            const subject = `Project Inquiry: ${selectedScope.type} (${selectedScope.format}) — ${name}`;
+            const addonsText = selectedScope.addons.length > 0 ? selectedScope.addons.join(', ') : 'Core Editing';
+            const body = `${msg}\n\n---\nFrom: ${name}${linkOrRef ? '\nReference / Raw Link: ' + linkOrRef : ''}\nEngagement: ${selectedScope.type} | Format: ${selectedScope.format}\nScope: ${addonsText}`;
+            return { name, linkOrRef, msg, subject, body };
+        }
+
+        function prepareDirectMailto(e) {
+            const { subject, body } = buildMailSubjectAndBody();
+            const link = document.getElementById('directMailtoLink');
+            if (link) {
+                link.href = `mailto:${SITE_SETTINGS.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             }
         }
 
-        function requestStyle(event, videoId) {
-            event.stopPropagation();
-            const item = VIDEOS.find(v => v.id === videoId);
+        function openInGmailWeb() {
+            const { subject, body } = buildMailSubjectAndBody();
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(SITE_SETTINGS.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(gmailUrl, '_blank', 'noopener');
+        }
+
+        function copyComposedMessage() {
+            const { body } = buildMailSubjectAndBody();
+            copyTextHelper(body);
+            showToast('Inquiry brief copied to clipboard!');
+        }
+
+        function buildMailSubjectAndBody() {
+            const name = (document.getElementById('senderName').value || 'Prospective Client').trim();
+            const email = (document.getElementById('senderEmail').value || '').trim();
+            const msg = (document.getElementById('senderMessage').value || '').trim();
+            const subject = `Project Inquiry: ${selectedScope.type} (${selectedScope.format}) — ${name}`;
+            const addonsText = selectedScope.addons.length > 0 ? selectedScope.addons.join(', ') : 'Editing Only';
+            const body = `${msg}\n\n---\nFrom: ${name}${email ? ' (' + email + ')' : ''}\nScope: ${selectedScope.type} | Format: ${selectedScope.format}\nAdd-Ons: ${addonsText}`;
+            return { name, email, msg, subject, body };
+        }
+
+        function handleDirectMailSubmit(e) {
+            e.preventDefault();
+            openInDefaultMailApp();
+        }
+
+        function openInGmailWeb() {
+            const { subject, body } = buildMailSubjectAndBody();
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(SITE_SETTINGS.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(gmailUrl, '_blank', 'noopener');
+        }
+
+        function openInDefaultMailApp() {
+            const { subject, body } = buildMailSubjectAndBody();
+            window.location.href = `mailto:${SITE_SETTINGS.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        function copyComposedMessage() {
+            const { body } = buildMailSubjectAndBody();
+            copyTextHelper(body);
+            showToast('Project note copied to clipboard!');
+        }
+
+        /* ============================================================================ */
+        /* SITE MANAGER MODAL (Photo, Video Reordering, HTML Export)                    */
+        /* ============================================================================ */
+        function toggleManageModal() {
+            const modal = document.getElementById('manageModal');
+            if (modal.classList.contains('hidden')) {
+                renderManagerList();
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function renderManagerList() {
+            const list = document.getElementById('videoManagerList');
+            document.getElementById('projectCount').textContent = currentVideos.length;
+
+            list.innerHTML = currentVideos.map((item, idx) => `
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 p-3 rounded-xl bg-pureCard border border-seafoamBorder text-xs">
+                    <div class="truncate pr-2 flex-1 min-w-0">
+                        <span class="text-oceanInk font-bold">${idx + 1}. ${item.title}</span>
+                        <span class="text-slateTide text-[11px] block truncate">${item.categoryBadge} • ${item.videoUrl}</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <select onchange="changeVideoCategory('${item.id}', this.value)" class="px-2 py-1 rounded-lg bg-seaSalt border border-seafoamBorder text-oceanInk text-[11px] font-medium">
+                            <option value="talking-head" ${item.category === 'talking-head' ? 'selected' : ''}>YouTube Long-Form</option>
+                            <option value="short-form" ${item.category === 'short-form' ? 'selected' : ''}>Shorts 9:16</option>
+                            <option value="educational" ${(item.category === 'educational' || item.category === 'saas') ? 'selected' : ''}>Educational &amp; SaaS</option>
+                        </select>
+                        <button type="button" onclick="moveVideo('${item.id}', -1)" class="px-2.5 py-1 rounded-lg bg-seaSalt hover:bg-foamTint border border-seafoamBorder text-oceanInk font-bold" title="Move Up">↑</button>
+                        <button type="button" onclick="moveVideo('${item.id}', 1)" class="px-2.5 py-1 rounded-lg bg-seaSalt hover:bg-foamTint border border-seafoamBorder text-oceanInk font-bold" title="Move Down">↓</button>
+                        <button type="button" onclick="startEditVideo('${item.id}')" class="px-2.5 py-1 rounded-lg bg-seaSalt hover:bg-foamTint border border-seafoamBorder text-oceanTeal" title="Edit">✎</button>
+                        <button type="button" onclick="deleteVideoItem('${item.id}')" class="px-2.5 py-1 rounded-lg bg-seaSalt hover:bg-red-50 border border-seafoamBorder text-slateTide hover:text-red-600" title="Delete"><i class="fa-solid fa-trash-can text-[10px]"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function changeVideoCategory(id, newCat) {
+            const defaultBadgeMap = {
+                'talking-head': 'YouTube Talking-Head • 16:9',
+                'short-form': 'Vertical Short • 9:16',
+                'educational': 'Educational & Motion • 16:9'
+            };
+            const item = currentVideos.find(v => v.id === id);
+            if (item) {
+                item.category = newCat;
+                if (!item.categoryBadge) item.categoryBadge = defaultBadgeMap[newCat] || 'Featured Cut';
+                if (newCat === 'short-form') item.aspect = '9:16';
+                saveVideos();
+                renderShowcase();
+                renderManagerList();
+                showToast('Section updated');
+            }
+        }
+
+        function moveVideo(id, direction) {
+            const index = currentVideos.findIndex(v => v.id === id);
+            if (index === -1) return;
+            const targetIndex = index + direction;
+            if (targetIndex < 0 || targetIndex >= currentVideos.length) return;
+            const temp = currentVideos[index];
+            currentVideos[index] = currentVideos[targetIndex];
+            currentVideos[targetIndex] = temp;
+            saveVideos();
+            renderShowcase();
+            renderManagerList();
+        }
+
+        function startEditVideo(id) {
+            const item = currentVideos.find(v => v.id === id);
             if (!item) return;
-
-            const meta = CATEGORIES[item.category];
-            if (meta) setScope("format", meta.defaultFormat);
-            updateDraftText(item.title);
-            document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
-            showToast(`Added "${item.title}" to your note`);
+            document.getElementById('editVideoId').value = item.id;
+            document.getElementById('inputTitle').value = item.title;
+            document.getElementById('inputUrl').value = item.videoUrl;
+            document.getElementById('inputAspect').value = item.aspect;
+            document.getElementById('inputCategory').value = item.category === 'saas' ? 'educational' : item.category;
+            document.getElementById('inputBadge').value = item.categoryBadge || '';
+            document.getElementById('inputDeliverables').value = item.deliverables;
+            document.getElementById('inputRetentionLogic').value = item.retentionLogic || '';
+            document.getElementById('inputCustomThumb').value = item.customThumbnail || '';
+            document.getElementById('formHeading').textContent = '✎ Editing Video Case Study';
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
         }
 
-        function getMailParts() {
-            const subject = `${scope.type} — ${scope.format}`;
-            const body = document.getElementById("draftMessage").value.trim();
-            return { subject, body };
+        function resetVideoForm() {
+            document.getElementById('addVideoForm').reset();
+            document.getElementById('editVideoId').value = '';
+            document.getElementById('formHeading').textContent = '+ Add or Edit Video Case Study';
+            document.getElementById('cancelEditBtn').classList.add('hidden');
         }
 
-        function openGmail() {
-            const { subject, body } = getMailParts();
-            const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONFIG.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.open(url, "_blank", "noopener");
-        }
+        function handleSaveVideo(e) {
+            e.preventDefault();
+            const editId = document.getElementById('editVideoId').value;
+            const title = document.getElementById('inputTitle').value.trim();
+            const url = document.getElementById('inputUrl').value.trim();
+            const aspect = document.getElementById('inputAspect').value;
+            const category = document.getElementById('inputCategory').value;
+            const customBadge = document.getElementById('inputBadge').value.trim();
+            const deliverables = document.getElementById('inputDeliverables').value.trim() || 'Tightened hook pacing, layered B-roll visuals, and balanced dialogue audio.';
+            const retentionLogic = document.getElementById('inputRetentionLogic').value.trim() || 'Keeps viewer attention through pattern interrupts and studio vocal clarity.';
+            const customThumbnail = document.getElementById('inputCustomThumb').value.trim();
 
-        function openMailApp() {
-            const { subject, body } = getMailParts();
-            window.location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        }
+            const defaultBadgeMap = {
+                'talking-head': 'YouTube Talking-Head • 16:9',
+                'short-form': 'Vertical Short • 9:16',
+                'educational': 'Educational & Motion • 16:9'
+            };
+            const parsed = parseVideoLink(url);
 
-        function copyText(text, message) {
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(() => showToast(message));
+            if (editId) {
+                const item = currentVideos.find(v => v.id === editId);
+                if (item) {
+                    item.title = title;
+                    item.videoUrl = url;
+                    item.aspect = aspect;
+                    item.category = category;
+                    item.categoryBadge = customBadge || defaultBadgeMap[category] || 'Featured Cut';
+                    item.deliverables = deliverables;
+                    item.retentionLogic = retentionLogic;
+                    item.customThumbnail = customThumbnail || '';
+                    item.thumbnail = customThumbnail || parsed.thumb || item.thumbnail;
+                }
             } else {
-                const ta = document.createElement("textarea");
-                ta.value = text;
-                ta.style.position = "fixed";
-                ta.style.opacity = "0";
-                document.body.appendChild(ta);
-                ta.select();
-                try { document.execCommand("copy"); } catch (e) {}
-                document.body.removeChild(ta);
-                showToast(message);
+                currentVideos.unshift({
+                    id: 'custom-' + Date.now(),
+                    title,
+                    category,
+                    categoryBadge: customBadge || defaultBadgeMap[category] || 'Featured Cut',
+                    strategicMeta: 'RETENTION CUT',
+                    aspect,
+                    duration: '4K',
+                    deliverables,
+                    retentionLogic,
+                    videoUrl: url,
+                    customThumbnail: customThumbnail || '',
+                    thumbnail: customThumbnail || parsed.thumb || ''
+                });
+            }
+
+            saveVideos();
+            renderShowcase();
+            renderManagerList();
+            resetVideoForm();
+            showToast('Video saved! Click "Download Ready-to-Host index.html" to export.');
+        }
+
+        function deleteVideoItem(id) {
+            currentVideos = currentVideos.filter(v => v.id !== id);
+            saveVideos();
+            renderShowcase();
+            renderManagerList();
+        }
+
+        function restoreDefaults() {
+            currentVideos = [...DEFAULT_VIDEOS];
+            saveVideos();
+            renderShowcase();
+            renderManagerList();
+            showToast('Restored all 9 strategic case study videos.');
+        }
+
+        function downloadCleanHtmlFile() {
+            document.getElementById('manageModal').classList.add('hidden');
+            document.getElementById('manageModal').classList.remove('flex');
+            closeVideoModal();
+
+            let pageSource = document.documentElement.outerHTML;
+            const dataReplacement = `///* PORTFOLIO_DATA_START */\n        const DEFAULT_VIDEOS = ${JSON.stringify(currentVideos, null, 4)};\n        ///* PORTFOLIO_DATA_END */`;
+            pageSource = pageSource.replace(/\/\/\/\* PORTFOLIO_DATA_START \*\/[\s\S]*?\/\/\/\* PORTFOLIO_DATA_END \*\//, dataReplacement);
+
+            const photoReplacement = `///* PROFILE_PHOTO_START */\n        let SAVED_PROFILE_PHOTO = ${JSON.stringify(SAVED_PROFILE_PHOTO || "")};\n        ///* PROFILE_PHOTO_END */`;
+            pageSource = pageSource.replace(/\/\/\/\* PROFILE_PHOTO_START \*\/[\s\S]*?\/\/\/\* PROFILE_PHOTO_END \*\//, photoReplacement);
+
+            const blob = new Blob(['<!DOCTYPE html>\n' + pageSource], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'index.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast('Downloaded index.html with your photo & videos baked in!');
+        }
+
+        function copyEmailToClipboard() {
+            copyTextHelper(SITE_SETTINGS.email);
+            const label = document.getElementById('copyEmailBtnLabel');
+            if (label) {
+                label.textContent = 'Copied!';
+                setTimeout(() => { label.textContent = 'Copy Email'; }, 2200);
+            }
+            showToast(`Copied ${SITE_SETTINGS.email}`);
+        }
+
+        function applySiteContactSettings() {
+            const displayEmail = document.getElementById('displayEmailText');
+            const footerEmail = document.getElementById('footerEmailLink');
+            const mailtoLink = document.getElementById('directMailtoLink');
+            if (displayEmail) displayEmail.textContent = SITE_SETTINGS.email;
+            if (footerEmail) {
+                footerEmail.textContent = SITE_SETTINGS.email;
+                footerEmail.href = `mailto:${SITE_SETTINGS.email}`;
+            }
+            if (mailtoLink) {
+                mailtoLink.href = `mailto:${SITE_SETTINGS.email}`;
+            }
+
+            if (SITE_SETTINGS.bookingLink && SITE_SETTINGS.bookingLink.trim()) {
+                ['heroBookingBtn', 'contactBookingBtn'].forEach(btnId => {
+                    const btn = document.getElementById(btnId);
+                    if (btn) {
+                        btn.href = SITE_SETTINGS.bookingLink.trim();
+                        btn.classList.remove('hidden');
+                        btn.classList.add('inline-flex');
+                    }
+                });
             }
         }
 
-        function copyEmail() {
-            copyText(CONFIG.email, `Copied ${CONFIG.email}`);
+        function copyTextHelper(text) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            el.style.position = 'fixed';
+            el.style.opacity = '0';
+            document.body.appendChild(el);
+            el.select();
+            try { document.execCommand('copy'); } catch (e) {}
+            document.body.removeChild(el);
         }
 
-        function copyDraft() {
-            copyText(document.getElementById("draftMessage").value.trim(), "Note copied to clipboard");
-        }
-
-        let toastTimer = null;
         function showToast(msg) {
-            const el = document.getElementById("toast");
-            document.getElementById("toastText").textContent = msg;
-            el.classList.remove("hidden");
-            el.classList.add("flex");
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => {
-                el.classList.add("hidden");
-                el.classList.remove("flex");
-            }, 3200);
+            const toast = document.getElementById('toast');
+            document.getElementById('toastText').textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 3500);
         }
 
-        document.getElementById("year").textContent = new Date().getFullYear();
-        document.getElementById("displayEmail").textContent = CONFIG.email;
-        initPhotoSystem();
-        updateDraftText();
-        renderPortfolio();
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+                return;
+            }
+            const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+            if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+            if (e.shiftKey && (e.key === 'M' || e.key === 'm')) {
+                e.preventDefault();
+                toggleManageModal();
+            }
+        });
+
+        window.onload = function () {
+            applySiteContactSettings();
+            loadSavedState();
+            renderShowcase();
+            renderAddonButtons();
+            syncMailboxDraft();
+            checkSecretAdminHash();
+        };
     </script>
 </body>
 </html>
